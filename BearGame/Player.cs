@@ -12,6 +12,7 @@ namespace BearGame
         public const int NUMBER_OF_CHARACTERS = 4;
         public const int NUMBER_OF_MOVEMENT_SQUARES = 40;
 
+        public bool AllCahractersInFinalSquare {  get; set; }
         public Color PlayerColor { get; set; }
         public TextBox[] PlayerSquares { get; set; }
         public TextBox[] PlayerCharacterSquares { get; set; }
@@ -39,6 +40,7 @@ namespace BearGame
             PlayerIndex = playerIndex;
             PlayerColor = playerColor;
             PlayerSquares = playerSquares;
+            AllCahractersInFinalSquare = false;
             PlayerCharacterSquares = new TextBox[NUMBER_OF_CHARACTERS];
             PlayerFinalSauares = new TextBox[NUMBER_OF_CHARACTERS];
 
@@ -147,6 +149,7 @@ namespace BearGame
                 character.Reset();
             }
             ActiveCharacters.Clear();
+            AllCahractersInFinalSquare = false;
         }
 
     }

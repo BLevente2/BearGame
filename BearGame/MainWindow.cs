@@ -338,11 +338,7 @@ namespace BearGame
                 StartGAmeButton.UseWaitCursor = true;
                 StartGAmeButton.Enabled = false;
 
-                for (int i = 1; i <= (int)NumberOfPlayersSelector.Value; i++)
-                {
-                    game.StartGame();
-                    game.ResetGame();
-                }
+                game.StartGame((int)NumberOfMatchesSelector.Value);
 
                 StartGAmeButton.Text = tempText;
                 StartGAmeButton.UseWaitCursor = false;
