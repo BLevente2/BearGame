@@ -18,6 +18,8 @@ namespace BearGame
             StartGAmeButton.MouseEnter += Buttons_MouseEnter;
             StartGAmeButton.MouseLeave += Buttons_MouseLeave;
 
+            _selectedStrategy = null;
+
             GameView.Visible = false;
 
         }
@@ -331,7 +333,12 @@ namespace BearGame
         {
             try
             {
-                Game game = new Game(GetPlayers((int)NumberOfPlayersSelector.Value));
+                if (_selectedStrategy == null)
+                {
+                    throw new NullReferenceException("You must select a GameStrategy to start the game.");
+                }
+
+                Game game = new Game(GetPlayers((int)NumberOfPlayersSelector.Value), (GameStrategy)_selectedStrategy);
 
                 string tempText = StartGAmeButton.Text;
                 StartGAmeButton.Text = "GameIsRunning...";
@@ -347,6 +354,30 @@ namespace BearGame
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private GameStrategy? _selectedStrategy;
+
+        private void GameStrategySelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (GameStrategySelector.SelectedIndex)
+            {
+                case 0:
+                    _selectedStrategy = GameStrategy.AlwaysGoForKnockOut;
+                    break;
+                    case 1:
+                    _selectedStrategy = GameStrategy.GoWithWhatsFurthest;
+                        break;
+                    case 2:
+                    _selectedStrategy = GameStrategy.GoWithWhatsClosest;
+                        break;
+                    case 3:
+                    _selectedStrategy = GameStrategy.ActionWithRandomCharacter;
+                    break;
+                    default:
+                    _selectedStrategy = null;
+                    break;
             }
         }
     }

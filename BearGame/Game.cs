@@ -9,10 +9,11 @@ namespace BearGame
     {
         public Player[] Players { get; set; }
         public List<Player> ActivePlayers { get; set; }
-        public Player? Winner { get; set; }
+        public List<Player> PlayerFinished { get; set; }
+        public GameStrategy Strategy { get; set; }
 
 
-        public Game(Player[] players)
+        public Game(Player[] players, GameStrategy strategy)
         {
             if (players.Length < 2 || players.Length > 4)
             {
@@ -22,7 +23,8 @@ namespace BearGame
             _dice = new MersenneTwister();
             Players = players;
             ActivePlayers = players.ToList();
-            Winner = null;
+            PlayerFinished = new List<Player>();
+            Strategy = strategy;
         }
 
         public void StartGame(int numberOfMatches)
@@ -64,7 +66,7 @@ namespace BearGame
                 player.Reset();
             }
 
-            Winner = null;
+            PlayerFinished.Clear();
             ActivePlayers = Players.ToList();
         }
 
@@ -76,6 +78,46 @@ namespace BearGame
         }
 
         private Character? DecideWhichCharacterToMove(int roll, Player player)
+        {
+            Character? selectedCharacter = null;
+
+            switch (Strategy)
+            {
+                case GameStrategy.AlwaysGoForKnockOut:
+                    selectedCharacter = GoForKnockOuts(roll, player);
+                    break;
+                case GameStrategy.GoWithWhatsFurthest:
+                    selectedCharacter = GoWithFurthest(roll, player);
+                    break;
+                case GameStrategy.GoWithWhatsClosest:
+                    selectedCharacter = GoWithClosest(roll, player);
+                    break;
+                case GameStrategy.ActionWithRandomCharacter:
+                    selectedCharacter = GoWithRandom(roll, player);
+                    break;
+                default:
+                    selectedCharacter = null;
+                    break;
+            }
+            return selectedCharacter;
+        }
+
+        private Character? GoForKnockOuts(int roll, Player player)
+        {
+            return null;
+        }
+
+        private Character? GoWithFurthest(int roll, Player player)
+        {
+            return null;
+        }
+
+        private Character? GoWithClosest(int roll, Player player)
+        {
+            return null;
+        }
+
+        private Character? GoWithRandom(int roll, Player player)
         {
             return null;
         }

@@ -106,6 +106,8 @@
             YC2 = new TextBox();
             YC1 = new TextBox();
             GameConfigPanel = new Panel();
+            GameStrategySelector = new ListBox();
+            GameStrategyLabel = new Label();
             NumberOfMatchesSelector = new NumericUpDown();
             NumberOfMatchesLabel = new Label();
             NumberOfPlayersSelector = new NumericUpDown();
@@ -1294,6 +1296,8 @@
             // GameConfigPanel
             // 
             GameConfigPanel.BorderStyle = BorderStyle.FixedSingle;
+            GameConfigPanel.Controls.Add(GameStrategySelector);
+            GameConfigPanel.Controls.Add(GameStrategyLabel);
             GameConfigPanel.Controls.Add(NumberOfMatchesSelector);
             GameConfigPanel.Controls.Add(NumberOfMatchesLabel);
             GameConfigPanel.Controls.Add(NumberOfPlayersSelector);
@@ -1305,6 +1309,36 @@
             GameConfigPanel.Name = "GameConfigPanel";
             GameConfigPanel.Size = new Size(279, 595);
             GameConfigPanel.TabIndex = 0;
+            // 
+            // GameStrategySelector
+            // 
+            GameStrategySelector.BackColor = SystemColors.Control;
+            GameStrategySelector.BorderStyle = BorderStyle.FixedSingle;
+            GameStrategySelector.DisplayMember = "ChooseAStrategy";
+            GameStrategySelector.Dock = DockStyle.Top;
+            GameStrategySelector.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            GameStrategySelector.FormattingEnabled = true;
+            GameStrategySelector.ItemHeight = 28;
+            GameStrategySelector.Items.AddRange(new object[] { "GoForKnockOuts", "GoWithRandomCharacter", "GoWithTheClosest", "GoWithTheFurthest" });
+            GameStrategySelector.Location = new Point(0, 293);
+            GameStrategySelector.Name = "GameStrategySelector";
+            GameStrategySelector.Size = new Size(277, 142);
+            GameStrategySelector.Sorted = true;
+            GameStrategySelector.TabIndex = 7;
+            GameStrategySelector.SelectedIndexChanged += GameStrategySelector_SelectedIndexChanged;
+            // 
+            // GameStrategyLabel
+            // 
+            GameStrategyLabel.AutoSize = true;
+            GameStrategyLabel.Dock = DockStyle.Top;
+            GameStrategyLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            GameStrategyLabel.Location = new Point(0, 227);
+            GameStrategyLabel.Margin = new Padding(2, 0, 2, 0);
+            GameStrategyLabel.Name = "GameStrategyLabel";
+            GameStrategyLabel.Padding = new Padding(20, 30, 0, 8);
+            GameStrategyLabel.Size = new Size(160, 66);
+            GameStrategyLabel.TabIndex = 6;
+            GameStrategyLabel.Text = "GameStrategy:";
             // 
             // NumberOfMatchesSelector
             // 
@@ -1499,5 +1533,7 @@
         private Label NumberOfPlayersLabel;
         private NumericUpDown NumberOfMatchesSelector;
         private Label NumberOfMatchesLabel;
+        private Label GameStrategyLabel;
+        private ListBox GameStrategySelector;
     }
 }
