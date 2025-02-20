@@ -66,11 +66,42 @@ namespace BearGame
             {
                 PlayerCharacters[i] = new Character(i, PlayerCharacterSquares[i], playerColor);
             }
+
         }
 
         public List<Character> ActiveCharacters = new List<Character>();
 
+        public void KnockOutCharacterOfThisPlayer(Character characterToBeKnockedOut)
+        {
+            if (characterToBeKnockedOut.IsInFinalSquare || characterToBeKnockedOut.IsInStartingSquare || ActiveCharacters.Contains(characterToBeKnockedOut) == false)
+            {
+                throw new ArgumentException("Character can not be knocked out.");
+            }
 
+            characterToBeKnockedOut.Reset();
+            ActiveCharacters.Remove(characterToBeKnockedOut);
+        }
+
+        public int IndexOfMoveEndingSquare(Character character, int roll)
+        {
+            int indexOfEndSquare = (int)Math.Min(character.LocationIndex + roll, PlayerSquares.Length - 1);
+            return indexOfEndSquare;
+        }
+
+        public Character? FindCahracterByLocation(TextBox location)
+        {
+            if (location.BackColor == PlayerColor)
+            {
+                foreach (Character character in ActiveCharacters)
+                {
+                    if (character.LocationBox == location)
+                    {
+                        return character;
+                    }
+                }
+            }
+            return null;
+        }
 
         public void SetACharacterActive()
         {
@@ -104,42 +135,61 @@ namespace BearGame
             {
                 throw new ArgumentException("Invalid character location");
             }
+            int index = character.LocationIndex;
+            int? indexOfSqureToMove = character.LocationIndex + numOfSquaresToMove;
 
-            int indexOfSqureToMove = character.LocationIndex + numOfSquaresToMove;
-
-
-            if (character.LocationIndex + numOfSquaresToMove > NUMBER_OF_MOVEMENT_SQUARES + NUMBER_OF_MOVEMENT_SQUARES)
+            if ((int)indexOfSqureToMove >= (NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES))
             {
-                indexOfSqureToMove = MoveToFinalSquare(character, numOfSquaresToMove);
+                indexOfSqureToMove = MoveToFinalSquare(indexOfSqureToMove, character);
             }
-            else if (PlayerSquares[indexOfSqureToMove].BackColor == PlayerColor)
+           else if (indexOfSqureToMove == null || indexOfSqureToMove < NUMBER_OF_CHARACTERS)
             {
-                throw new ArgumentException("Square is already occupied");
+                throw new ArgumentException("Invalid character movement: null or less than character count.");
+            }
+            else if (PlayerSquares[(int)indexOfSqureToMove].BackColor == PlayerColor)
+            {
+                indexOfSqureToMove = null;
             }
 
-            character.MoveCharacter(PlayerSquares[indexOfSqureToMove], indexOfSqureToMove);
+           if (indexOfSqureToMove != null)
+            {
+                character.MoveCharacter(PlayerSquares[(int)indexOfSqureToMove], (int)indexOfSqureToMove);
+            }
 
         }
 
-        public int MoveToFinalSquare(Character character, int numOfSquaresToMove)
+        public int? MoveToFinalSquare(int? indexOfSquareToMove, Character character)
         {
-            int indexOfFinalSquare = character.LocationIndex + numOfSquaresToMove;
-
-            if (character.LocationIndex + numOfSquaresToMove >= PlayerSquares.Length)
+            if (indexOfSquareToMove == null)
             {
-                int squresToTheEnd = PlayerSquares.Length - character.LocationIndex - 1;
-                int numOfSquaresBackwards = numOfSquaresToMove - squresToTheEnd;
-                indexOfFinalSquare = PlayerSquares.Length - 1 - numOfSquaresBackwards;
+                return null;
             }
 
-            if (PlayerSquares[indexOfFinalSquare].BackColor == PlayerColor)
+            if ((int)indexOfSquareToMove >= 2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
             {
-                throw new ArgumentException("Finishing square is already occupied.");
+                indexOfSquareToMove = 2 * (2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES - 1) - (int)indexOfSquareToMove;
+
             }
 
-                character.IsInFinalSquare = true;
-                ActiveCharacters.Remove(character);
-            return indexOfFinalSquare;
+            if (PlayerSquares[(int)indexOfSquareToMove].BackColor == PlayerColor)
+            {
+                return null;
+            }
+            
+            character.IsInFinalSquare = true;
+            ActiveCharacters.Remove(character);
+
+            int counter = 0;
+            foreach (Character playerCharacter in PlayerCharacters)
+            {
+                if (playerCharacter.IsInFinalSquare)
+                {
+                    counter++;
+                }
+            }
+            AllCahractersInFinalSquare = counter == NUMBER_OF_CHARACTERS;
+
+            return indexOfSquareToMove;
         }
 
         public void Reset()

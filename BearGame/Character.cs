@@ -19,6 +19,11 @@ namespace BearGame
 
         public Character(int locationIndex, TextBox locationBox, Color color)
         {
+            if (locationIndex < 0 || locationIndex > 3)
+            {
+                throw new AggregateException($"Location index was incorrect: {locationBox}");
+            }
+
             LocationIndex = locationIndex;
             LocationBox = locationBox;
             StartingSquare = locationBox;

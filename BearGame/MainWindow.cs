@@ -329,7 +329,7 @@ namespace BearGame
             return players;
         }
 
-        private void StartGAmeButton_Click(object sender, EventArgs e)
+        private async void StartGAmeButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -345,7 +345,7 @@ namespace BearGame
                 StartGAmeButton.UseWaitCursor = true;
                 StartGAmeButton.Enabled = false;
 
-                game.StartGame((int)NumberOfMatchesSelector.Value);
+                await game.StartGame((int)NumberOfMatchesSelector.Value);
 
                 StartGAmeButton.Text = tempText;
                 StartGAmeButton.UseWaitCursor = false;
