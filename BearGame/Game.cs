@@ -11,22 +11,22 @@ namespace BearGame
         public Player[] Players { get; set; }
         public List<Player> ActivePlayers { get; set; }
         public List<Player> PlayerFinished { get; set; }
-        public GameStrategy Strategy { get; set; }
         public bool MakeItSlower { get; set; }
+        public double GameSpeed { get; set; }
 
 
-        public Game(Player[] players, GameStrategy strategy)
+        public Game(Player[] players)
         {
             if (players.Length < 2 || players.Length > 4)
             {
                 throw new ArgumentException("Invalid number of players");
             }
 
+            GameSpeed = 1;
             _dice = new MersenneTwister();
             Players = players;
             ActivePlayers = players.ToList();
             PlayerFinished = new List<Player>();
-            Strategy = strategy;
             MakeItSlower = true;
         }
 
@@ -38,11 +38,20 @@ namespace BearGame
 
                 if (MakeItSlower)
                 {
-                    await Task.Delay(1000);
+                    await Task.Delay((int)Math.Round(GameSpeed * 2000)); // Delay is in ms.
                 }
 
                 ResetGame();
             }
+        }
+
+        private void SetACharacterActiveFromAPlayer(Player player)
+        {
+            if (player.PlayerStartingSquare.BackColor != SystemColors.Control)
+            {
+                KnockOutACharacter(player, player.PlayerStartingSquare);
+            }
+            player.SetACharacterActive();
         }
 
         public async Task StartMatch()
@@ -57,11 +66,7 @@ namespace BearGame
 
                 if (currentPlayer.ActiveCharacters.Count == 0 && currentPlayer.AllCahractersInFinalSquare == false && roll == 6)
                 {
-                    if (currentPlayer.PlayerStartingSquare.BackColor != SystemColors.Control)
-                    {
-                        KnockOutACharacter(currentPlayer, currentPlayer.PlayerStartingSquare);
-                    }
-                    currentPlayer.SetACharacterActive();
+                    SetACharacterActiveFromAPlayer(currentPlayer);
                 }
                 else if (currentPlayer.ActiveCharacters.Count == 1)
                 {
@@ -97,7 +102,7 @@ namespace BearGame
 
                 if (MakeItSlower)
                 {
-                    await Task.Delay(200);
+                    await Task.Delay((int)Math.Round(GameSpeed * 500)); // Delay is in ms.
                 }
             }
         }
@@ -152,37 +157,26 @@ namespace BearGame
             return _dice.Next(1, 7);
         }
 
+
+
         private Character? DecideWhichCharacterToMove(int roll, Player player)
         {
             Character? selectedCharacter = null;
 
-            switch (Strategy)
+            if (player.PlayerStartingSquare.BackColor == player.PlayerColor && player.PlayerStrategy.PrioritizeOutOfStart)
             {
-                case GameStrategy.AlwaysGoForKnockOut:
-                    selectedCharacter = GoForKnockOuts(roll, player);
-                    break;
-                case GameStrategy.GoWithWhatsFurthest:
-                    selectedCharacter = GoWithFurthest(roll, player);
-                    break;
-                case GameStrategy.GoWithWhatsClosest:
-                    selectedCharacter = GoWithClosest(roll, player);
-                    break;
-                case GameStrategy.ActionWithRandomCharacter:
-                    selectedCharacter = GoWithRandom(roll, player);
-                    break;
-                default:
-                    selectedCharacter = null;
-                    break;
+                return player.FindCahracterByLocation(player.PlayerStartingSquare);
             }
+
+            if (roll == 6 && player.PlayerStrategy.PrioritizeNewCharacter && player.PlayerStartingSquare.BackColor != player.PlayerColor)
+            {
+                SetACharacterActiveFromAPlayer(player);
+            }
+
             return selectedCharacter;
         }
 
-        private Character? GoForKnockOuts(int roll, Player player)
-        {
-            return null;
-        }
-
-        private Character? GoWithFurthest(int roll, Player player)
+        private Character? GoWithRandom(int roll, Player player)
         {
             return null;
         }
@@ -192,7 +186,22 @@ namespace BearGame
             return null;
         }
 
-        private Character? GoWithRandom(int roll, Player player)
+        private Character? GoWithFurthest(int roll, Player player)
+        {
+            return null;
+        }
+
+        private Character? PriorityKO(int roll, Player player)
+        {
+            return null;
+        }
+
+        private Character? PriorityNewCharacter(int roll, Player player)
+        {
+            return null;
+        }
+
+        private Character? PriorityOutOfStart(int roll, Player player)
         {
             return null;
         }

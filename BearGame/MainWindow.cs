@@ -17,8 +17,23 @@ namespace BearGame
             StartGAmeButton.FlatAppearance.BorderSize = 0;
             StartGAmeButton.MouseEnter += Buttons_MouseEnter;
             StartGAmeButton.MouseLeave += Buttons_MouseLeave;
+            SettingPlayer1.FlatAppearance.BorderSize = 0;
+            SettingPlayer1.MouseEnter += Buttons_MouseEnter;
+            SettingPlayer1.MouseLeave += Buttons_MouseLeave;
+            SettingPlayer2.FlatAppearance.BorderSize = 0;
+            SettingPlayer2.MouseEnter += Buttons_MouseEnter;
+            SettingPlayer2.MouseLeave += Buttons_MouseLeave;
+            SettingPlayer3.FlatAppearance.BorderSize = 0;
+            SettingPlayer3.MouseEnter += Buttons_MouseEnter;
+            SettingPlayer3.MouseLeave += Buttons_MouseLeave;
+            SettingPlayer4.FlatAppearance.BorderSize = 0;
+            SettingPlayer4.MouseEnter += Buttons_MouseEnter;
+            SettingPlayer4.MouseLeave += Buttons_MouseLeave;
 
-            _selectedStrategy = null;
+            _player1Strategy = new Strategy(true, false, false, true, true, true);
+            _player2Strategy = new Strategy(true, false, false, true, true, true);
+            _player3Strategy = new Strategy(true, false, false, true, true, true);
+            _player4Strategy = new Strategy(true, false, false, true, true, true);
 
             GameView.Visible = false;
 
@@ -313,16 +328,16 @@ namespace BearGame
                 switch (i)
                 {
                     case 0:
-                        players[i] = new Player(i, Color.Yellow, GetPlayer1Squares());
+                        players[i] = new Player(Color.Yellow, GetPlayer1Squares(), _player1Strategy);
                         break;
                     case 1:
-                        players[i] = new Player(i, Color.Red, GetPlayer2Squares());
+                        players[i] = new Player(Color.Red, GetPlayer2Squares(), _player2Strategy);
                         break;
                     case 2:
-                        players[i] = new Player(i, Color.Blue, GetPlayer3Squares());
+                        players[i] = new Player(Color.Blue, GetPlayer3Squares(), _player3Strategy);
                         break;
                     case 3:
-                        players[i] = new Player(i, Color.Green, GetPlayer4Squares());
+                        players[i] = new Player(Color.Green, GetPlayer4Squares(), _player4Strategy);
                         break;
                 }
             }
@@ -333,12 +348,8 @@ namespace BearGame
         {
             try
             {
-                if (_selectedStrategy == null)
-                {
-                    throw new NullReferenceException("You must select a GameStrategy to start the game.");
-                }
 
-                Game game = new Game(GetPlayers((int)NumberOfPlayersSelector.Value), (GameStrategy)_selectedStrategy);
+                Game game = new Game(GetPlayers((int)NumberOfPlayersSelector.Value));
 
                 string tempText = StartGAmeButton.Text;
                 StartGAmeButton.Text = "GameIsRunning...";
@@ -357,28 +368,76 @@ namespace BearGame
             }
         }
 
-        private GameStrategy? _selectedStrategy;
-
-        private void GameStrategySelector_SelectedIndexChanged(object sender, EventArgs e)
+        private void NumberOfPlayersSelector_ValueChanged(object sender, EventArgs e)
         {
-            switch (GameStrategySelector.SelectedIndex)
+            if (NumberOfPlayersSelector.Value <= 2)
             {
-                case 0:
-                    _selectedStrategy = GameStrategy.AlwaysGoForKnockOut;
-                    break;
-                    case 1:
-                    _selectedStrategy = GameStrategy.GoWithWhatsFurthest;
-                        break;
-                    case 2:
-                    _selectedStrategy = GameStrategy.GoWithWhatsClosest;
-                        break;
-                    case 3:
-                    _selectedStrategy = GameStrategy.ActionWithRandomCharacter;
-                    break;
-                    default:
-                    _selectedStrategy = null;
-                    break;
+                SettingPlayer3.Visible = false;
+                SettingPlayer3.Enabled = false;
+                SettingPlayer4.Visible = false;
+                SettingPlayer4.Enabled = false;
+            }
+            else if (NumberOfPlayersSelector.Value == 3)
+            {
+
+                SettingPlayer3.Visible = true;
+                SettingPlayer3.Enabled = true;
+                SettingPlayer4.Visible = false;
+                SettingPlayer4.Enabled = false;
+            }
+            else
+            {
+                SettingPlayer3.Visible = true;
+                SettingPlayer3.Enabled = true;
+                SettingPlayer4.Visible = true;
+                SettingPlayer4.Enabled = true;
             }
         }
+
+        private Strategy _player1Strategy;
+        private Strategy _player2Strategy;
+        private Strategy _player3Strategy;
+        private Strategy _player4Strategy;
+
+        private void SettingPlayer1_Click(object sender, EventArgs e)
+        {
+            _player1Strategy = GetPlayerStrategy(_player1Strategy, SettingPlayer1.ForeColor);
+        }
+
+        private void SettingPlayer2_Click(object sender, EventArgs e)
+        {
+            _player2Strategy = GetPlayerStrategy(_player2Strategy, SettingPlayer2.ForeColor);
+        }
+
+        private void SettingPlayer3_Click(object sender, EventArgs e)
+        {
+            _player3Strategy = GetPlayerStrategy(_player3Strategy, SettingPlayer3.ForeColor);
+        }
+
+        private void SettingPlayer4_Click(object sender, EventArgs e)
+        {
+            _player4Strategy = GetPlayerStrategy(_player4Strategy, SettingPlayer4.ForeColor);
+        }
+
+        private Strategy GetPlayerStrategy(Strategy currentStrategy, Color playerColor)
+        {
+            try
+            {
+                PlayerSettings playerSettings = new PlayerSettings(currentStrategy, playerColor);
+                var result = playerSettings.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    return playerSettings.PlayerStrategy;
+                }
+                playerSettings.Dispose();
+                return currentStrategy;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return currentStrategy;
+            }
+
     }
+}
 }

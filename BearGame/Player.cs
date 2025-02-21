@@ -12,61 +12,36 @@ namespace BearGame
         public const int NUMBER_OF_CHARACTERS = 4;
         public const int NUMBER_OF_MOVEMENT_SQUARES = 40;
 
+        public Strategy PlayerStrategy { get; set; }
         public bool AllCahractersInFinalSquare {  get; set; }
         public Color PlayerColor { get; set; }
         public TextBox[] PlayerSquares { get; set; }
-        public TextBox[] PlayerCharacterSquares { get; set; }
-        public TextBox[] PlayerFinalSauares { get; set; }
         public TextBox PlayerStartingSquare { get; set; }
-        public TextBox PlayerLastMovementSquare { get; set; }
-        public TextBox[] PlayerMovementSquares { get; set; }
-        public int PlayerIndex { get; set; }
         public Character[] PlayerCharacters { get; set; }
+        public int NumberOfCharactersInFinalSquare { get; set; }
 
 
 
-        public Player(int playerIndex, Color playerColor, TextBox[] playerSquares)
+        public Player(Color playerColor, TextBox[] playerSquares, Strategy playerStrategy)
         {
             if (playerSquares.Length != 2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
             {
                 throw new ArgumentException("Invalid number of squares for player");
             }
 
-            if (playerIndex < 0 || playerIndex > 3)
-            {
-                throw new ArgumentException("Invalid player index");
-            }
-
-            PlayerIndex = playerIndex;
             PlayerColor = playerColor;
+            PlayerStrategy = playerStrategy;
+            NumberOfCharactersInFinalSquare = 0;
             PlayerSquares = playerSquares;
             AllCahractersInFinalSquare = false;
-            PlayerCharacterSquares = new TextBox[NUMBER_OF_CHARACTERS];
-            PlayerFinalSauares = new TextBox[NUMBER_OF_CHARACTERS];
-
-            for (int i = 0; i < NUMBER_OF_CHARACTERS; i++)
-            {
-                PlayerCharacterSquares[i] = playerSquares[i];
-                PlayerFinalSauares[i] = playerSquares[NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES + i];
-            }
-
             PlayerStartingSquare = playerSquares[NUMBER_OF_CHARACTERS];
-            PlayerLastMovementSquare = playerSquares[NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES - 1];
-
-            PlayerMovementSquares = new TextBox[NUMBER_OF_MOVEMENT_SQUARES];
-
-            for (int i = NUMBER_OF_CHARACTERS; i < NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES; i++)
-            {
-                PlayerMovementSquares[i - NUMBER_OF_CHARACTERS] = playerSquares[i];
-            }
 
             PlayerCharacters = new Character[NUMBER_OF_CHARACTERS];
 
             for (int i = 0; i < NUMBER_OF_CHARACTERS; i++)
             {
-                PlayerCharacters[i] = new Character(i, PlayerCharacterSquares[i], playerColor);
+                PlayerCharacters[i] = new Character(i, PlayerSquares[i], playerColor);
             }
-
         }
 
         public List<Character> ActiveCharacters = new List<Character>();
@@ -84,7 +59,18 @@ namespace BearGame
 
         public int IndexOfMoveEndingSquare(Character character, int roll)
         {
-            int indexOfEndSquare = (int)Math.Min(character.LocationIndex + roll, PlayerSquares.Length - 1);
+            int indexOfEndSquare = character.LocationIndex + roll;
+
+            if (indexOfEndSquare < NUMBER_OF_CHARACTERS)
+            {
+                throw new ArgumentException("Invalid character movement: less than character count.");
+            }
+
+            if (indexOfEndSquare >= 2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
+            {
+                indexOfEndSquare = 2 * (2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES - 1) - indexOfEndSquare;
+            }
+
             return indexOfEndSquare;
         }
 
@@ -135,61 +121,32 @@ namespace BearGame
             {
                 throw new ArgumentException("Invalid character location");
             }
-            int index = character.LocationIndex;
-            int? indexOfSqureToMove = character.LocationIndex + numOfSquaresToMove;
 
-            if ((int)indexOfSqureToMove >= (NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES))
+            int indexOfSqureToMove = IndexOfMoveEndingSquare(character, numOfSquaresToMove);
+
+            if (PlayerSquares[indexOfSqureToMove].BackColor == PlayerColor)
+                {
+                return;
+                }
+
+            if (indexOfSqureToMove >= NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
             {
-                indexOfSqureToMove = MoveToFinalSquare(indexOfSqureToMove, character);
-            }
-           else if (indexOfSqureToMove == null || indexOfSqureToMove < NUMBER_OF_CHARACTERS)
-            {
-                throw new ArgumentException("Invalid character movement: null or less than character count.");
-            }
-            else if (PlayerSquares[(int)indexOfSqureToMove].BackColor == PlayerColor)
-            {
-                indexOfSqureToMove = null;
+                MoveToFinalSquare(indexOfSqureToMove, character);
+                return;
             }
 
-           if (indexOfSqureToMove != null)
-            {
-                character.MoveCharacter(PlayerSquares[(int)indexOfSqureToMove], (int)indexOfSqureToMove);
-            }
+            character.MoveCharacter(PlayerSquares[indexOfSqureToMove], indexOfSqureToMove);
 
         }
 
-        public int? MoveToFinalSquare(int? indexOfSquareToMove, Character character)
+        public void MoveToFinalSquare(int indexOfSquareToMove, Character character)
         {
-            if (indexOfSquareToMove == null)
-            {
-                return null;
-            }
-
-            if ((int)indexOfSquareToMove >= 2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
-            {
-                indexOfSquareToMove = 2 * (2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES - 1) - (int)indexOfSquareToMove;
-
-            }
-
-            if (PlayerSquares[(int)indexOfSquareToMove].BackColor == PlayerColor)
-            {
-                return null;
-            }
-            
+            character.MoveCharacter(PlayerSquares[indexOfSquareToMove], indexOfSquareToMove);
             character.IsInFinalSquare = true;
             ActiveCharacters.Remove(character);
+            NumberOfCharactersInFinalSquare++;
 
-            int counter = 0;
-            foreach (Character playerCharacter in PlayerCharacters)
-            {
-                if (playerCharacter.IsInFinalSquare)
-                {
-                    counter++;
-                }
-            }
-            AllCahractersInFinalSquare = counter == NUMBER_OF_CHARACTERS;
-
-            return indexOfSquareToMove;
+            AllCahractersInFinalSquare = NumberOfCharactersInFinalSquare == NUMBER_OF_CHARACTERS;
         }
 
         public void Reset()
@@ -198,6 +155,8 @@ namespace BearGame
             {
                 character.Reset();
             }
+
+            NumberOfCharactersInFinalSquare = 0;
             ActiveCharacters.Clear();
             AllCahractersInFinalSquare = false;
         }
