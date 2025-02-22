@@ -61,9 +61,9 @@ namespace BearGame
         {
             int indexOfEndSquare = character.LocationIndex + roll;
 
-            if (indexOfEndSquare < NUMBER_OF_CHARACTERS)
+            if (indexOfEndSquare < NUMBER_OF_CHARACTERS || roll < 1 || roll > 6)
             {
-                throw new ArgumentException("Invalid character movement: less than character count.");
+                throw new ArgumentException("Invalid move");
             }
 
             if (indexOfEndSquare >= 2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
@@ -72,6 +72,20 @@ namespace BearGame
             }
 
             return indexOfEndSquare;
+        }
+
+        public List<Character> GetCharactersThatCanMove(int roll)
+        {
+            List<Character> charactersThatCanMove = new List<Character>();
+            foreach (Character character in ActiveCharacters)
+            {
+                int indexOfEndSquare = IndexOfMoveEndingSquare(character, roll);
+                if (PlayerSquares[indexOfEndSquare].BackColor != PlayerColor)
+                {
+                    charactersThatCanMove.Add(character);
+                }
+            }
+            return charactersThatCanMove;
         }
 
         public Character? FindCahracterByLocation(TextBox location)
@@ -89,11 +103,28 @@ namespace BearGame
             return null;
         }
 
+        public bool IsThereCharacterInStartingSquare()
+        {
+            if (AllCahractersInFinalSquare || ActiveCharacters.Count == NUMBER_OF_CHARACTERS)
+            {
+                return false;
+            }
+
+            foreach (Character character in PlayerCharacters)
+            {
+                if (character.IsInStartingSquare)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public void SetACharacterActive()
         {
-            if (ActiveCharacters.Count == NUMBER_OF_CHARACTERS)
+            if (IsThereCharacterInStartingSquare() == false)
             {
-                throw new ArgumentException("All characters are already active");
+                throw new ArgumentException("No character in starting square");
             }
 
             if (PlayerStartingSquare.BackColor == PlayerColor)
@@ -111,15 +142,13 @@ namespace BearGame
                     return;
                 }
             }
-
-            throw new ArgumentException("There are no characters in starting squares.");
         }
 
-        public void MoveCahracter(int numOfSquaresToMove, Character character)
+        public void MoveCharacter(int numOfSquaresToMove, Character character)
         {
             if (character.IsInStartingSquare || character.IsInFinalSquare || ActiveCharacters.Contains(character) == false)
             {
-                throw new ArgumentException("Invalid character location");
+                throw new ArgumentException($"Character can not be moved: StartingSquare: {character.IsInStartingSquare}, FinalSquare: {character.IsInFinalSquare}, ActiveCharacter: {ActiveCharacters.Contains(character)}, Count: {ActiveCharacters.Count}");
             }
 
             int indexOfSqureToMove = IndexOfMoveEndingSquare(character, numOfSquaresToMove);

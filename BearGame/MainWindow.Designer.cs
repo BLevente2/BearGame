@@ -106,6 +106,9 @@
             YC2 = new TextBox();
             YC1 = new TextBox();
             GameConfigPanel = new Panel();
+            GameSpeedBar = new TrackBar();
+            UseSlowModeBox = new CheckBox();
+            GameSpeedLabel = new Label();
             SettingPlayer4 = new Button();
             SettingPlayer3 = new Button();
             SettingPlayer2 = new Button();
@@ -115,12 +118,13 @@
             NumberOfMatchesLabel = new Label();
             NumberOfPlayersSelector = new NumericUpDown();
             NumberOfPlayersLabel = new Label();
-            StartGAmeButton = new Button();
+            StartGameButton = new Button();
             GameConfigLabel = new Label();
             ViewControlPanel.SuspendLayout();
             GameView.SuspendLayout();
             GameTablePanel.SuspendLayout();
             GameConfigPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)GameSpeedBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumberOfMatchesSelector).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumberOfPlayersSelector).BeginInit();
             SuspendLayout();
@@ -171,7 +175,7 @@
             GameView.Location = new Point(0, 41);
             GameView.Margin = new Padding(4);
             GameView.Name = "GameView";
-            GameView.Size = new Size(1900, 744);
+            GameView.Size = new Size(1900, 942);
             GameView.TabIndex = 1;
             // 
             // GameTablePanel
@@ -253,7 +257,7 @@
             GameTablePanel.Location = new Point(0, 0);
             GameTablePanel.Margin = new Padding(4);
             GameTablePanel.Name = "GameTablePanel";
-            GameTablePanel.Size = new Size(1552, 744);
+            GameTablePanel.Size = new Size(1552, 942);
             GameTablePanel.TabIndex = 1;
             // 
             // GF4
@@ -1376,6 +1380,9 @@
             // GameConfigPanel
             // 
             GameConfigPanel.BorderStyle = BorderStyle.FixedSingle;
+            GameConfigPanel.Controls.Add(GameSpeedBar);
+            GameConfigPanel.Controls.Add(UseSlowModeBox);
+            GameConfigPanel.Controls.Add(GameSpeedLabel);
             GameConfigPanel.Controls.Add(SettingPlayer4);
             GameConfigPanel.Controls.Add(SettingPlayer3);
             GameConfigPanel.Controls.Add(SettingPlayer2);
@@ -1385,14 +1392,56 @@
             GameConfigPanel.Controls.Add(NumberOfMatchesLabel);
             GameConfigPanel.Controls.Add(NumberOfPlayersSelector);
             GameConfigPanel.Controls.Add(NumberOfPlayersLabel);
-            GameConfigPanel.Controls.Add(StartGAmeButton);
+            GameConfigPanel.Controls.Add(StartGameButton);
             GameConfigPanel.Controls.Add(GameConfigLabel);
             GameConfigPanel.Dock = DockStyle.Right;
             GameConfigPanel.Location = new Point(1552, 0);
             GameConfigPanel.Margin = new Padding(4);
             GameConfigPanel.Name = "GameConfigPanel";
-            GameConfigPanel.Size = new Size(348, 744);
+            GameConfigPanel.Size = new Size(348, 942);
             GameConfigPanel.TabIndex = 0;
+            // 
+            // GameSpeedBar
+            // 
+            GameSpeedBar.Dock = DockStyle.Top;
+            GameSpeedBar.Location = new Point(0, 673);
+            GameSpeedBar.Maximum = 50;
+            GameSpeedBar.Minimum = 1;
+            GameSpeedBar.Name = "GameSpeedBar";
+            GameSpeedBar.Size = new Size(346, 69);
+            GameSpeedBar.TabIndex = 13;
+            GameSpeedBar.TickFrequency = 2;
+            GameSpeedBar.Value = 10;
+            // 
+            // UseSlowModeBox
+            // 
+            UseSlowModeBox.AutoSize = true;
+            UseSlowModeBox.Checked = true;
+            UseSlowModeBox.CheckState = CheckState.Checked;
+            UseSlowModeBox.Dock = DockStyle.Top;
+            UseSlowModeBox.FlatStyle = FlatStyle.Flat;
+            UseSlowModeBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            UseSlowModeBox.Location = new Point(0, 632);
+            UseSlowModeBox.Name = "UseSlowModeBox";
+            UseSlowModeBox.Padding = new Padding(50, 0, 0, 5);
+            UseSlowModeBox.Size = new Size(346, 41);
+            UseSlowModeBox.TabIndex = 12;
+            UseSlowModeBox.Text = "UseSlowMode";
+            UseSlowModeBox.UseVisualStyleBackColor = true;
+            UseSlowModeBox.CheckedChanged += UseSlowModeBox_CheckedChanged;
+            // 
+            // GameSpeedLabel
+            // 
+            GameSpeedLabel.AutoSize = true;
+            GameSpeedLabel.Dock = DockStyle.Top;
+            GameSpeedLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            GameSpeedLabel.Location = new Point(0, 556);
+            GameSpeedLabel.Margin = new Padding(2, 0, 2, 0);
+            GameSpeedLabel.Name = "GameSpeedLabel";
+            GameSpeedLabel.Padding = new Padding(25, 38, 0, 6);
+            GameSpeedLabel.Size = new Size(173, 76);
+            GameSpeedLabel.TabIndex = 11;
+            GameSpeedLabel.Text = "GameSpeed:";
             // 
             // SettingPlayer4
             // 
@@ -1521,19 +1570,19 @@
             NumberOfPlayersLabel.TabIndex = 2;
             NumberOfPlayersLabel.Text = "NumberOfPlayers:";
             // 
-            // StartGAmeButton
+            // StartGameButton
             // 
-            StartGAmeButton.Dock = DockStyle.Bottom;
-            StartGAmeButton.FlatStyle = FlatStyle.Flat;
-            StartGAmeButton.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 238);
-            StartGAmeButton.Location = new Point(0, 662);
-            StartGAmeButton.Margin = new Padding(2);
-            StartGAmeButton.Name = "StartGAmeButton";
-            StartGAmeButton.Size = new Size(346, 80);
-            StartGAmeButton.TabIndex = 1;
-            StartGAmeButton.Text = "StartGame";
-            StartGAmeButton.UseVisualStyleBackColor = true;
-            StartGAmeButton.Click += StartGAmeButton_Click;
+            StartGameButton.Dock = DockStyle.Bottom;
+            StartGameButton.FlatStyle = FlatStyle.Flat;
+            StartGameButton.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            StartGameButton.Location = new Point(0, 860);
+            StartGameButton.Margin = new Padding(2);
+            StartGameButton.Name = "StartGameButton";
+            StartGameButton.Size = new Size(346, 80);
+            StartGameButton.TabIndex = 1;
+            StartGameButton.Text = "StartGame";
+            StartGameButton.UseVisualStyleBackColor = true;
+            StartGameButton.Click += StartGAmeButton_Click;
             // 
             // GameConfigLabel
             // 
@@ -1553,7 +1602,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1900, 785);
+            ClientSize = new Size(1900, 983);
             Controls.Add(GameView);
             Controls.Add(ViewControlPanel);
             DoubleBuffered = true;
@@ -1568,6 +1617,7 @@
             GameTablePanel.PerformLayout();
             GameConfigPanel.ResumeLayout(false);
             GameConfigPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)GameSpeedBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumberOfMatchesSelector).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumberOfPlayersSelector).EndInit();
             ResumeLayout(false);
@@ -1654,7 +1704,7 @@
         private TextBox BF4;
         private TextBox BF3;
         private TextBox BF2;
-        private Button StartGAmeButton;
+        private Button StartGameButton;
         private NumericUpDown NumberOfPlayersSelector;
         private Label NumberOfPlayersLabel;
         private NumericUpDown NumberOfMatchesSelector;
@@ -1664,5 +1714,8 @@
         private Button SettingPlayer4;
         private Button SettingPlayer3;
         private Button SettingPlayer2;
+        private CheckBox UseSlowModeBox;
+        private Label GameSpeedLabel;
+        private TrackBar GameSpeedBar;
     }
 }

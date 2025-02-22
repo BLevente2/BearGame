@@ -14,9 +14,9 @@ namespace BearGame
             StatisticsViewButton.FlatAppearance.BorderSize = 0;
             StatisticsViewButton.MouseEnter += Buttons_MouseEnter;
             StatisticsViewButton.MouseLeave += Buttons_MouseLeave;
-            StartGAmeButton.FlatAppearance.BorderSize = 0;
-            StartGAmeButton.MouseEnter += Buttons_MouseEnter;
-            StartGAmeButton.MouseLeave += Buttons_MouseLeave;
+            StartGameButton.FlatAppearance.BorderSize = 0;
+            StartGameButton.MouseEnter += Buttons_MouseEnter;
+            StartGameButton.MouseLeave += Buttons_MouseLeave;
             SettingPlayer1.FlatAppearance.BorderSize = 0;
             SettingPlayer1.MouseEnter += Buttons_MouseEnter;
             SettingPlayer1.MouseLeave += Buttons_MouseLeave;
@@ -348,19 +348,18 @@ namespace BearGame
         {
             try
             {
+                Game game = new Game(GetPlayers((int)NumberOfPlayersSelector.Value), UseSlowModeBox, GameSpeedBar);
 
-                Game game = new Game(GetPlayers((int)NumberOfPlayersSelector.Value));
-
-                string tempText = StartGAmeButton.Text;
-                StartGAmeButton.Text = "GameIsRunning...";
-                StartGAmeButton.UseWaitCursor = true;
-                StartGAmeButton.Enabled = false;
+                string tempText = StartGameButton.Text;
+                StartGameButton.Text = "GameIsRunning...";
+                StartGameButton.UseWaitCursor = true;
+                StartGameButton.Enabled = false;
 
                 await game.StartGame((int)NumberOfMatchesSelector.Value);
 
-                StartGAmeButton.Text = tempText;
-                StartGAmeButton.UseWaitCursor = false;
-                StartGAmeButton.Enabled = true;
+                StartGameButton.Text = tempText;
+                StartGameButton.UseWaitCursor = false;
+                StartGameButton.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -438,6 +437,11 @@ namespace BearGame
                 return currentStrategy;
             }
 
+        }
+
+        private void UseSlowModeBox_CheckedChanged(object sender, EventArgs e)
+        {
+            GameSpeedBar.Enabled = UseSlowModeBox.Checked;
+        }
     }
-}
 }
