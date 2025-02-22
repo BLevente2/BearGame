@@ -41,7 +41,7 @@ namespace BearGame
 
                 if (SlowMode)
                 {
-                    await Task.Delay((int)Math.Round(GameSpeed * 20000)); // Delay is in ms.
+                    await Task.Delay((int)Math.Round(GameSpeed * 2000)); // Delay is in ms.
                 }
 
                 ResetGame();
@@ -105,7 +105,7 @@ namespace BearGame
 
                 if (SlowMode)
                 {
-                    await Task.Delay((int)Math.Round(GameSpeed * 5000)); // Delay is in ms.
+                    await Task.Delay((int)Math.Round(GameSpeed * 500)); // Delay is in ms.
                 }
             }
         }
