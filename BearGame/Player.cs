@@ -1,195 +1,189 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace BearGame;
 
-namespace BearGame
+public class Player
 {
-    public class Player
+
+    public const int NUMBER_OF_CHARACTERS = 4;
+    public const int NUMBER_OF_MOVEMENT_SQUARES = 40;
+
+    #region Properties&Constructors
+
+    public Strategy PlayerStrategy { get; private set; }
+    public bool AllCahractersInFinalSquare { get; private set; }
+    public Color PlayerColor { get; private set; }
+    public TextBox[] PlayerSquares { get; private set; }
+    public TextBox PlayerStartingSquare { get; private set; }
+    public Character[] PlayerCharacters { get; private set; }
+    public int NumberOfCharactersInFinalSquare { get; private set; }
+    public List<Character> ActiveCharacters { get; private set; }
+
+    public Player(Color playerColor, TextBox[] playerSquares, Strategy playerStrategy)
     {
-
-        public const int NUMBER_OF_CHARACTERS = 4;
-        public const int NUMBER_OF_MOVEMENT_SQUARES = 40;
-
-        public Strategy PlayerStrategy { get; set; }
-        public bool AllCahractersInFinalSquare {  get; set; }
-        public Color PlayerColor { get; set; }
-        public TextBox[] PlayerSquares { get; set; }
-        public TextBox PlayerStartingSquare { get; set; }
-        public Character[] PlayerCharacters { get; set; }
-        public int NumberOfCharactersInFinalSquare { get; set; }
-
-
-
-        public Player(Color playerColor, TextBox[] playerSquares, Strategy playerStrategy)
+        if (playerSquares.Length != 2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
         {
-            if (playerSquares.Length != 2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
-            {
-                throw new ArgumentException("Invalid number of squares for player");
-            }
-
-            PlayerColor = playerColor;
-            PlayerStrategy = playerStrategy;
-            NumberOfCharactersInFinalSquare = 0;
-            PlayerSquares = playerSquares;
-            AllCahractersInFinalSquare = false;
-            PlayerStartingSquare = playerSquares[NUMBER_OF_CHARACTERS];
-
-            PlayerCharacters = new Character[NUMBER_OF_CHARACTERS];
-
-            for (int i = 0; i < NUMBER_OF_CHARACTERS; i++)
-            {
-                PlayerCharacters[i] = new Character(i, PlayerSquares[i], playerColor);
-            }
+            throw new ArgumentException("Invalid number of squares for player");
         }
 
-        public List<Character> ActiveCharacters = new List<Character>();
+        PlayerColor = playerColor;
+        PlayerStrategy = playerStrategy;
+        NumberOfCharactersInFinalSquare = 0;
+        PlayerSquares = playerSquares;
+        AllCahractersInFinalSquare = false;
+        PlayerStartingSquare = playerSquares[NUMBER_OF_CHARACTERS];
 
-        public void KnockOutCharacterOfThisPlayer(Character characterToBeKnockedOut)
+        PlayerCharacters = new Character[NUMBER_OF_CHARACTERS];
+        ActiveCharacters = new List<Character>();
+
+        for (int i = 0; i < NUMBER_OF_CHARACTERS; i++)
         {
-            if (characterToBeKnockedOut.IsInFinalSquare || characterToBeKnockedOut.IsInStartingSquare || ActiveCharacters.Contains(characterToBeKnockedOut) == false)
-            {
-                throw new ArgumentException("Character can not be knocked out.");
-            }
+            PlayerCharacters[i] = new Character(i, PlayerSquares[i], playerColor);
+        }
+    }
 
-            characterToBeKnockedOut.Reset();
-            ActiveCharacters.Remove(characterToBeKnockedOut);
+    #endregion
+
+    public void KnockOutCharacterOfThisPlayer(Character characterToBeKnockedOut)
+    {
+        if (characterToBeKnockedOut.IsInFinalSquare || characterToBeKnockedOut.IsInStartingSquare || ActiveCharacters.Contains(characterToBeKnockedOut) == false)
+        {
+            throw new ArgumentException("Character can not be knocked out.");
         }
 
-        public int IndexOfMoveEndingSquare(Character character, int roll)
+        characterToBeKnockedOut.Reset();
+        ActiveCharacters.Remove(characterToBeKnockedOut);
+    }
+
+    public int IndexOfMoveEndingSquare(Character character, int roll)
+    {
+        int indexOfEndSquare = character.LocationIndex + roll;
+
+        if (indexOfEndSquare < NUMBER_OF_CHARACTERS || roll < 1 || roll > 6)
         {
-            int indexOfEndSquare = character.LocationIndex + roll;
-
-            if (indexOfEndSquare < NUMBER_OF_CHARACTERS || roll < 1 || roll > 6)
-            {
-                throw new ArgumentException("Invalid move");
-            }
-
-            if (indexOfEndSquare >= 2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
-            {
-                indexOfEndSquare = 2 * (2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES - 1) - indexOfEndSquare;
-            }
-
-            return indexOfEndSquare;
+            throw new ArgumentException("Invalid move");
         }
 
-        public List<Character> GetCharactersThatCanMove(int roll)
+        if (indexOfEndSquare >= 2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
         {
-            List<Character> charactersThatCanMove = new List<Character>();
+            indexOfEndSquare = 2 * (2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES - 1) - indexOfEndSquare;
+        }
+
+        return indexOfEndSquare;
+    }
+
+    public List<Character> GetCharactersThatCanMove(int roll)
+    {
+        List<Character> charactersThatCanMove = new List<Character>();
+        foreach (Character character in ActiveCharacters)
+        {
+            int indexOfEndSquare = IndexOfMoveEndingSquare(character, roll);
+            if (PlayerSquares[indexOfEndSquare].BackColor != PlayerColor)
+            {
+                charactersThatCanMove.Add(character);
+            }
+        }
+        return charactersThatCanMove;
+    }
+
+    public Character? FindCahracterByLocation(TextBox location)
+    {
+        if (location.BackColor == PlayerColor)
+        {
             foreach (Character character in ActiveCharacters)
             {
-                int indexOfEndSquare = IndexOfMoveEndingSquare(character, roll);
-                if (PlayerSquares[indexOfEndSquare].BackColor != PlayerColor)
+                if (character.LocationBox == location)
                 {
-                    charactersThatCanMove.Add(character);
+                    return character;
                 }
             }
-            return charactersThatCanMove;
         }
+        return null;
+    }
 
-        public Character? FindCahracterByLocation(TextBox location)
+    public bool IsThereCharacterInStartingSquare()
+    {
+        if (AllCahractersInFinalSquare || ActiveCharacters.Count == NUMBER_OF_CHARACTERS)
         {
-            if (location.BackColor == PlayerColor)
-            {
-                foreach (Character character in ActiveCharacters)
-                {
-                    if (character.LocationBox == location)
-                    {
-                        return character;
-                    }
-                }
-            }
-            return null;
-        }
-
-        public bool IsThereCharacterInStartingSquare()
-        {
-            if (AllCahractersInFinalSquare || ActiveCharacters.Count == NUMBER_OF_CHARACTERS)
-            {
-                return false;
-            }
-
-            foreach (Character character in PlayerCharacters)
-            {
-                if (character.IsInStartingSquare)
-                {
-                    return true;
-                }
-            }
             return false;
         }
 
-        public void SetACharacterActive()
+        foreach (Character character in PlayerCharacters)
         {
-            if (IsThereCharacterInStartingSquare() == false)
+            if (character.IsInStartingSquare)
             {
-                throw new ArgumentException("No character in starting square");
-            }
-
-            if (PlayerStartingSquare.BackColor == PlayerColor)
-            {
-                throw new ArgumentException("Starting square is already occupied");
-            }
-
-            foreach (Character character in PlayerCharacters)
-            {
-                if (character.IsInStartingSquare)
-                {
-                    character.IsInStartingSquare = false;
-                    ActiveCharacters.Add(character);
-                    character.MoveCharacter(PlayerStartingSquare, NUMBER_OF_CHARACTERS);
-                    return;
-                }
+                return true;
             }
         }
+        return false;
+    }
 
-        public void MoveCharacter(int numOfSquaresToMove, Character character)
+    public void SetACharacterActive()
+    {
+        if (IsThereCharacterInStartingSquare() == false)
         {
-            if (character.IsInStartingSquare || character.IsInFinalSquare || ActiveCharacters.Contains(character) == false)
+            throw new ArgumentException("No character in starting square");
+        }
+
+        if (PlayerStartingSquare.BackColor == PlayerColor)
+        {
+            throw new ArgumentException("Starting square is already occupied");
+        }
+
+        foreach (Character character in PlayerCharacters)
+        {
+            if (character.IsInStartingSquare)
             {
-                throw new ArgumentException($"Character can not be moved: StartingSquare: {character.IsInStartingSquare}, FinalSquare: {character.IsInFinalSquare}, ActiveCharacter: {ActiveCharacters.Contains(character)}, Count: {ActiveCharacters.Count}");
-            }
-
-            int indexOfSqureToMove = IndexOfMoveEndingSquare(character, numOfSquaresToMove);
-
-            if (PlayerSquares[indexOfSqureToMove].BackColor == PlayerColor)
-                {
-                return;
-                }
-
-            if (indexOfSqureToMove >= NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
-            {
-                MoveToFinalSquare(indexOfSqureToMove, character);
+                character.IsInStartingSquare = false;
+                ActiveCharacters.Add(character);
+                character.MoveCharacter(PlayerStartingSquare, NUMBER_OF_CHARACTERS);
                 return;
             }
-
-            character.MoveCharacter(PlayerSquares[indexOfSqureToMove], indexOfSqureToMove);
-
         }
+    }
 
-        public void MoveToFinalSquare(int indexOfSquareToMove, Character character)
+    public void MoveCharacter(int numOfSquaresToMove, Character character)
+    {
+        if (character.IsInStartingSquare || character.IsInFinalSquare || ActiveCharacters.Contains(character) == false)
         {
-            character.MoveCharacter(PlayerSquares[indexOfSquareToMove], indexOfSquareToMove);
-            character.IsInFinalSquare = true;
-            ActiveCharacters.Remove(character);
-            NumberOfCharactersInFinalSquare++;
-
-            AllCahractersInFinalSquare = NumberOfCharactersInFinalSquare == NUMBER_OF_CHARACTERS;
+            throw new ArgumentException($"Character can not be moved: StartingSquare: {character.IsInStartingSquare}, FinalSquare: {character.IsInFinalSquare}, ActiveCharacter: {ActiveCharacters.Contains(character)}, Count: {ActiveCharacters.Count}");
         }
 
-        public void Reset()
+        int indexOfSqureToMove = IndexOfMoveEndingSquare(character, numOfSquaresToMove);
+
+        if (PlayerSquares[indexOfSqureToMove].BackColor == PlayerColor)
         {
-            foreach (Character character in PlayerCharacters)
-            {
-                character.Reset();
-            }
-
-            NumberOfCharactersInFinalSquare = 0;
-            ActiveCharacters.Clear();
-            AllCahractersInFinalSquare = false;
+            return;
         }
 
+        if (indexOfSqureToMove >= NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
+        {
+            MoveToFinalSquare(indexOfSqureToMove, character);
+            return;
+        }
+
+        character.MoveCharacter(PlayerSquares[indexOfSqureToMove], indexOfSqureToMove);
+
+    }
+
+    private void MoveToFinalSquare(int indexOfSquareToMove, Character character)
+    {
+        character.MoveCharacter(PlayerSquares[indexOfSquareToMove], indexOfSquareToMove);
+        character.IsInFinalSquare = true;
+        ActiveCharacters.Remove(character);
+        NumberOfCharactersInFinalSquare++;
+
+        AllCahractersInFinalSquare = NumberOfCharactersInFinalSquare == NUMBER_OF_CHARACTERS;
+    }
+
+    public void Reset()
+    {
+        foreach (Character character in PlayerCharacters)
+        {
+            character.Reset();
+        }
+
+        NumberOfCharactersInFinalSquare = 0;
+        ActiveCharacters.Clear();
+        AllCahractersInFinalSquare = false;
     }
 
 }
