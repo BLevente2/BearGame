@@ -33,6 +33,9 @@
             GameViewButton = new Button();
             GameView = new Panel();
             GameTablePanel = new Panel();
+            ProgressPanel = new Panel();
+            SimulationProgress = new ProgressBar();
+            ProgressLabel = new Label();
             GF4 = new TextBox();
             GF3 = new TextBox();
             GF2 = new TextBox();
@@ -123,6 +126,7 @@
             ViewControlPanel.SuspendLayout();
             GameView.SuspendLayout();
             GameTablePanel.SuspendLayout();
+            ProgressPanel.SuspendLayout();
             GameConfigPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)GameSpeedBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumberOfMatchesSelector).BeginInit();
@@ -181,6 +185,7 @@
             // GameTablePanel
             // 
             GameTablePanel.BorderStyle = BorderStyle.FixedSingle;
+            GameTablePanel.Controls.Add(ProgressPanel);
             GameTablePanel.Controls.Add(GF4);
             GameTablePanel.Controls.Add(GF3);
             GameTablePanel.Controls.Add(GF2);
@@ -259,6 +264,42 @@
             GameTablePanel.Name = "GameTablePanel";
             GameTablePanel.Size = new Size(1552, 942);
             GameTablePanel.TabIndex = 1;
+            // 
+            // ProgressPanel
+            // 
+            ProgressPanel.Controls.Add(SimulationProgress);
+            ProgressPanel.Controls.Add(ProgressLabel);
+            ProgressPanel.Dock = DockStyle.Bottom;
+            ProgressPanel.Location = new Point(0, 850);
+            ProgressPanel.Name = "ProgressPanel";
+            ProgressPanel.Size = new Size(1550, 90);
+            ProgressPanel.TabIndex = 74;
+            ProgressPanel.Visible = false;
+            // 
+            // SimulationProgress
+            // 
+            SimulationProgress.Dock = DockStyle.Bottom;
+            SimulationProgress.Location = new Point(0, 35);
+            SimulationProgress.Maximum = 1000;
+            SimulationProgress.Name = "SimulationProgress";
+            SimulationProgress.Size = new Size(1550, 55);
+            SimulationProgress.Style = ProgressBarStyle.Continuous;
+            SimulationProgress.TabIndex = 72;
+            SimulationProgress.UseWaitCursor = true;
+            // 
+            // ProgressLabel
+            // 
+            ProgressLabel.AutoSize = true;
+            ProgressLabel.BackColor = Color.Transparent;
+            ProgressLabel.Dock = DockStyle.Top;
+            ProgressLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+            ProgressLabel.ForeColor = SystemColors.WindowText;
+            ProgressLabel.Location = new Point(0, 0);
+            ProgressLabel.Name = "ProgressLabel";
+            ProgressLabel.Padding = new Padding(750, 0, 750, 0);
+            ProgressLabel.Size = new Size(1556, 32);
+            ProgressLabel.TabIndex = 73;
+            ProgressLabel.Text = "0 %";
             // 
             // GF4
             // 
@@ -1404,7 +1445,7 @@
             // GameSpeedBar
             // 
             GameSpeedBar.Dock = DockStyle.Top;
-            GameSpeedBar.Location = new Point(0, 673);
+            GameSpeedBar.Location = new Point(0, 677);
             GameSpeedBar.Maximum = 50;
             GameSpeedBar.Minimum = 1;
             GameSpeedBar.Name = "GameSpeedBar";
@@ -1420,11 +1461,11 @@
             UseSlowModeBox.CheckState = CheckState.Checked;
             UseSlowModeBox.Dock = DockStyle.Top;
             UseSlowModeBox.FlatStyle = FlatStyle.Flat;
-            UseSlowModeBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            UseSlowModeBox.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point, 238);
             UseSlowModeBox.Location = new Point(0, 632);
             UseSlowModeBox.Name = "UseSlowModeBox";
             UseSlowModeBox.Padding = new Padding(50, 0, 0, 5);
-            UseSlowModeBox.Size = new Size(346, 41);
+            UseSlowModeBox.Size = new Size(346, 45);
             UseSlowModeBox.TabIndex = 12;
             UseSlowModeBox.Text = "UseSlowMode";
             UseSlowModeBox.UseVisualStyleBackColor = true;
@@ -1615,6 +1656,8 @@
             GameView.ResumeLayout(false);
             GameTablePanel.ResumeLayout(false);
             GameTablePanel.PerformLayout();
+            ProgressPanel.ResumeLayout(false);
+            ProgressPanel.PerformLayout();
             GameConfigPanel.ResumeLayout(false);
             GameConfigPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)GameSpeedBar).EndInit();
@@ -1717,5 +1760,8 @@
         private CheckBox UseSlowModeBox;
         private Label GameSpeedLabel;
         private TrackBar GameSpeedBar;
+        private ProgressBar SimulationProgress;
+        private Label ProgressLabel;
+        private Panel ProgressPanel;
     }
 }

@@ -348,18 +348,33 @@ namespace BearGame
         {
             try
             {
-                Game game = new Game(GetPlayers((int)NumberOfPlayersSelector.Value), UseSlowModeBox, GameSpeedBar);
+                Game game = new Game(GetPlayers((int)NumberOfPlayersSelector.Value), UseSlowModeBox, GameSpeedBar, SimulationProgress, ProgressLabel);
 
                 string tempText = StartGameButton.Text;
                 StartGameButton.Text = "GameIsRunning...";
                 StartGameButton.UseWaitCursor = true;
                 StartGameButton.Enabled = false;
+                NumberOfPlayersSelector.Enabled = false;
+                NumberOfMatchesSelector.Enabled = false;
+                SettingPlayer1.Enabled = false;
+                SettingPlayer2.Enabled = false;
+                SettingPlayer3.Enabled = false;
+                SettingPlayer4.Enabled = false;
+                SimulationProgress.Value = 0;
+                ProgressPanel.Visible = true;
 
                 await game.StartGame((int)NumberOfMatchesSelector.Value);
 
+                ProgressPanel.Visible = false;
                 StartGameButton.Text = tempText;
                 StartGameButton.UseWaitCursor = false;
                 StartGameButton.Enabled = true;
+                NumberOfPlayersSelector.Enabled = true;
+                NumberOfMatchesSelector.Enabled = true;
+                SettingPlayer1.Enabled = true;
+                SettingPlayer2.Enabled = true;
+                SettingPlayer3.Enabled = true;
+                SettingPlayer4.Enabled = true;
             }
             catch (Exception ex)
             {

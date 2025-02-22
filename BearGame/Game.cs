@@ -16,9 +16,14 @@ namespace BearGame
         public bool SlowMode => _slowModeBox.Checked;
         private TrackBar _gameSpeedBar;
         public double GameSpeed => 10.0 / _gameSpeedBar.Value;
+        private ProgressBar _simulationProgress;
+        public long TotalNumberOfPlayersFinished { get; set; }
+        public long CurrentNumberOfPlayersFinished { get; set; }
+        public int SimulationProgress => (int)Math.Round((double)CurrentNumberOfPlayersFinished / TotalNumberOfPlayersFinished * _simulationProgress.Maximum);
+        private Label _simulationProgressLabel;
+        public string Progress => $"{SimulationProgress / 10.0} %";
 
-
-        public Game(Player[] players, CheckBox slowModeBox, TrackBar gameSpeedBar)
+        public Game(Player[] players, CheckBox slowModeBox, TrackBar gameSpeedBar, ProgressBar simulationProgress, Label simulationProgressLabel)
         {
             if (players.Length < 2 || players.Length > 4)
             {
@@ -27,6 +32,8 @@ namespace BearGame
 
             _slowModeBox = slowModeBox;
             _gameSpeedBar = gameSpeedBar;
+            _simulationProgress = simulationProgress;
+            _simulationProgressLabel = simulationProgressLabel;
             _dice = new MersenneTwister();
             Players = players;
             ActivePlayers = players.ToList();
@@ -35,9 +42,17 @@ namespace BearGame
 
         public async Task StartGame(int numberOfMatches)
         {
+            TotalNumberOfPlayersFinished = numberOfMatches * Players.Length;
+            CurrentNumberOfPlayersFinished = 0;
+            _simulationProgressLabel.Text = Progress;
+
             for (int i = 0; i < numberOfMatches; i++)
             {
                 await StartMatch();
+
+                _simulationProgress.Value = SimulationProgress;
+                _simulationProgressLabel.Text = Progress;
+                await Task.Delay(1); // Delay is in ms.
 
                 if (SlowMode)
                 {
@@ -90,6 +105,7 @@ namespace BearGame
                 {
                     ActivePlayers.Remove(currentPlayer);
                     PlayerFinished.Add(currentPlayer);
+                    CurrentNumberOfPlayersFinished++;
 
                     if (PlayerFinished.Count == Players.Length)
                     {
