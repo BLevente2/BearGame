@@ -2,6 +2,8 @@ namespace BearGame;
 
 public partial class BearGameProject : Form
 {
+
+    #region Constructor
     public BearGameProject()
     {
         InitializeComponent();
@@ -27,6 +29,12 @@ public partial class BearGameProject : Form
         SettingPlayer4.FlatAppearance.BorderSize = 0;
         SettingPlayer4.MouseEnter += Buttons_MouseEnter;
         SettingPlayer4.MouseLeave += Buttons_MouseLeave;
+        SaveStatisticsButton.FlatAppearance.BorderSize = 0;
+        SaveStatisticsButton.MouseEnter += Buttons_MouseEnter;
+        SaveStatisticsButton.MouseLeave += Buttons_MouseLeave;
+        LoadStatisticsButton.FlatAppearance.BorderSize = 0;
+        LoadStatisticsButton.MouseEnter += Buttons_MouseEnter;
+        LoadStatisticsButton.MouseLeave += Buttons_MouseLeave;
 
 
         _player1Strategy = new Strategy(true, false, false, true, true, true);
@@ -34,13 +42,20 @@ public partial class BearGameProject : Form
         _player3Strategy = new Strategy(true, false, false, true, true, true);
         _player4Strategy = new Strategy(true, false, false, true, true, true);
 
-        GameView.Visible = false;
+        _dataCollection = null;
 
     }
 
+    #endregion
+
+    #region GameView
+
     private void GameViewButton_Click(object sender, EventArgs e)
     {
+        StatisticsView.Visible = false;
+        StatisticsView.Enabled = false;
         GameView.Visible = true;
+        GameView.Enabled = true;
     }
 
     private void Buttons_MouseEnter(object? sender, EventArgs e)
@@ -327,53 +342,66 @@ public partial class BearGameProject : Form
             switch (i)
             {
                 case 0:
-                    players[i] = new Player(Color.Yellow, GetPlayer1Squares(), _player1Strategy);
+                    players[i] = new Player(Color.Yellow, GetPlayer1Squares(), _player1Strategy, i);
                     break;
                 case 1:
-                    players[i] = new Player(Color.Red, GetPlayer2Squares(), _player2Strategy);
+                    players[i] = new Player(Color.Red, GetPlayer2Squares(), _player2Strategy, i);
                     break;
                 case 2:
-                    players[i] = new Player(Color.Blue, GetPlayer3Squares(), _player3Strategy);
+                    players[i] = new Player(Color.Blue, GetPlayer3Squares(), _player3Strategy, i);
                     break;
                 case 3:
-                    players[i] = new Player(Color.Green, GetPlayer4Squares(), _player4Strategy);
+                    players[i] = new Player(Color.Green, GetPlayer4Squares(), _player4Strategy, i);
                     break;
             }
         }
         return players;
     }
 
+    private void SetVisibilityWhileSimulating(bool visibility)
+    {
+        StartGameButton.Enabled = visibility;
+        NumberOfPlayersSelector.Enabled = visibility;
+        NumberOfMatchesSelector.Enabled = visibility;
+        SettingPlayer1.Enabled = visibility;
+        SettingPlayer2.Enabled = visibility;
+        SettingPlayer3.Enabled = visibility;
+        SettingPlayer4.Enabled = visibility;
+        SaveStatisticsButton.Enabled = visibility;
+        SaveStatisticsButton.Visible = visibility;
+        LoadStatisticsButton.Enabled = visibility;
+        LoadStatisticsButton.Visible = visibility;
+
+        StartGameButton.UseWaitCursor = !visibility;
+        ProgressPanel.Visible = !visibility;
+    }
+
     private async void StartGAmeButton_Click(object sender, EventArgs e)
     {
         try
         {
-            Game game = new Game(GetPlayers((int)NumberOfPlayersSelector.Value), UseSlowModeBox, GameSpeedBar, SimulationProgress, ProgressLabel);
+            GameStatistics gameStatistics = new GameStatistics((int)NumberOfMatchesSelector.Value, (int)NumberOfPlayersSelector.Value);
+            _dataCollection = new DataCollection(gameStatistics);
+            Player[] players = GetPlayers((int)NumberOfPlayersSelector.Value);
 
+            foreach (Player player in players)
+            {
+                gameStatistics.PlayerStrategies.Add(player.PlayerStrategy);
+            }
+
+            Game game = new Game(players, UseSlowModeBox, GameSpeedBar, SimulationProgress, ProgressLabel, gameStatistics.MatchStatistics, MatchesPlayedCounter, RoundsPlayedCounter, PlayerFinishedCounter);
             string tempText = StartGameButton.Text;
             StartGameButton.Text = "GameIsRunning...";
-            StartGameButton.UseWaitCursor = true;
-            StartGameButton.Enabled = false;
-            NumberOfPlayersSelector.Enabled = false;
-            NumberOfMatchesSelector.Enabled = false;
-            SettingPlayer1.Enabled = false;
-            SettingPlayer2.Enabled = false;
-            SettingPlayer3.Enabled = false;
-            SettingPlayer4.Enabled = false;
             SimulationProgress.Value = 0;
-            ProgressPanel.Visible = true;
+            SetVisibilityWhileSimulating(false);
 
             await game.StartGame((int)NumberOfMatchesSelector.Value);
 
-            ProgressPanel.Visible = false;
+            SetVisibilityWhileSimulating(true);
             StartGameButton.Text = tempText;
-            StartGameButton.UseWaitCursor = false;
-            StartGameButton.Enabled = true;
-            NumberOfPlayersSelector.Enabled = true;
-            NumberOfMatchesSelector.Enabled = true;
-            SettingPlayer1.Enabled = true;
-            SettingPlayer2.Enabled = true;
-            SettingPlayer3.Enabled = true;
-            SettingPlayer4.Enabled = true;
+            MatchesPlayedCounter.Text = "0";
+            RoundsPlayedCounter.Text = "0";
+            PlayerFinishedCounter.Text = "0";
         }
         catch (Exception ex)
         {
@@ -457,4 +485,68 @@ public partial class BearGameProject : Form
     {
         GameSpeedBar.Enabled = UseSlowModeBox.Checked;
     }
+
+    #endregion
+
+    #region Statistics
+
+    private DataCollection? _dataCollection;
+
+    private void StatisticsViewButton_Click(object sender, EventArgs e)
+    {
+        GameView.Visible = false;
+        GameView.Enabled = false;
+        StatisticsView.Visible = true;
+        StatisticsView.Enabled = true;
+    }
+
+    private void SaveStatisticsButton_Click(object sender, EventArgs e)
+    {
+        if (_dataCollection != null)
+        {
+            try
+            {
+                var saveFile = new SaveFileDialog();
+                var result = saveFile.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    _dataCollection.JsonFilePath = saveFile.FileName;
+                    _dataCollection.SaveGameStatistics();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+    }
+
+    private void LoadStatisticsButton_Click(object sender, EventArgs e)
+    {
+        try
+        {
+           if (_dataCollection == null)
+            {
+                _dataCollection = new DataCollection();
+            }
+
+           var openFile = new OpenFileDialog();
+            var result = openFile.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                _dataCollection.JsonFilePath = openFile.FileName;
+                _dataCollection.LoadGameStatistics();
+                SaveStatisticsButton.Enabled = true;
+                SaveStatisticsButton.Visible = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+
+    #endregion
 }

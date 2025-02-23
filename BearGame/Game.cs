@@ -14,15 +14,16 @@ public class Game
     private TrackBar _gameSpeedBar;
     private ProgressBar _simulationProgress;
     private Label _simulationProgressLabel;
+    private List<MatchStatistics> _matchStatistics;
+    private Label _numOfGamesFinishedBox;
+    private Label _numOfRoundsPlayedBox;
+    private Label _numOfPlayersFinishedBox;
 
     public bool SlowMode => _slowModeBox.Checked;
     public double GameSpeed => 10.0 / _gameSpeedBar.Value;
-    public long TotalNumberOfPlayersFinished { get; private set; }
-    public long CurrentNumberOfPlayersFinished { get; private set; }
-    public int SimulationProgress => (int)Math.Round((double)CurrentNumberOfPlayersFinished / TotalNumberOfPlayersFinished * _simulationProgress.Maximum);
-    public string Progress => $"Progress: {SimulationProgress / 10.0} %";
+    public string Progress => $"Progress: {Math.Round((double)_simulationProgress.Value / (double)_simulationProgress.Maximum * 100.0, 1)} %";
 
-    public Game(Player[] players, CheckBox slowModeBox, TrackBar gameSpeedBar, ProgressBar simulationProgress, Label simulationProgressLabel)
+    public Game(Player[] players, CheckBox slowModeBox, TrackBar gameSpeedBar, ProgressBar simulationProgress, Label simulationProgressLabel, List<MatchStatistics> matchStatistics, Label numOfGamesFinishedBox, Label numOfRoundsPlayedBox, Label numOfPlayersFinishedBox)
     {
         if (players.Length < 2 || players.Length > 4)
         {
@@ -37,21 +38,29 @@ public class Game
         _players = players;
         _activePlayers = players.ToList();
         _playersFinished = new List<Player>();
+        _matchStatistics = matchStatistics;
+        _numOfGamesFinishedBox = numOfGamesFinishedBox;
+        _numOfRoundsPlayedBox = numOfRoundsPlayedBox;
+        _numOfPlayersFinishedBox = numOfPlayersFinishedBox;
     }
 
     #endregion
 
     public async Task StartGame(int numberOfMatches)
     {
-        TotalNumberOfPlayersFinished = numberOfMatches * _players.Length;
-        CurrentNumberOfPlayersFinished = 0;
+        _simulationProgress.Maximum = numberOfMatches * _players.Length;
+        _simulationProgress.Value = 0;
         _simulationProgressLabel.Text = Progress;
 
         for (int i = 0; i < numberOfMatches; i++)
         {
-            await StartMatch();
+            MatchStatistics stat = new MatchStatistics(_players.Length);
 
-            _simulationProgress.Value = SimulationProgress;
+            await StartMatch(stat);
+
+            _numOfGamesFinishedBox.Text = (i + 1).ToString();
+            _matchStatistics.Add(stat);
+
             _simulationProgressLabel.Text = Progress;
             await Task.Delay(1); // Delay is in ms.
 
@@ -75,7 +84,7 @@ public class Game
         _activePlayers = _players.ToList();
     }
 
-    public async Task StartMatch()
+    public async Task StartMatch(MatchStatistics stat)
     {
         int numberOfCicles = 0;
         int i = 0;
@@ -91,7 +100,7 @@ public class Game
             Player currentPlayer = _activePlayers[i];
 
             int roll = RollDice();
-            Character? characterToMove = characterToMove = DecideWhichCharacterToMove(roll, currentPlayer);
+            Character? characterToMove = characterToMove = DecideWhichCharacterToMove(roll, currentPlayer, stat, numberOfCicles);
 
             if (characterToMove != null)
             {
@@ -99,7 +108,7 @@ public class Game
 
                 if (endOfMove.BackColor != SystemColors.Control && endOfMove.BackColor != currentPlayer.PlayerColor)
                 {
-                    KnockOutACharacter(currentPlayer, endOfMove);
+                    KnockOutACharacter(currentPlayer, endOfMove, stat, numberOfCicles);
                 }
                 currentPlayer.MoveCharacter(roll, characterToMove);
             }
@@ -108,10 +117,15 @@ public class Game
             {
                 _activePlayers.Remove(currentPlayer);
                 _playersFinished.Add(currentPlayer);
-                CurrentNumberOfPlayersFinished++;
+                _simulationProgress.Value++;
+                _numOfPlayersFinishedBox.Text = _playersFinished.Count.ToString();
+
+                stat.PlayerFinishOrder.Add(currentPlayer.PlayerIndex);
+                stat.NumberOfRoundsNeededToFinish.Add(numberOfCicles);
 
                 if (_playersFinished.Count == _players.Length)
                 {
+                    stat.TotalNumberOfRounds = numberOfCicles;
                     break;
                 }
             }
@@ -122,6 +136,8 @@ public class Game
                 i = 0;
             }
 
+            _numOfRoundsPlayedBox.Text = numberOfCicles.ToString();
+
             if (SlowMode)
             {
                 await Task.Delay((int)Math.Round(GameSpeed * 500)); // Delay is in ms.
@@ -129,11 +145,11 @@ public class Game
         }
     }
 
-    private Character? DecideWhichCharacterToMove(int roll, Player player)
+    private Character? DecideWhichCharacterToMove(int roll, Player player, MatchStatistics stat, int round)
     {
         if ((player.PlayerStrategy.PrioritizeNewCharacter || player.ActiveCharacters.Count == 0) && (roll == 6 && player.PlayerStartingSquare.BackColor != player.PlayerColor && player.IsThereCharacterInStartingSquare()))
         {
-            SetACharacterActiveFromAPlayer(player);
+            SetACharacterActiveFromAPlayer(player, stat, round);
             return null;
         }
 
@@ -189,16 +205,16 @@ public class Game
         return selectedCharacter;
     }
 
-    private void SetACharacterActiveFromAPlayer(Player player)
+    private void SetACharacterActiveFromAPlayer(Player player, MatchStatistics stat, int round)
     {
         if (player.PlayerStartingSquare.BackColor != SystemColors.Control && player.PlayerStartingSquare.BackColor != player.PlayerColor)
         {
-            KnockOutACharacter(player, player.PlayerStartingSquare);
+            KnockOutACharacter(player, player.PlayerStartingSquare, stat, round);
         }
         player.SetACharacterActive();
     }
 
-    private void KnockOutACharacter(Player playerWhoMoves, TextBox knockOutLocation)
+    private void KnockOutACharacter(Player playerWhoMoves, TextBox knockOutLocation, MatchStatistics stat, int round)
     {
         Player? playerToBeKnockedOut = WhichPlayerStandsHere(knockOutLocation);
 
@@ -206,6 +222,11 @@ public class Game
         {
             throw new ArgumentException("Player not found to be knocked out.");
         }
+
+        stat.NumberOfTimesKnockedOutAPlayer[playerWhoMoves.PlayerIndex]++;
+        stat.NumberOfTimesBeenKnockedOut[playerToBeKnockedOut.PlayerIndex]++;
+        KOStatistics koStat = new KOStatistics(playerWhoMoves.PlayerIndex, playerToBeKnockedOut.PlayerIndex, round);
+        stat.KOStatistics.Add(koStat);
 
         Character? characterToBeKnockedOut = playerToBeKnockedOut.FindCahracterByLocation(knockOutLocation);
 

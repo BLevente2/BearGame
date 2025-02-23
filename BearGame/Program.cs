@@ -1,14 +1,21 @@
+using System.Runtime.Versioning;
+
 namespace BearGame;
 
-internal static class Program
+public static class Program
 {
-    /// <summary>
-    ///  The main entry point for the application.
-    /// </summary>
+    [SupportedOSPlatform("windows")]
     [STAThread]
-    static void Main()
+    public static void Main()
     {
-        ApplicationConfiguration.Initialize();
-        Application.Run(new BearGameProject());
+        if (OperatingSystem.IsWindows())
+        {
+            ApplicationConfiguration.Initialize();
+            Application.Run(new BearGameProject());
+        }
+        else
+        {
+            throw new PlatformNotSupportedException("Ez az alkalmazás csak Windows rendszeren futtatható.");
+        }
     }
 }

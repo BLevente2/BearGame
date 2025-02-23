@@ -8,6 +8,7 @@ public class Player
 
     #region Properties&Constructors
 
+    public int PlayerIndex { get; set; }
     public Strategy PlayerStrategy { get; private set; }
     public bool AllCahractersInFinalSquare { get; private set; }
     public Color PlayerColor { get; private set; }
@@ -16,14 +17,25 @@ public class Player
     public Character[] PlayerCharacters { get; private set; }
     public int NumberOfCharactersInFinalSquare { get; private set; }
     public List<Character> ActiveCharacters { get; private set; }
+    public int NumberOfTimesBeenKnockedOut { get; set; }
+    public int NumberOfTimesKnockedOutAPlayer { get; set; }
 
-    public Player(Color playerColor, TextBox[] playerSquares, Strategy playerStrategy)
+
+    public Player(Color playerColor, TextBox[] playerSquares, Strategy playerStrategy, int playerIndex)
     {
         if (playerSquares.Length != 2 * NUMBER_OF_CHARACTERS + NUMBER_OF_MOVEMENT_SQUARES)
         {
             throw new ArgumentException("Invalid number of squares for player");
         }
 
+        if (playerIndex < 0 || playerIndex > 3)
+        {
+            throw new ArgumentException("Invalid player index");
+        }
+
+        PlayerIndex = playerIndex;
+        NumberOfTimesBeenKnockedOut = 0;
+        NumberOfTimesKnockedOutAPlayer = 0;
         PlayerColor = playerColor;
         PlayerStrategy = playerStrategy;
         NumberOfCharactersInFinalSquare = 0;
@@ -38,6 +50,8 @@ public class Player
         {
             PlayerCharacters[i] = new Character(i, PlayerSquares[i], playerColor);
         }
+
+        PlayerIndex = playerIndex;
     }
 
     #endregion
@@ -184,6 +198,8 @@ public class Player
         NumberOfCharactersInFinalSquare = 0;
         ActiveCharacters.Clear();
         AllCahractersInFinalSquare = false;
+        NumberOfTimesBeenKnockedOut = 0;
+        NumberOfTimesKnockedOutAPlayer = 0;
     }
 
 }

@@ -33,6 +33,13 @@ partial class BearGameProject
         GameViewButton = new Button();
         GameView = new Panel();
         GameTablePanel = new Panel();
+        GameDataPanel = new Panel();
+        PlayerFinishedCounter = new Label();
+        PlayerFinishedCounterLabel = new Label();
+        RoundsPlayedCounter = new Label();
+        RoundCounterLabel = new Label();
+        MatchesPlayedCounter = new Label();
+        MatchCounterLabel = new Label();
         ProgressPanel = new Panel();
         SimulationProgress = new ProgressBar();
         ProgressLabel = new Label();
@@ -123,14 +130,19 @@ partial class BearGameProject
         NumberOfPlayersLabel = new Label();
         StartGameButton = new Button();
         GameConfigLabel = new Label();
+        StatisticsView = new Panel();
+        LoadStatisticsButton = new Button();
+        SaveStatisticsButton = new Button();
         ViewControlPanel.SuspendLayout();
         GameView.SuspendLayout();
         GameTablePanel.SuspendLayout();
+        GameDataPanel.SuspendLayout();
         ProgressPanel.SuspendLayout();
         GameConfigPanel.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)GameSpeedBar).BeginInit();
         ((System.ComponentModel.ISupportInitialize)NumberOfMatchesSelector).BeginInit();
         ((System.ComponentModel.ISupportInitialize)NumberOfPlayersSelector).BeginInit();
+        StatisticsView.SuspendLayout();
         SuspendLayout();
         // 
         // ViewControlPanel
@@ -143,7 +155,7 @@ partial class BearGameProject
         ViewControlPanel.Location = new Point(0, 0);
         ViewControlPanel.Margin = new Padding(4);
         ViewControlPanel.Name = "ViewControlPanel";
-        ViewControlPanel.Size = new Size(1900, 41);
+        ViewControlPanel.Size = new Size(2167, 41);
         ViewControlPanel.TabIndex = 0;
         // 
         // StatisticsViewButton
@@ -157,6 +169,7 @@ partial class BearGameProject
         StatisticsViewButton.TabIndex = 2;
         StatisticsViewButton.Text = "StatisticsView";
         StatisticsViewButton.UseVisualStyleBackColor = true;
+        StatisticsViewButton.Click += StatisticsViewButton_Click;
         // 
         // GameViewButton
         // 
@@ -176,15 +189,18 @@ partial class BearGameProject
         GameView.Controls.Add(GameTablePanel);
         GameView.Controls.Add(GameConfigPanel);
         GameView.Dock = DockStyle.Fill;
+        GameView.Enabled = false;
         GameView.Location = new Point(0, 41);
         GameView.Margin = new Padding(4);
         GameView.Name = "GameView";
-        GameView.Size = new Size(1900, 942);
+        GameView.Size = new Size(2167, 991);
         GameView.TabIndex = 1;
+        GameView.Visible = false;
         // 
         // GameTablePanel
         // 
         GameTablePanel.BorderStyle = BorderStyle.FixedSingle;
+        GameTablePanel.Controls.Add(GameDataPanel);
         GameTablePanel.Controls.Add(ProgressPanel);
         GameTablePanel.Controls.Add(GF4);
         GameTablePanel.Controls.Add(GF3);
@@ -262,17 +278,103 @@ partial class BearGameProject
         GameTablePanel.Location = new Point(0, 0);
         GameTablePanel.Margin = new Padding(4);
         GameTablePanel.Name = "GameTablePanel";
-        GameTablePanel.Size = new Size(1552, 942);
+        GameTablePanel.Size = new Size(1819, 991);
         GameTablePanel.TabIndex = 1;
+        // 
+        // GameDataPanel
+        // 
+        GameDataPanel.Controls.Add(PlayerFinishedCounter);
+        GameDataPanel.Controls.Add(PlayerFinishedCounterLabel);
+        GameDataPanel.Controls.Add(RoundsPlayedCounter);
+        GameDataPanel.Controls.Add(RoundCounterLabel);
+        GameDataPanel.Controls.Add(MatchesPlayedCounter);
+        GameDataPanel.Controls.Add(MatchCounterLabel);
+        GameDataPanel.Dock = DockStyle.Right;
+        GameDataPanel.Location = new Point(1456, 0);
+        GameDataPanel.Name = "GameDataPanel";
+        GameDataPanel.Size = new Size(361, 899);
+        GameDataPanel.TabIndex = 75;
+        // 
+        // PlayerFinishedCounter
+        // 
+        PlayerFinishedCounter.AutoSize = true;
+        PlayerFinishedCounter.Dock = DockStyle.Top;
+        PlayerFinishedCounter.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        PlayerFinishedCounter.Location = new Point(0, 220);
+        PlayerFinishedCounter.Name = "PlayerFinishedCounter";
+        PlayerFinishedCounter.Padding = new Padding(45, 0, 0, 0);
+        PlayerFinishedCounter.Size = new Size(72, 32);
+        PlayerFinishedCounter.TabIndex = 5;
+        PlayerFinishedCounter.Text = "0";
+        // 
+        // PlayerFinishedCounterLabel
+        // 
+        PlayerFinishedCounterLabel.AutoSize = true;
+        PlayerFinishedCounterLabel.Dock = DockStyle.Top;
+        PlayerFinishedCounterLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        PlayerFinishedCounterLabel.Location = new Point(0, 168);
+        PlayerFinishedCounterLabel.Name = "PlayerFinishedCounterLabel";
+        PlayerFinishedCounterLabel.Padding = new Padding(0, 20, 0, 0);
+        PlayerFinishedCounterLabel.Size = new Size(296, 52);
+        PlayerFinishedCounterLabel.TabIndex = 4;
+        PlayerFinishedCounterLabel.Text = "NumberOfPlayersFinished:";
+        // 
+        // RoundsPlayedCounter
+        // 
+        RoundsPlayedCounter.AutoSize = true;
+        RoundsPlayedCounter.Dock = DockStyle.Top;
+        RoundsPlayedCounter.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        RoundsPlayedCounter.Location = new Point(0, 136);
+        RoundsPlayedCounter.Name = "RoundsPlayedCounter";
+        RoundsPlayedCounter.Padding = new Padding(45, 0, 0, 0);
+        RoundsPlayedCounter.Size = new Size(72, 32);
+        RoundsPlayedCounter.TabIndex = 3;
+        RoundsPlayedCounter.Text = "0";
+        // 
+        // RoundCounterLabel
+        // 
+        RoundCounterLabel.AutoSize = true;
+        RoundCounterLabel.Dock = DockStyle.Top;
+        RoundCounterLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        RoundCounterLabel.Location = new Point(0, 84);
+        RoundCounterLabel.Name = "RoundCounterLabel";
+        RoundCounterLabel.Padding = new Padding(0, 20, 0, 0);
+        RoundCounterLabel.Size = new Size(282, 52);
+        RoundCounterLabel.TabIndex = 2;
+        RoundCounterLabel.Text = "NumberOfRoundsPlayed:";
+        // 
+        // MatchesPlayedCounter
+        // 
+        MatchesPlayedCounter.AutoSize = true;
+        MatchesPlayedCounter.Dock = DockStyle.Top;
+        MatchesPlayedCounter.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        MatchesPlayedCounter.Location = new Point(0, 52);
+        MatchesPlayedCounter.Name = "MatchesPlayedCounter";
+        MatchesPlayedCounter.Padding = new Padding(45, 0, 0, 0);
+        MatchesPlayedCounter.Size = new Size(72, 32);
+        MatchesPlayedCounter.TabIndex = 1;
+        MatchesPlayedCounter.Text = "0";
+        // 
+        // MatchCounterLabel
+        // 
+        MatchCounterLabel.AutoSize = true;
+        MatchCounterLabel.Dock = DockStyle.Top;
+        MatchCounterLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        MatchCounterLabel.Location = new Point(0, 0);
+        MatchCounterLabel.Name = "MatchCounterLabel";
+        MatchCounterLabel.Padding = new Padding(0, 20, 0, 0);
+        MatchCounterLabel.Size = new Size(293, 52);
+        MatchCounterLabel.TabIndex = 0;
+        MatchCounterLabel.Text = "NumberOfMatchesPlayed:";
         // 
         // ProgressPanel
         // 
         ProgressPanel.Controls.Add(SimulationProgress);
         ProgressPanel.Controls.Add(ProgressLabel);
         ProgressPanel.Dock = DockStyle.Bottom;
-        ProgressPanel.Location = new Point(0, 850);
+        ProgressPanel.Location = new Point(0, 899);
         ProgressPanel.Name = "ProgressPanel";
-        ProgressPanel.Size = new Size(1550, 90);
+        ProgressPanel.Size = new Size(1817, 90);
         ProgressPanel.TabIndex = 74;
         ProgressPanel.Visible = false;
         // 
@@ -282,7 +384,7 @@ partial class BearGameProject
         SimulationProgress.Location = new Point(0, 35);
         SimulationProgress.Maximum = 1000;
         SimulationProgress.Name = "SimulationProgress";
-        SimulationProgress.Size = new Size(1550, 55);
+        SimulationProgress.Size = new Size(1817, 55);
         SimulationProgress.Style = ProgressBarStyle.Continuous;
         SimulationProgress.TabIndex = 72;
         SimulationProgress.UseWaitCursor = true;
@@ -1363,10 +1465,10 @@ partial class BearGameProject
         GameConfigPanel.Controls.Add(StartGameButton);
         GameConfigPanel.Controls.Add(GameConfigLabel);
         GameConfigPanel.Dock = DockStyle.Right;
-        GameConfigPanel.Location = new Point(1552, 0);
+        GameConfigPanel.Location = new Point(1819, 0);
         GameConfigPanel.Margin = new Padding(4);
         GameConfigPanel.Name = "GameConfigPanel";
-        GameConfigPanel.Size = new Size(348, 942);
+        GameConfigPanel.Size = new Size(348, 991);
         GameConfigPanel.TabIndex = 0;
         // 
         // GameSpeedBar
@@ -1543,7 +1645,7 @@ partial class BearGameProject
         StartGameButton.Dock = DockStyle.Bottom;
         StartGameButton.FlatStyle = FlatStyle.Flat;
         StartGameButton.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        StartGameButton.Location = new Point(0, 860);
+        StartGameButton.Location = new Point(0, 909);
         StartGameButton.Margin = new Padding(2);
         StartGameButton.Name = "StartGameButton";
         StartGameButton.Size = new Size(346, 80);
@@ -1566,13 +1668,57 @@ partial class BearGameProject
         GameConfigLabel.Text = "GameConfig";
         GameConfigLabel.TextAlign = ContentAlignment.MiddleCenter;
         // 
+        // StatisticsView
+        // 
+        StatisticsView.BackColor = SystemColors.Control;
+        StatisticsView.BorderStyle = BorderStyle.FixedSingle;
+        StatisticsView.Controls.Add(LoadStatisticsButton);
+        StatisticsView.Controls.Add(SaveStatisticsButton);
+        StatisticsView.Dock = DockStyle.Fill;
+        StatisticsView.Enabled = false;
+        StatisticsView.Location = new Point(0, 0);
+        StatisticsView.Margin = new Padding(4);
+        StatisticsView.Name = "StatisticsView";
+        StatisticsView.Size = new Size(2167, 1032);
+        StatisticsView.TabIndex = 2;
+        StatisticsView.Visible = false;
+        // 
+        // LoadStatisticsButton
+        // 
+        LoadStatisticsButton.Dock = DockStyle.Bottom;
+        LoadStatisticsButton.FlatStyle = FlatStyle.Flat;
+        LoadStatisticsButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+        LoadStatisticsButton.Location = new Point(0, 920);
+        LoadStatisticsButton.Name = "LoadStatisticsButton";
+        LoadStatisticsButton.Size = new Size(2165, 55);
+        LoadStatisticsButton.TabIndex = 1;
+        LoadStatisticsButton.Text = "LoadStatistics";
+        LoadStatisticsButton.UseVisualStyleBackColor = true;
+        LoadStatisticsButton.Click += LoadStatisticsButton_Click;
+        // 
+        // SaveStatisticsButton
+        // 
+        SaveStatisticsButton.Dock = DockStyle.Bottom;
+        SaveStatisticsButton.Enabled = false;
+        SaveStatisticsButton.FlatStyle = FlatStyle.Flat;
+        SaveStatisticsButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+        SaveStatisticsButton.Location = new Point(0, 975);
+        SaveStatisticsButton.Name = "SaveStatisticsButton";
+        SaveStatisticsButton.Size = new Size(2165, 55);
+        SaveStatisticsButton.TabIndex = 0;
+        SaveStatisticsButton.Text = "SaveStatistics";
+        SaveStatisticsButton.UseVisualStyleBackColor = true;
+        SaveStatisticsButton.Visible = false;
+        SaveStatisticsButton.Click += SaveStatisticsButton_Click;
+        // 
         // BearGameProject
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1900, 983);
+        ClientSize = new Size(2167, 1032);
         Controls.Add(GameView);
         Controls.Add(ViewControlPanel);
+        Controls.Add(StatisticsView);
         DoubleBuffered = true;
         FormBorderStyle = FormBorderStyle.FixedToolWindow;
         Margin = new Padding(4);
@@ -1583,6 +1729,8 @@ partial class BearGameProject
         GameView.ResumeLayout(false);
         GameTablePanel.ResumeLayout(false);
         GameTablePanel.PerformLayout();
+        GameDataPanel.ResumeLayout(false);
+        GameDataPanel.PerformLayout();
         ProgressPanel.ResumeLayout(false);
         ProgressPanel.PerformLayout();
         GameConfigPanel.ResumeLayout(false);
@@ -1590,6 +1738,7 @@ partial class BearGameProject
         ((System.ComponentModel.ISupportInitialize)GameSpeedBar).EndInit();
         ((System.ComponentModel.ISupportInitialize)NumberOfMatchesSelector).EndInit();
         ((System.ComponentModel.ISupportInitialize)NumberOfPlayersSelector).EndInit();
+        StatisticsView.ResumeLayout(false);
         ResumeLayout(false);
     }
 
@@ -1690,4 +1839,14 @@ partial class BearGameProject
     private ProgressBar SimulationProgress;
     private Label ProgressLabel;
     private Panel ProgressPanel;
+    private Panel StatisticsView;
+    private Button SaveStatisticsButton;
+    private Button LoadStatisticsButton;
+    private Panel GameDataPanel;
+    private Label MatchCounterLabel;
+    private Label MatchesPlayedCounter;
+    private Label RoundCounterLabel;
+    private Label RoundsPlayedCounter;
+    private Label PlayerFinishedCounter;
+    private Label PlayerFinishedCounterLabel;
 }
