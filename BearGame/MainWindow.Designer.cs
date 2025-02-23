@@ -135,6 +135,12 @@ partial class BearGameProject
         VictoryDiagramPanel = new Panel();
         VictoryLabel = new Label();
         GeneralStatistics = new Panel();
+        MaxOfRoundsBox = new TextBox();
+        MaxOfRoundsLabel = new Label();
+        MinOfRoundsBox = new TextBox();
+        MinOfRoundsLabel = new Label();
+        RangeOfRoundsBox = new TextBox();
+        RangeOfRoundsLabel = new Label();
         MedianOfRoundsBox = new TextBox();
         MedianOfRoundsLabel = new Label();
         StandardDeviationBox = new TextBox();
@@ -1743,6 +1749,12 @@ partial class BearGameProject
         // GeneralStatistics
         // 
         GeneralStatistics.BorderStyle = BorderStyle.FixedSingle;
+        GeneralStatistics.Controls.Add(MaxOfRoundsBox);
+        GeneralStatistics.Controls.Add(MaxOfRoundsLabel);
+        GeneralStatistics.Controls.Add(MinOfRoundsBox);
+        GeneralStatistics.Controls.Add(MinOfRoundsLabel);
+        GeneralStatistics.Controls.Add(RangeOfRoundsBox);
+        GeneralStatistics.Controls.Add(RangeOfRoundsLabel);
         GeneralStatistics.Controls.Add(MedianOfRoundsBox);
         GeneralStatistics.Controls.Add(MedianOfRoundsLabel);
         GeneralStatistics.Controls.Add(StandardDeviationBox);
@@ -1758,6 +1770,81 @@ partial class BearGameProject
         GeneralStatistics.Name = "GeneralStatistics";
         GeneralStatistics.Size = new Size(323, 920);
         GeneralStatistics.TabIndex = 4;
+        // 
+        // MaxOfRoundsBox
+        // 
+        MaxOfRoundsBox.BorderStyle = BorderStyle.None;
+        MaxOfRoundsBox.Dock = DockStyle.Top;
+        MaxOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        MaxOfRoundsBox.Location = new Point(0, 707);
+        MaxOfRoundsBox.Name = "MaxOfRoundsBox";
+        MaxOfRoundsBox.PlaceholderText = "max";
+        MaxOfRoundsBox.ReadOnly = true;
+        MaxOfRoundsBox.Size = new Size(321, 32);
+        MaxOfRoundsBox.TabIndex = 14;
+        MaxOfRoundsBox.TextAlign = HorizontalAlignment.Center;
+        // 
+        // MaxOfRoundsLabel
+        // 
+        MaxOfRoundsLabel.AutoSize = true;
+        MaxOfRoundsLabel.Dock = DockStyle.Top;
+        MaxOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        MaxOfRoundsLabel.Location = new Point(0, 645);
+        MaxOfRoundsLabel.Name = "MaxOfRoundsLabel";
+        MaxOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
+        MaxOfRoundsLabel.Size = new Size(248, 62);
+        MaxOfRoundsLabel.TabIndex = 13;
+        MaxOfRoundsLabel.Text = "MaxOfNumOfRounds:";
+        // 
+        // MinOfRoundsBox
+        // 
+        MinOfRoundsBox.BorderStyle = BorderStyle.None;
+        MinOfRoundsBox.Dock = DockStyle.Top;
+        MinOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        MinOfRoundsBox.Location = new Point(0, 613);
+        MinOfRoundsBox.Name = "MinOfRoundsBox";
+        MinOfRoundsBox.PlaceholderText = "min";
+        MinOfRoundsBox.ReadOnly = true;
+        MinOfRoundsBox.Size = new Size(321, 32);
+        MinOfRoundsBox.TabIndex = 12;
+        MinOfRoundsBox.TextAlign = HorizontalAlignment.Center;
+        // 
+        // MinOfRoundsLabel
+        // 
+        MinOfRoundsLabel.AutoSize = true;
+        MinOfRoundsLabel.Dock = DockStyle.Top;
+        MinOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        MinOfRoundsLabel.Location = new Point(0, 551);
+        MinOfRoundsLabel.Name = "MinOfRoundsLabel";
+        MinOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
+        MinOfRoundsLabel.Size = new Size(245, 62);
+        MinOfRoundsLabel.TabIndex = 11;
+        MinOfRoundsLabel.Text = "MinOfNumOfRounds:";
+        // 
+        // RangeOfRoundsBox
+        // 
+        RangeOfRoundsBox.BorderStyle = BorderStyle.None;
+        RangeOfRoundsBox.Dock = DockStyle.Top;
+        RangeOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        RangeOfRoundsBox.Location = new Point(0, 519);
+        RangeOfRoundsBox.Name = "RangeOfRoundsBox";
+        RangeOfRoundsBox.PlaceholderText = "rage";
+        RangeOfRoundsBox.ReadOnly = true;
+        RangeOfRoundsBox.Size = new Size(321, 32);
+        RangeOfRoundsBox.TabIndex = 10;
+        RangeOfRoundsBox.TextAlign = HorizontalAlignment.Center;
+        // 
+        // RangeOfRoundsLabel
+        // 
+        RangeOfRoundsLabel.AutoSize = true;
+        RangeOfRoundsLabel.Dock = DockStyle.Top;
+        RangeOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        RangeOfRoundsLabel.Location = new Point(0, 457);
+        RangeOfRoundsLabel.Name = "RangeOfRoundsLabel";
+        RangeOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
+        RangeOfRoundsLabel.Size = new Size(270, 62);
+        RangeOfRoundsLabel.TabIndex = 9;
+        RangeOfRoundsLabel.Text = "RangeOfNumOfRounds:";
         // 
         // MedianOfRoundsBox
         // 
@@ -2121,4 +2208,10 @@ partial class BearGameProject
     private Label StandardDeviationLabel;
     private Label MedianOfRoundsLabel;
     private TextBox MedianOfRoundsBox;
+    private Label RangeOfRoundsLabel;
+    private TextBox RangeOfRoundsBox;
+    private TextBox MinOfRoundsBox;
+    private Label MinOfRoundsLabel;
+    private TextBox MaxOfRoundsBox;
+    private Label MaxOfRoundsLabel;
 }
