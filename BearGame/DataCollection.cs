@@ -52,4 +52,55 @@ class DataCollection
         }
         GameStatistics = statistics;
     }
+
+    public int[] GetTotalKnockOuts()
+    {
+        int[] kos = new int[GameStatistics.NumberOfPlayers];
+
+        foreach (MatchStatistics match in GameStatistics.MatchStatistics)
+        {
+            for (int i = 0; i < GameStatistics.NumberOfPlayers; i++)
+            {
+                kos[i] += match.NumberOfTimesKnockedOutAPlayer[i];
+            }
+        }  
+        return kos;
+    }
+
+    public int[] TotalNumberOfTimesBeenKOd()
+    {
+        int[] kos = new int[GameStatistics.NumberOfPlayers];
+
+        foreach (MatchStatistics match in GameStatistics.MatchStatistics)
+        {
+            for (int i = 0; i < GameStatistics.NumberOfPlayers; i++)
+            {
+                kos[i] += match.NumberOfTimesBeenKnockedOut[i];
+            }
+        }
+        return kos;
+    }
+
+    public int[] GetNumberOfCictories()
+    {
+        int[] counter = new int[GameStatistics.NumberOfPlayers];
+
+        foreach (MatchStatistics match in GameStatistics.MatchStatistics)
+        {
+            counter[match.PlayerFinishOrder[0]]++;
+        }
+        return counter;
+    }
+
+    public double[] GetNumOfRounds()
+    {
+        double[] numOfRounds = new double[GameStatistics.MatchStatistics.Count];
+        for (int i = 0; i < numOfRounds.Length; i++)
+        {
+            numOfRounds[i] = GameStatistics.MatchStatistics[i].TotalNumberOfRounds;
+        }
+        return numOfRounds;
+    }
+
+
 }

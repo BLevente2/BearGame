@@ -131,14 +131,24 @@ partial class BearGameProject
         StartGameButton = new Button();
         GameConfigLabel = new Label();
         StatisticsView = new Panel();
+        LeftStat2 = new Panel();
+        VictoryDiagramPanel = new Panel();
+        VictoryLabel = new Label();
+        GeneralStatistics = new Panel();
+        StandardDeviationBox = new TextBox();
+        StandardDeviationLabel = new Label();
+        VarianceOfRoundsBox = new TextBox();
+        VarianceOfRoundsLabel = new Label();
+        AvarageNumOfRoundsBox = new TextBox();
+        AvarageNumOfRoundsLabel = new Label();
+        GeneralStatisticsLabel = new Label();
         LeftStatPanel = new Panel();
+        KOdDiagram = new Panel();
+        KOdDiagramLabel = new Label();
         KOsDiagram = new Panel();
         KOsDiagramLabel = new Label();
         LoadStatisticsButton = new Button();
         SaveStatisticsButton = new Button();
-        label1 = new Label();
-        KOdDiagram = new Panel();
-        KOdDiagramLabel = new Label();
         ViewControlPanel.SuspendLayout();
         GameView.SuspendLayout();
         GameTablePanel.SuspendLayout();
@@ -149,9 +159,12 @@ partial class BearGameProject
         ((System.ComponentModel.ISupportInitialize)NumberOfMatchesSelector).BeginInit();
         ((System.ComponentModel.ISupportInitialize)NumberOfPlayersSelector).BeginInit();
         StatisticsView.SuspendLayout();
+        LeftStat2.SuspendLayout();
+        VictoryDiagramPanel.SuspendLayout();
+        GeneralStatistics.SuspendLayout();
         LeftStatPanel.SuspendLayout();
-        KOsDiagram.SuspendLayout();
         KOdDiagram.SuspendLayout();
+        KOsDiagram.SuspendLayout();
         SuspendLayout();
         // 
         // ViewControlPanel
@@ -198,13 +211,11 @@ partial class BearGameProject
         GameView.Controls.Add(GameTablePanel);
         GameView.Controls.Add(GameConfigPanel);
         GameView.Dock = DockStyle.Fill;
-        GameView.Enabled = false;
         GameView.Location = new Point(0, 0);
         GameView.Margin = new Padding(4);
         GameView.Name = "GameView";
         GameView.Size = new Size(2167, 1032);
         GameView.TabIndex = 1;
-        GameView.Visible = false;
         // 
         // GameTablePanel
         // 
@@ -1681,6 +1692,8 @@ partial class BearGameProject
         // 
         StatisticsView.BackColor = SystemColors.Control;
         StatisticsView.BorderStyle = BorderStyle.FixedSingle;
+        StatisticsView.Controls.Add(LeftStat2);
+        StatisticsView.Controls.Add(GeneralStatistics);
         StatisticsView.Controls.Add(LeftStatPanel);
         StatisticsView.Controls.Add(LoadStatisticsButton);
         StatisticsView.Controls.Add(SaveStatisticsButton);
@@ -1693,6 +1706,142 @@ partial class BearGameProject
         StatisticsView.TabIndex = 2;
         StatisticsView.Visible = false;
         // 
+        // LeftStat2
+        // 
+        LeftStat2.Controls.Add(VictoryDiagramPanel);
+        LeftStat2.Dock = DockStyle.Left;
+        LeftStat2.Location = new Point(781, 0);
+        LeftStat2.Name = "LeftStat2";
+        LeftStat2.Size = new Size(582, 920);
+        LeftStat2.TabIndex = 5;
+        // 
+        // VictoryDiagramPanel
+        // 
+        VictoryDiagramPanel.BorderStyle = BorderStyle.FixedSingle;
+        VictoryDiagramPanel.Controls.Add(VictoryLabel);
+        VictoryDiagramPanel.Dock = DockStyle.Top;
+        VictoryDiagramPanel.Location = new Point(0, 0);
+        VictoryDiagramPanel.Name = "VictoryDiagramPanel";
+        VictoryDiagramPanel.Size = new Size(582, 483);
+        VictoryDiagramPanel.TabIndex = 0;
+        // 
+        // VictoryLabel
+        // 
+        VictoryLabel.AutoSize = true;
+        VictoryLabel.BackColor = Color.Transparent;
+        VictoryLabel.Dock = DockStyle.Top;
+        VictoryLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+        VictoryLabel.Location = new Point(0, 0);
+        VictoryLabel.Name = "VictoryLabel";
+        VictoryLabel.Padding = new Padding(20, 45, 0, 5);
+        VictoryLabel.Size = new Size(320, 82);
+        VictoryLabel.TabIndex = 0;
+        VictoryLabel.Text = "VictoriesBetweenPlayers:";
+        // 
+        // GeneralStatistics
+        // 
+        GeneralStatistics.BorderStyle = BorderStyle.FixedSingle;
+        GeneralStatistics.Controls.Add(StandardDeviationBox);
+        GeneralStatistics.Controls.Add(StandardDeviationLabel);
+        GeneralStatistics.Controls.Add(VarianceOfRoundsBox);
+        GeneralStatistics.Controls.Add(VarianceOfRoundsLabel);
+        GeneralStatistics.Controls.Add(AvarageNumOfRoundsBox);
+        GeneralStatistics.Controls.Add(AvarageNumOfRoundsLabel);
+        GeneralStatistics.Controls.Add(GeneralStatisticsLabel);
+        GeneralStatistics.Dock = DockStyle.Right;
+        GeneralStatistics.Location = new Point(1781, 0);
+        GeneralStatistics.Name = "GeneralStatistics";
+        GeneralStatistics.Size = new Size(384, 920);
+        GeneralStatistics.TabIndex = 4;
+        GeneralStatistics.Visible = false;
+        // 
+        // StandardDeviationBox
+        // 
+        StandardDeviationBox.BorderStyle = BorderStyle.None;
+        StandardDeviationBox.Dock = DockStyle.Top;
+        StandardDeviationBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        StandardDeviationBox.Location = new Point(0, 331);
+        StandardDeviationBox.Name = "StandardDeviationBox";
+        StandardDeviationBox.PlaceholderText = "standardDeviation";
+        StandardDeviationBox.ReadOnly = true;
+        StandardDeviationBox.Size = new Size(382, 32);
+        StandardDeviationBox.TabIndex = 6;
+        StandardDeviationBox.TextAlign = HorizontalAlignment.Center;
+        // 
+        // StandardDeviationLabel
+        // 
+        StandardDeviationLabel.AutoSize = true;
+        StandardDeviationLabel.Dock = DockStyle.Top;
+        StandardDeviationLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        StandardDeviationLabel.Location = new Point(0, 269);
+        StandardDeviationLabel.Name = "StandardDeviationLabel";
+        StandardDeviationLabel.Padding = new Padding(0, 25, 0, 5);
+        StandardDeviationLabel.Size = new Size(320, 62);
+        StandardDeviationLabel.TabIndex = 5;
+        StandardDeviationLabel.Text = "StandardDeviationOfRounds:";
+        // 
+        // VarianceOfRoundsBox
+        // 
+        VarianceOfRoundsBox.BorderStyle = BorderStyle.None;
+        VarianceOfRoundsBox.Dock = DockStyle.Top;
+        VarianceOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        VarianceOfRoundsBox.Location = new Point(0, 237);
+        VarianceOfRoundsBox.Name = "VarianceOfRoundsBox";
+        VarianceOfRoundsBox.PlaceholderText = "variance";
+        VarianceOfRoundsBox.ReadOnly = true;
+        VarianceOfRoundsBox.Size = new Size(382, 32);
+        VarianceOfRoundsBox.TabIndex = 4;
+        VarianceOfRoundsBox.TextAlign = HorizontalAlignment.Center;
+        // 
+        // VarianceOfRoundsLabel
+        // 
+        VarianceOfRoundsLabel.AutoSize = true;
+        VarianceOfRoundsLabel.Dock = DockStyle.Top;
+        VarianceOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        VarianceOfRoundsLabel.Location = new Point(0, 175);
+        VarianceOfRoundsLabel.Name = "VarianceOfRoundsLabel";
+        VarianceOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
+        VarianceOfRoundsLabel.Size = new Size(292, 62);
+        VarianceOfRoundsLabel.TabIndex = 3;
+        VarianceOfRoundsLabel.Text = "VarianceOfNumOfRounds:";
+        // 
+        // AvarageNumOfRoundsBox
+        // 
+        AvarageNumOfRoundsBox.BorderStyle = BorderStyle.None;
+        AvarageNumOfRoundsBox.Dock = DockStyle.Top;
+        AvarageNumOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        AvarageNumOfRoundsBox.Location = new Point(0, 143);
+        AvarageNumOfRoundsBox.Name = "AvarageNumOfRoundsBox";
+        AvarageNumOfRoundsBox.PlaceholderText = "avarage";
+        AvarageNumOfRoundsBox.ReadOnly = true;
+        AvarageNumOfRoundsBox.Size = new Size(382, 32);
+        AvarageNumOfRoundsBox.TabIndex = 2;
+        AvarageNumOfRoundsBox.TextAlign = HorizontalAlignment.Center;
+        // 
+        // AvarageNumOfRoundsLabel
+        // 
+        AvarageNumOfRoundsLabel.AutoSize = true;
+        AvarageNumOfRoundsLabel.Dock = DockStyle.Top;
+        AvarageNumOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        AvarageNumOfRoundsLabel.Location = new Point(0, 81);
+        AvarageNumOfRoundsLabel.Name = "AvarageNumOfRoundsLabel";
+        AvarageNumOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
+        AvarageNumOfRoundsLabel.Size = new Size(263, 62);
+        AvarageNumOfRoundsLabel.TabIndex = 1;
+        AvarageNumOfRoundsLabel.Text = "AvarageNumOfRounds:";
+        // 
+        // GeneralStatisticsLabel
+        // 
+        GeneralStatisticsLabel.AutoSize = true;
+        GeneralStatisticsLabel.Dock = DockStyle.Top;
+        GeneralStatisticsLabel.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 238);
+        GeneralStatisticsLabel.Location = new Point(0, 0);
+        GeneralStatisticsLabel.Name = "GeneralStatisticsLabel";
+        GeneralStatisticsLabel.Padding = new Padding(25, 45, 0, 0);
+        GeneralStatisticsLabel.Size = new Size(239, 81);
+        GeneralStatisticsLabel.TabIndex = 0;
+        GeneralStatisticsLabel.Text = "GeneralStatistics";
+        // 
         // LeftStatPanel
         // 
         LeftStatPanel.Controls.Add(KOdDiagram);
@@ -1703,6 +1852,29 @@ partial class BearGameProject
         LeftStatPanel.Size = new Size(781, 920);
         LeftStatPanel.TabIndex = 3;
         // 
+        // KOdDiagram
+        // 
+        KOdDiagram.BorderStyle = BorderStyle.FixedSingle;
+        KOdDiagram.Controls.Add(KOdDiagramLabel);
+        KOdDiagram.Dock = DockStyle.Top;
+        KOdDiagram.Location = new Point(0, 483);
+        KOdDiagram.Name = "KOdDiagram";
+        KOdDiagram.Size = new Size(781, 431);
+        KOdDiagram.TabIndex = 1;
+        // 
+        // KOdDiagramLabel
+        // 
+        KOdDiagramLabel.AutoSize = true;
+        KOdDiagramLabel.BackColor = Color.Transparent;
+        KOdDiagramLabel.Dock = DockStyle.Top;
+        KOdDiagramLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+        KOdDiagramLabel.Location = new Point(0, 0);
+        KOdDiagramLabel.Name = "KOdDiagramLabel";
+        KOdDiagramLabel.Padding = new Padding(100, 5, 100, 5);
+        KOdDiagramLabel.Size = new Size(709, 42);
+        KOdDiagramLabel.TabIndex = 0;
+        KOdDiagramLabel.Text = "NumberOfTimesPlayerHasBeenKnockedout";
+        // 
         // KOsDiagram
         // 
         KOsDiagram.BorderStyle = BorderStyle.FixedSingle;
@@ -1710,12 +1882,13 @@ partial class BearGameProject
         KOsDiagram.Dock = DockStyle.Top;
         KOsDiagram.Location = new Point(0, 0);
         KOsDiagram.Name = "KOsDiagram";
-        KOsDiagram.Size = new Size(781, 452);
+        KOsDiagram.Size = new Size(781, 483);
         KOsDiagram.TabIndex = 0;
         // 
         // KOsDiagramLabel
         // 
         KOsDiagramLabel.AutoSize = true;
+        KOsDiagramLabel.BackColor = Color.Transparent;
         KOsDiagramLabel.Dock = DockStyle.Top;
         KOsDiagramLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         KOsDiagramLabel.Location = new Point(0, 0);
@@ -1753,39 +1926,6 @@ partial class BearGameProject
         SaveStatisticsButton.Visible = false;
         SaveStatisticsButton.Click += SaveStatisticsButton_Click;
         // 
-        // label1
-        // 
-        label1.AutoSize = true;
-        label1.Dock = DockStyle.Bottom;
-        label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        label1.Location = new Point(132, 75);
-        label1.Name = "label1";
-        label1.Size = new Size(463, 32);
-        label1.TabIndex = 0;
-        label1.Text = "Number Of Knockouts Between Players";
-        // 
-        // KOdDiagram
-        // 
-        KOdDiagram.BorderStyle = BorderStyle.FixedSingle;
-        KOdDiagram.Controls.Add(KOdDiagramLabel);
-        KOdDiagram.Dock = DockStyle.Top;
-        KOdDiagram.Location = new Point(0, 452);
-        KOdDiagram.Name = "KOdDiagram";
-        KOdDiagram.Size = new Size(781, 412);
-        KOdDiagram.TabIndex = 1;
-        // 
-        // KOdDiagramLabel
-        // 
-        KOdDiagramLabel.AutoSize = true;
-        KOdDiagramLabel.Dock = DockStyle.Top;
-        KOdDiagramLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        KOdDiagramLabel.Location = new Point(0, 0);
-        KOdDiagramLabel.Name = "KOdDiagramLabel";
-        KOdDiagramLabel.Padding = new Padding(100, 5, 100, 5);
-        KOdDiagramLabel.Size = new Size(709, 42);
-        KOdDiagramLabel.TabIndex = 0;
-        KOdDiagramLabel.Text = "NumberOfTimesPlayerHasBeenKnockedout";
-        // 
         // BearGameProject
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
@@ -1814,11 +1954,16 @@ partial class BearGameProject
         ((System.ComponentModel.ISupportInitialize)NumberOfMatchesSelector).EndInit();
         ((System.ComponentModel.ISupportInitialize)NumberOfPlayersSelector).EndInit();
         StatisticsView.ResumeLayout(false);
+        LeftStat2.ResumeLayout(false);
+        VictoryDiagramPanel.ResumeLayout(false);
+        VictoryDiagramPanel.PerformLayout();
+        GeneralStatistics.ResumeLayout(false);
+        GeneralStatistics.PerformLayout();
         LeftStatPanel.ResumeLayout(false);
-        KOsDiagram.ResumeLayout(false);
-        KOsDiagram.PerformLayout();
         KOdDiagram.ResumeLayout(false);
         KOdDiagram.PerformLayout();
+        KOsDiagram.ResumeLayout(false);
+        KOsDiagram.PerformLayout();
         ResumeLayout(false);
     }
 
@@ -1929,11 +2074,20 @@ partial class BearGameProject
     private Label RoundsPlayedCounter;
     private Label PlayerFinishedCounter;
     private Label PlayerFinishedCounterLabel;
-    private Panel KOsDiagramPanel;
-    private Label label1;
     private Panel LeftStatPanel;
     private Panel KOsDiagram;
     private Label KOsDiagramLabel;
     private Panel KOdDiagram;
     private Label KOdDiagramLabel;
+    private Panel GeneralStatistics;
+    private Label GeneralStatisticsLabel;
+    private Panel LeftStat2;
+    private Panel VictoryDiagramPanel;
+    private Label VictoryLabel;
+    private Label AvarageNumOfRoundsLabel;
+    private TextBox AvarageNumOfRoundsBox;
+    private Label VarianceOfRoundsLabel;
+    private TextBox VarianceOfRoundsBox;
+    private TextBox StandardDeviationBox;
+    private Label StandardDeviationLabel;
 }

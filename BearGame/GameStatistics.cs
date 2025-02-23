@@ -31,4 +31,5 @@
         PlayerStrategies.Clear();
         MatchStatistics.Clear();
     }
+
 }

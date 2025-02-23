@@ -1,9 +1,14 @@
+using MathNet.Numerics.Statistics;
+using System.Windows.Forms;
+
 namespace BearGame;
 
 public partial class BearGameProject : Form
 {
 
     private ScottPlot.WinForms.FormsPlot _koDiagram;
+    private ScottPlot.WinForms.FormsPlot _beenKOdDiagram;
+    private ScottPlot.WinForms.FormsPlot _winsDiagram;
 
     #region Constructor
 
@@ -39,6 +44,8 @@ public partial class BearGameProject : Form
         LoadStatisticsButton.MouseEnter += Buttons_MouseEnter;
         LoadStatisticsButton.MouseLeave += Buttons_MouseLeave;
 
+        ViewControlPanel.SendToBack();
+
 
         _player1Strategy = new Strategy(true, false, false, true, true, true);
         _player2Strategy = new Strategy(true, false, false, true, true, true);
@@ -47,6 +54,10 @@ public partial class BearGameProject : Form
 
         _koDiagram = GetNewBarDiagram();
         KOsDiagram.Controls.Add(_koDiagram);
+        _beenKOdDiagram = GetNewBarDiagram();
+        KOdDiagram.Controls.Add(_beenKOdDiagram);
+        _winsDiagram = GetNewPieDiagram();
+        VictoryDiagramPanel.Controls.Add(_winsDiagram);
 
 
         _dataCollection = null;
@@ -378,6 +389,7 @@ public partial class BearGameProject : Form
         SaveStatisticsButton.Visible = visibility;
         LoadStatisticsButton.Enabled = visibility;
         LoadStatisticsButton.Visible = visibility;
+        GeneralStatistics.Visible = visibility;
 
         StartGameButton.UseWaitCursor = !visibility;
         ProgressPanel.Visible = !visibility;
@@ -405,7 +417,34 @@ public partial class BearGameProject : Form
             _koDiagram.Plot.Title("KOs per Player");
             KOsDiagram.Controls.Add(_koDiagram);
 
-            Game game = new Game(players, UseSlowModeBox, GameSpeedBar, SimulationProgress, ProgressLabel, gameStatistics.MatchStatistics, MatchesPlayedCounter, RoundsPlayedCounter, PlayerFinishedCounter, outBars, _koDiagram);
+            KOdDiagram.Controls.Remove(_beenKOdDiagram);
+            _beenKOdDiagram = GetNewBarDiagram(players.Length, playerLabels, playerColors, out List<ScottPlot.Bar> outBars2);
+            _beenKOdDiagram.Plot.Title("KOd per Player");
+            KOdDiagram.Controls.Add(_beenKOdDiagram);
+
+            VictoryDiagramPanel.Controls.Remove(_winsDiagram);
+            _winsDiagram = GetNewPieDiagram(players.Length, playerLabels, playerColors, out List<ScottPlot.PieSlice> outPie);
+            _winsDiagram.Plot.Title("NumberOfVictories");
+            VictoryDiagramPanel.Controls.Add( _winsDiagram);
+
+            Game game = new Game(
+                players, 
+                UseSlowModeBox, 
+                GameSpeedBar, 
+                SimulationProgress, 
+                ProgressLabel, 
+                gameStatistics.
+                MatchStatistics, 
+                MatchesPlayedCounter, 
+                RoundsPlayedCounter, 
+                PlayerFinishedCounter, 
+                outBars, 
+                _koDiagram,
+                outBars2, 
+                _beenKOdDiagram, 
+                outPie, 
+                _winsDiagram);
+            
             string tempText = StartGameButton.Text;
             StartGameButton.Text = "GameIsRunning...";
             SimulationProgress.Value = 0;
@@ -413,6 +452,7 @@ public partial class BearGameProject : Form
 
             await game.StartGame((int)NumberOfMatchesSelector.Value);
 
+            CalculateGeneralStatistics();
             SetVisibilityWhileSimulating(true);
             StartGameButton.Text = tempText;
             MatchesPlayedCounter.Text = "0";
@@ -523,6 +563,10 @@ public partial class BearGameProject : Form
             try
             {
                 var saveFile = new SaveFileDialog();
+                saveFile.Filter = "JSON Files (*.json)|*.json";
+                saveFile.Title = "Save statistics to JSON File";
+                saveFile.DefaultExt = "json";
+                saveFile.FileName = "game_statistics.json";
                 var result = saveFile.ShowDialog();
 
                 if (result == DialogResult.OK)
@@ -548,6 +592,8 @@ public partial class BearGameProject : Form
             }
 
            var openFile = new OpenFileDialog();
+            openFile.Filter = "JSON Files (*.json)|*.json";
+            openFile.Title = "Open JSON FileCreatedByThisApp";
             var result = openFile.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -556,6 +602,9 @@ public partial class BearGameProject : Form
                 _dataCollection.LoadGameStatistics();
                 SaveStatisticsButton.Enabled = true;
                 SaveStatisticsButton.Visible = true;
+                GeneralStatistics.Visible = true;
+                LoadDataToDiagrams();
+                CalculateGeneralStatistics();
             }
         }
         catch (Exception ex)
@@ -593,6 +642,116 @@ public partial class BearGameProject : Form
     }
 
     public static ScottPlot.WinForms.FormsPlot GetNewBarDiagram() => GetNewBarDiagram(4, new string[] { "Yellow", "Red", "Blue", "Green" }, new Color[] { Color.Yellow, Color.Red, Color.Blue, Color.Green }, out List<ScottPlot.Bar> outBars);
+
+    public static ScottPlot.WinForms.FormsPlot GetNewPieDiagram(int numOfBars, string[] labels, Color[] colors, out List<ScottPlot.PieSlice> outPie)
+    {
+        if (labels.Length != numOfBars || colors.Length != numOfBars)
+        {
+            throw new ArgumentException("Invalid number of labels or colors");
+        }
+
+        outPie = new List<ScottPlot.PieSlice>();
+        double[] values = new double[numOfBars];
+        ScottPlot.WinForms.FormsPlot plot = new ScottPlot.WinForms.FormsPlot();
+        plot.Plot.DataBackground.Color = ScottPlot.Colors.Transparent;
+        plot.Dock = DockStyle.Fill;
+        var pies = plot.Plot.Add.Pie(values);
+
+        if (pies != null)
+        {
+            for (int i = 0; i < numOfBars; i++)
+            {
+                pies.Slices[i].Label = labels[i];
+                pies.Slices[i].LabelAlignment = ScottPlot.Alignment.MiddleCenter;
+                pies.Slices[i].LabelFontColor = ScottPlot.Color.FromARGB(SystemColors.WindowText.ToArgb());
+                pies.Slices[i].FillColor = ScottPlot.Color.FromARGB(colors[i].ToArgb());
+                outPie = (List<ScottPlot.PieSlice>)pies.Slices;
+            }
+        }
+
+        return plot;
+    }
+
+    public static ScottPlot.WinForms.FormsPlot GetNewPieDiagram() => GetNewPieDiagram(4, new string[] { "Yellow", "Red", "Blue", "Green" }, new Color[] { Color.Yellow, Color.Red, Color.Blue, Color.Green }, out List<ScottPlot.PieSlice> outPie);
+
+    private void LoadDataToDiagrams()
+    {
+        if (_dataCollection != null && _dataCollection.GameStatistics != null)
+        {
+            GameStatistics stat = _dataCollection.GameStatistics;
+
+            NumberOfPlayersSelector.Value = stat.NumberOfPlayers;
+            NumberOfMatchesSelector.Value = stat.NumberOfMatches;
+
+            _player1Strategy = stat.PlayerStrategies[0];
+            _player2Strategy = stat.PlayerStrategies[1];
+            if (stat.NumberOfPlayers >= 3)
+            {
+                _player3Strategy = stat.PlayerStrategies[2];
+            }
+            if (stat.NumberOfPlayers == 4)
+            {
+                _player4Strategy = stat.PlayerStrategies[3];
+            }
+
+            KOdDiagram.Controls.Remove(_beenKOdDiagram);
+            KOsDiagram.Controls.Remove(_koDiagram);
+            VictoryDiagramPanel.Controls.Remove(_winsDiagram);
+            Player[] players = GetPlayers(stat.NumberOfPlayers);
+            Color[] playerColors = new Color[players.Length];
+            string[] koLabels = new string[players.Length];
+            string[] kodLabels = new string[players.Length];
+            int[] values1 = _dataCollection.GetTotalKnockOuts();
+            int[] values2 = _dataCollection.TotalNumberOfTimesBeenKOd();
+            int[] victories = _dataCollection.GetNumberOfCictories();
+            string[] victoriesLbels = new string[victories.Length];
+
+            foreach (Player player in players)
+            {
+                playerColors[player.PlayerIndex] = player.PlayerColor;
+                koLabels[player.PlayerIndex] = values1[player.PlayerIndex].ToString();
+                kodLabels[player.PlayerIndex] = values2[player.PlayerIndex].ToString();
+                victoriesLbels[player.PlayerIndex] = victories[player.PlayerIndex].ToString();
+            }
+
+            _koDiagram = GetNewBarDiagram(stat.NumberOfPlayers, koLabels, playerColors, out List<ScottPlot.Bar> outBar1);
+            _beenKOdDiagram = GetNewBarDiagram(stat.NumberOfPlayers, kodLabels, playerColors, out List<ScottPlot.Bar> outBar2);
+            _winsDiagram = GetNewPieDiagram(stat.NumberOfPlayers, victoriesLbels, playerColors, out List<ScottPlot.PieSlice> outPie);
+
+            for (int i = 0; i < stat.NumberOfPlayers; i++)
+            {
+                outBar1[i].Value = values1[i];
+                outBar2[i].Value = values2[i];
+                outPie[i].Value = victories[i];
+            }
+
+            KOsDiagram.Controls.Add(_koDiagram);
+            KOdDiagram.Controls.Add(_beenKOdDiagram);
+            VictoryDiagramPanel.Controls.Add(_winsDiagram);
+            _koDiagram.Plot.Axes.AutoScale();
+            _koDiagram.Plot.Axes.AutoScale();
+            _winsDiagram.Plot.Axes.AutoScale();
+            _koDiagram.Refresh();
+            _beenKOdDiagram.Refresh();
+            _winsDiagram.Refresh();
+
+        }
+    }
+
+    public void CalculateGeneralStatistics()
+    {
+        if (_dataCollection != null && _dataCollection.GameStatistics != null)
+        {
+            double[] numOfRounds = _dataCollection.GetNumOfRounds();
+            double avgNumOfRounds = numOfRounds.Average();
+            AvarageNumOfRoundsBox.Text = Math.Round(avgNumOfRounds, 4).ToString();
+            double varianceOfRounds = MathNet.Numerics.Statistics.Statistics.Variance(numOfRounds);
+            VarianceOfRoundsBox.Text += Math.Round(varianceOfRounds, 4).ToString();
+            double standardDeviationOfRounds = MathNet.Numerics.Statistics.Statistics.StandardDeviation(numOfRounds);
+            StandardDeviationBox.Text = Math.Round(standardDeviationOfRounds, 4).ToString();
+            
+        }
+    }
 
     #endregion
 }

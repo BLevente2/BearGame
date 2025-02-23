@@ -20,12 +20,32 @@ public class Game
     private Label _numOfPlayersFinishedBox;
     private List<ScottPlot.Bar> _playerKODiagram;
     private ScottPlot.WinForms.FormsPlot _koPlot;
+    private List<ScottPlot.Bar> _beenKOdDiagram;
+    private ScottPlot.WinForms.FormsPlot _beenKOdPlot;
+    private List<ScottPlot.PieSlice> _victoriesDiagram;
+    private ScottPlot.WinForms.FormsPlot _victoriesPlot;
 
     public bool SlowMode => _slowModeBox.Checked;
     public double GameSpeed => 10.0 / _gameSpeedBar.Value;
     public string Progress => $"Progress: {Math.Round((double)_simulationProgress.Value / (double)_simulationProgress.Maximum * 100.0, 1)} %";
 
-    public Game(Player[] players, CheckBox slowModeBox, TrackBar gameSpeedBar, ProgressBar simulationProgress, Label simulationProgressLabel, List<MatchStatistics> matchStatistics, Label numOfGamesFinishedBox, Label numOfRoundsPlayedBox, Label numOfPlayersFinishedBox, List<ScottPlot.Bar> playerKODiagram,ScottPlot.WinForms.FormsPlot koPlot ) 
+
+    public Game(
+        Player[] players, 
+        CheckBox slowModeBox, 
+        TrackBar gameSpeedBar, 
+        ProgressBar simulationProgress, 
+        Label simulationProgressLabel, 
+        List<MatchStatistics> matchStatistics, 
+        Label numOfGamesFinishedBox, Label 
+        numOfRoundsPlayedBox, 
+        Label numOfPlayersFinishedBox, 
+        List<ScottPlot.Bar> playerKODiagram,
+        ScottPlot.WinForms.FormsPlot koPlot, 
+        List<ScottPlot.Bar> beenKOdDiagram, 
+        ScottPlot.WinForms.FormsPlot beenKOdPlot, 
+        List<ScottPlot.PieSlice> victoriesDiagram, 
+        ScottPlot.WinForms.FormsPlot victoriesPlot ) 
     {
         if (players.Length < 2 || players.Length > 4)
         {
@@ -46,6 +66,10 @@ public class Game
         _numOfPlayersFinishedBox = numOfPlayersFinishedBox;
         _playerKODiagram = playerKODiagram;
         _koPlot = koPlot;
+        _beenKOdDiagram = beenKOdDiagram;
+        _beenKOdPlot = beenKOdPlot;
+        _victoriesDiagram = victoriesDiagram;
+        _victoriesPlot = victoriesPlot;
     }
 
     #endregion
@@ -131,6 +155,12 @@ public class Game
                 {
                     stat.TotalNumberOfRounds = numberOfCicles;
                     break;
+                }
+                else if (_playersFinished.Count == 1)
+                {
+                    _victoriesDiagram[currentPlayer.PlayerIndex].Value++;
+                    _victoriesPlot.Plot.Axes.AutoScale();
+                    _victoriesPlot.Refresh();
                 }
             }
 
@@ -231,10 +261,16 @@ public class Game
         stat.NumberOfTimesBeenKnockedOut[playerToBeKnockedOut.PlayerIndex]++;
         KOStatistics koStat = new KOStatistics(playerWhoMoves.PlayerIndex, playerToBeKnockedOut.PlayerIndex, round);
         stat.KOStatistics.Add(koStat);
+
         _playerKODiagram[playerWhoMoves.PlayerIndex].Value++;
-        _playerKODiagram[playerToBeKnockedOut.PlayerIndex].Label = _playerKODiagram[playerToBeKnockedOut.PlayerIndex].Value.ToString();
+        _playerKODiagram[playerWhoMoves.PlayerIndex].Label = _playerKODiagram[playerWhoMoves.PlayerIndex].Value.ToString();
         _koPlot.Plot.Axes.AutoScale();
         _koPlot.Refresh();
+
+        _beenKOdDiagram[playerToBeKnockedOut.PlayerIndex].Value++;
+        _beenKOdDiagram[playerToBeKnockedOut.PlayerIndex].Label = _beenKOdDiagram[playerToBeKnockedOut.PlayerIndex].Value.ToString();
+        _beenKOdPlot.Plot.Axes.AutoScale();
+        _beenKOdPlot.Refresh();
 
         Character? characterToBeKnockedOut = playerToBeKnockedOut.FindCahracterByLocation(knockOutLocation);
 
