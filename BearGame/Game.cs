@@ -18,12 +18,14 @@ public class Game
     private Label _numOfGamesFinishedBox;
     private Label _numOfRoundsPlayedBox;
     private Label _numOfPlayersFinishedBox;
+    private List<ScottPlot.Bar> _playerKODiagram;
+    private ScottPlot.WinForms.FormsPlot _koPlot;
 
     public bool SlowMode => _slowModeBox.Checked;
     public double GameSpeed => 10.0 / _gameSpeedBar.Value;
     public string Progress => $"Progress: {Math.Round((double)_simulationProgress.Value / (double)_simulationProgress.Maximum * 100.0, 1)} %";
 
-    public Game(Player[] players, CheckBox slowModeBox, TrackBar gameSpeedBar, ProgressBar simulationProgress, Label simulationProgressLabel, List<MatchStatistics> matchStatistics, Label numOfGamesFinishedBox, Label numOfRoundsPlayedBox, Label numOfPlayersFinishedBox)
+    public Game(Player[] players, CheckBox slowModeBox, TrackBar gameSpeedBar, ProgressBar simulationProgress, Label simulationProgressLabel, List<MatchStatistics> matchStatistics, Label numOfGamesFinishedBox, Label numOfRoundsPlayedBox, Label numOfPlayersFinishedBox, List<ScottPlot.Bar> playerKODiagram,ScottPlot.WinForms.FormsPlot koPlot ) 
     {
         if (players.Length < 2 || players.Length > 4)
         {
@@ -42,6 +44,8 @@ public class Game
         _numOfGamesFinishedBox = numOfGamesFinishedBox;
         _numOfRoundsPlayedBox = numOfRoundsPlayedBox;
         _numOfPlayersFinishedBox = numOfPlayersFinishedBox;
+        _playerKODiagram = playerKODiagram;
+        _koPlot = koPlot;
     }
 
     #endregion
@@ -227,6 +231,10 @@ public class Game
         stat.NumberOfTimesBeenKnockedOut[playerToBeKnockedOut.PlayerIndex]++;
         KOStatistics koStat = new KOStatistics(playerWhoMoves.PlayerIndex, playerToBeKnockedOut.PlayerIndex, round);
         stat.KOStatistics.Add(koStat);
+        _playerKODiagram[playerWhoMoves.PlayerIndex].Value++;
+        _playerKODiagram[playerToBeKnockedOut.PlayerIndex].Label = _playerKODiagram[playerToBeKnockedOut.PlayerIndex].Value.ToString();
+        _koPlot.Plot.Axes.AutoScale();
+        _koPlot.Refresh();
 
         Character? characterToBeKnockedOut = playerToBeKnockedOut.FindCahracterByLocation(knockOutLocation);
 

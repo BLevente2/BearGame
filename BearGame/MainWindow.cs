@@ -3,7 +3,10 @@ namespace BearGame;
 public partial class BearGameProject : Form
 {
 
+    private ScottPlot.WinForms.FormsPlot _koDiagram;
+
     #region Constructor
+
     public BearGameProject()
     {
         InitializeComponent();
@@ -41,6 +44,10 @@ public partial class BearGameProject : Form
         _player2Strategy = new Strategy(true, false, false, true, true, true);
         _player3Strategy = new Strategy(true, false, false, true, true, true);
         _player4Strategy = new Strategy(true, false, false, true, true, true);
+
+        _koDiagram = GetNewBarDiagram();
+        KOsDiagram.Controls.Add(_koDiagram);
+
 
         _dataCollection = null;
 
@@ -383,13 +390,22 @@ public partial class BearGameProject : Form
             GameStatistics gameStatistics = new GameStatistics((int)NumberOfMatchesSelector.Value, (int)NumberOfPlayersSelector.Value);
             _dataCollection = new DataCollection(gameStatistics);
             Player[] players = GetPlayers((int)NumberOfPlayersSelector.Value);
+            Color[] playerColors = new Color[players.Length];
+            string[] playerLabels = new string[players.Length];
 
             foreach (Player player in players)
             {
                 gameStatistics.PlayerStrategies.Add(player.PlayerStrategy);
+                playerColors[player.PlayerIndex] = player.PlayerColor;
+                playerLabels[player.PlayerIndex] = $"Player{player.PlayerIndex + 1}";
             }
 
-            Game game = new Game(players, UseSlowModeBox, GameSpeedBar, SimulationProgress, ProgressLabel, gameStatistics.MatchStatistics, MatchesPlayedCounter, RoundsPlayedCounter, PlayerFinishedCounter);
+            KOsDiagram.Controls.Remove(_koDiagram);
+            _koDiagram = GetNewBarDiagram(players.Length, playerLabels, playerColors, out List<ScottPlot.Bar> outBars);
+            _koDiagram.Plot.Title("KOs per Player");
+            KOsDiagram.Controls.Add(_koDiagram);
+
+            Game game = new Game(players, UseSlowModeBox, GameSpeedBar, SimulationProgress, ProgressLabel, gameStatistics.MatchStatistics, MatchesPlayedCounter, RoundsPlayedCounter, PlayerFinishedCounter, outBars, _koDiagram);
             string tempText = StartGameButton.Text;
             StartGameButton.Text = "GameIsRunning...";
             SimulationProgress.Value = 0;
@@ -547,6 +563,36 @@ public partial class BearGameProject : Form
             MessageBox.Show(ex.Message);
         }
     }
+
+    public static ScottPlot.WinForms.FormsPlot GetNewBarDiagram(int numOfBars, string[] labels, Color[] colors, out List<ScottPlot.Bar> outBars)
+    {
+        if (labels.Length != numOfBars || colors.Length != numOfBars)
+        {
+            throw new ArgumentException("Invalid number of labels or colors");
+        }
+
+        outBars = new List<ScottPlot.Bar>();
+        double[] values = new double[numOfBars];
+        ScottPlot.WinForms.FormsPlot plot = new ScottPlot.WinForms.FormsPlot();
+        plot.Plot.DataBackground.Color = ScottPlot.Colors.Transparent;
+        plot.Dock = DockStyle.Fill;
+        var bars = plot.Plot.Add.Bars(values);
+
+        if (bars != null)
+        {
+            for (int i = 0; i < numOfBars; i++)
+            {
+                bars.Bars[i].Label = labels[i];
+                bars.Bars[i].CenterLabel = true;
+                bars.Bars[i].FillColor = ScottPlot.Color.FromARGB(colors[i].ToArgb());
+                outBars = bars.Bars;
+            }
+        }
+
+        return plot;
+    }
+
+    public static ScottPlot.WinForms.FormsPlot GetNewBarDiagram() => GetNewBarDiagram(4, new string[] { "Yellow", "Red", "Blue", "Green" }, new Color[] { Color.Yellow, Color.Red, Color.Blue, Color.Green }, out List<ScottPlot.Bar> outBars);
 
     #endregion
 }

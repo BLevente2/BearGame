@@ -131,8 +131,14 @@ partial class BearGameProject
         StartGameButton = new Button();
         GameConfigLabel = new Label();
         StatisticsView = new Panel();
+        LeftStatPanel = new Panel();
+        KOsDiagram = new Panel();
+        KOsDiagramLabel = new Label();
         LoadStatisticsButton = new Button();
         SaveStatisticsButton = new Button();
+        label1 = new Label();
+        KOdDiagram = new Panel();
+        KOdDiagramLabel = new Label();
         ViewControlPanel.SuspendLayout();
         GameView.SuspendLayout();
         GameTablePanel.SuspendLayout();
@@ -143,6 +149,9 @@ partial class BearGameProject
         ((System.ComponentModel.ISupportInitialize)NumberOfMatchesSelector).BeginInit();
         ((System.ComponentModel.ISupportInitialize)NumberOfPlayersSelector).BeginInit();
         StatisticsView.SuspendLayout();
+        LeftStatPanel.SuspendLayout();
+        KOsDiagram.SuspendLayout();
+        KOdDiagram.SuspendLayout();
         SuspendLayout();
         // 
         // ViewControlPanel
@@ -190,10 +199,10 @@ partial class BearGameProject
         GameView.Controls.Add(GameConfigPanel);
         GameView.Dock = DockStyle.Fill;
         GameView.Enabled = false;
-        GameView.Location = new Point(0, 41);
+        GameView.Location = new Point(0, 0);
         GameView.Margin = new Padding(4);
         GameView.Name = "GameView";
-        GameView.Size = new Size(2167, 991);
+        GameView.Size = new Size(2167, 1032);
         GameView.TabIndex = 1;
         GameView.Visible = false;
         // 
@@ -278,7 +287,7 @@ partial class BearGameProject
         GameTablePanel.Location = new Point(0, 0);
         GameTablePanel.Margin = new Padding(4);
         GameTablePanel.Name = "GameTablePanel";
-        GameTablePanel.Size = new Size(1819, 991);
+        GameTablePanel.Size = new Size(1819, 1032);
         GameTablePanel.TabIndex = 1;
         // 
         // GameDataPanel
@@ -292,7 +301,7 @@ partial class BearGameProject
         GameDataPanel.Dock = DockStyle.Right;
         GameDataPanel.Location = new Point(1456, 0);
         GameDataPanel.Name = "GameDataPanel";
-        GameDataPanel.Size = new Size(361, 899);
+        GameDataPanel.Size = new Size(361, 940);
         GameDataPanel.TabIndex = 75;
         // 
         // PlayerFinishedCounter
@@ -372,7 +381,7 @@ partial class BearGameProject
         ProgressPanel.Controls.Add(SimulationProgress);
         ProgressPanel.Controls.Add(ProgressLabel);
         ProgressPanel.Dock = DockStyle.Bottom;
-        ProgressPanel.Location = new Point(0, 899);
+        ProgressPanel.Location = new Point(0, 940);
         ProgressPanel.Name = "ProgressPanel";
         ProgressPanel.Size = new Size(1817, 90);
         ProgressPanel.TabIndex = 74;
@@ -1468,7 +1477,7 @@ partial class BearGameProject
         GameConfigPanel.Location = new Point(1819, 0);
         GameConfigPanel.Margin = new Padding(4);
         GameConfigPanel.Name = "GameConfigPanel";
-        GameConfigPanel.Size = new Size(348, 991);
+        GameConfigPanel.Size = new Size(348, 1032);
         GameConfigPanel.TabIndex = 0;
         // 
         // GameSpeedBar
@@ -1645,7 +1654,7 @@ partial class BearGameProject
         StartGameButton.Dock = DockStyle.Bottom;
         StartGameButton.FlatStyle = FlatStyle.Flat;
         StartGameButton.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        StartGameButton.Location = new Point(0, 909);
+        StartGameButton.Location = new Point(0, 950);
         StartGameButton.Margin = new Padding(2);
         StartGameButton.Name = "StartGameButton";
         StartGameButton.Size = new Size(346, 80);
@@ -1672,6 +1681,7 @@ partial class BearGameProject
         // 
         StatisticsView.BackColor = SystemColors.Control;
         StatisticsView.BorderStyle = BorderStyle.FixedSingle;
+        StatisticsView.Controls.Add(LeftStatPanel);
         StatisticsView.Controls.Add(LoadStatisticsButton);
         StatisticsView.Controls.Add(SaveStatisticsButton);
         StatisticsView.Dock = DockStyle.Fill;
@@ -1682,6 +1692,38 @@ partial class BearGameProject
         StatisticsView.Size = new Size(2167, 1032);
         StatisticsView.TabIndex = 2;
         StatisticsView.Visible = false;
+        // 
+        // LeftStatPanel
+        // 
+        LeftStatPanel.Controls.Add(KOdDiagram);
+        LeftStatPanel.Controls.Add(KOsDiagram);
+        LeftStatPanel.Dock = DockStyle.Left;
+        LeftStatPanel.Location = new Point(0, 0);
+        LeftStatPanel.Name = "LeftStatPanel";
+        LeftStatPanel.Size = new Size(781, 920);
+        LeftStatPanel.TabIndex = 3;
+        // 
+        // KOsDiagram
+        // 
+        KOsDiagram.BorderStyle = BorderStyle.FixedSingle;
+        KOsDiagram.Controls.Add(KOsDiagramLabel);
+        KOsDiagram.Dock = DockStyle.Top;
+        KOsDiagram.Location = new Point(0, 0);
+        KOsDiagram.Name = "KOsDiagram";
+        KOsDiagram.Size = new Size(781, 452);
+        KOsDiagram.TabIndex = 0;
+        // 
+        // KOsDiagramLabel
+        // 
+        KOsDiagramLabel.AutoSize = true;
+        KOsDiagramLabel.Dock = DockStyle.Top;
+        KOsDiagramLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+        KOsDiagramLabel.Location = new Point(0, 0);
+        KOsDiagramLabel.Name = "KOsDiagramLabel";
+        KOsDiagramLabel.Padding = new Padding(100, 50, 100, 5);
+        KOsDiagramLabel.Size = new Size(562, 87);
+        KOsDiagramLabel.TabIndex = 0;
+        KOsDiagramLabel.Text = "NumberOfKnockedoutPlayers:";
         // 
         // LoadStatisticsButton
         // 
@@ -1711,14 +1753,47 @@ partial class BearGameProject
         SaveStatisticsButton.Visible = false;
         SaveStatisticsButton.Click += SaveStatisticsButton_Click;
         // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.Dock = DockStyle.Bottom;
+        label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+        label1.Location = new Point(132, 75);
+        label1.Name = "label1";
+        label1.Size = new Size(463, 32);
+        label1.TabIndex = 0;
+        label1.Text = "Number Of Knockouts Between Players";
+        // 
+        // KOdDiagram
+        // 
+        KOdDiagram.BorderStyle = BorderStyle.FixedSingle;
+        KOdDiagram.Controls.Add(KOdDiagramLabel);
+        KOdDiagram.Dock = DockStyle.Top;
+        KOdDiagram.Location = new Point(0, 452);
+        KOdDiagram.Name = "KOdDiagram";
+        KOdDiagram.Size = new Size(781, 412);
+        KOdDiagram.TabIndex = 1;
+        // 
+        // KOdDiagramLabel
+        // 
+        KOdDiagramLabel.AutoSize = true;
+        KOdDiagramLabel.Dock = DockStyle.Top;
+        KOdDiagramLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+        KOdDiagramLabel.Location = new Point(0, 0);
+        KOdDiagramLabel.Name = "KOdDiagramLabel";
+        KOdDiagramLabel.Padding = new Padding(100, 5, 100, 5);
+        KOdDiagramLabel.Size = new Size(709, 42);
+        KOdDiagramLabel.TabIndex = 0;
+        KOdDiagramLabel.Text = "NumberOfTimesPlayerHasBeenKnockedout";
+        // 
         // BearGameProject
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(2167, 1032);
-        Controls.Add(GameView);
         Controls.Add(ViewControlPanel);
         Controls.Add(StatisticsView);
+        Controls.Add(GameView);
         DoubleBuffered = true;
         FormBorderStyle = FormBorderStyle.FixedToolWindow;
         Margin = new Padding(4);
@@ -1739,6 +1814,11 @@ partial class BearGameProject
         ((System.ComponentModel.ISupportInitialize)NumberOfMatchesSelector).EndInit();
         ((System.ComponentModel.ISupportInitialize)NumberOfPlayersSelector).EndInit();
         StatisticsView.ResumeLayout(false);
+        LeftStatPanel.ResumeLayout(false);
+        KOsDiagram.ResumeLayout(false);
+        KOsDiagram.PerformLayout();
+        KOdDiagram.ResumeLayout(false);
+        KOdDiagram.PerformLayout();
         ResumeLayout(false);
     }
 
@@ -1849,4 +1929,11 @@ partial class BearGameProject
     private Label RoundsPlayedCounter;
     private Label PlayerFinishedCounter;
     private Label PlayerFinishedCounterLabel;
+    private Panel KOsDiagramPanel;
+    private Label label1;
+    private Panel LeftStatPanel;
+    private Panel KOsDiagram;
+    private Label KOsDiagramLabel;
+    private Panel KOdDiagram;
+    private Label KOdDiagramLabel;
 }
