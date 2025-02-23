@@ -114,15 +114,15 @@ public class Game
 
     public async Task StartMatch(MatchStatistics stat)
     {
-        int numberOfCicles = 0;
+        int numberOfCicles = 1;
         int i = 0;
         while (_activePlayers.Count != 0)
         {
-            numberOfCicles++;
 
             if (i > _activePlayers.Count - 1)
             {
                 i = 0;
+                numberOfCicles++;
             }
 
             Player currentPlayer = _activePlayers[i];
@@ -168,6 +168,7 @@ public class Game
             if (i == _activePlayers.Count)
             {
                 i = 0;
+                numberOfCicles++;
             }
 
             _numOfRoundsPlayedBox.Text = numberOfCicles.ToString();

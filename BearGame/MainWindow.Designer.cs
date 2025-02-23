@@ -135,6 +135,8 @@ partial class BearGameProject
         VictoryDiagramPanel = new Panel();
         VictoryLabel = new Label();
         GeneralStatistics = new Panel();
+        MedianOfRoundsBox = new TextBox();
+        MedianOfRoundsLabel = new Label();
         StandardDeviationBox = new TextBox();
         StandardDeviationLabel = new Label();
         VarianceOfRoundsBox = new TextBox();
@@ -1733,14 +1735,16 @@ partial class BearGameProject
         VictoryLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         VictoryLabel.Location = new Point(0, 0);
         VictoryLabel.Name = "VictoryLabel";
-        VictoryLabel.Padding = new Padding(20, 45, 0, 5);
-        VictoryLabel.Size = new Size(320, 82);
+        VictoryLabel.Padding = new Padding(20, 45, 0, 10);
+        VictoryLabel.Size = new Size(320, 87);
         VictoryLabel.TabIndex = 0;
         VictoryLabel.Text = "VictoriesBetweenPlayers:";
         // 
         // GeneralStatistics
         // 
         GeneralStatistics.BorderStyle = BorderStyle.FixedSingle;
+        GeneralStatistics.Controls.Add(MedianOfRoundsBox);
+        GeneralStatistics.Controls.Add(MedianOfRoundsLabel);
         GeneralStatistics.Controls.Add(StandardDeviationBox);
         GeneralStatistics.Controls.Add(StandardDeviationLabel);
         GeneralStatistics.Controls.Add(VarianceOfRoundsBox);
@@ -1749,11 +1753,36 @@ partial class BearGameProject
         GeneralStatistics.Controls.Add(AvarageNumOfRoundsLabel);
         GeneralStatistics.Controls.Add(GeneralStatisticsLabel);
         GeneralStatistics.Dock = DockStyle.Right;
-        GeneralStatistics.Location = new Point(1781, 0);
+        GeneralStatistics.Enabled = false;
+        GeneralStatistics.Location = new Point(1842, 0);
         GeneralStatistics.Name = "GeneralStatistics";
-        GeneralStatistics.Size = new Size(384, 920);
+        GeneralStatistics.Size = new Size(323, 920);
         GeneralStatistics.TabIndex = 4;
-        GeneralStatistics.Visible = false;
+        // 
+        // MedianOfRoundsBox
+        // 
+        MedianOfRoundsBox.BorderStyle = BorderStyle.None;
+        MedianOfRoundsBox.Dock = DockStyle.Top;
+        MedianOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        MedianOfRoundsBox.Location = new Point(0, 425);
+        MedianOfRoundsBox.Name = "MedianOfRoundsBox";
+        MedianOfRoundsBox.PlaceholderText = "median";
+        MedianOfRoundsBox.ReadOnly = true;
+        MedianOfRoundsBox.Size = new Size(321, 32);
+        MedianOfRoundsBox.TabIndex = 8;
+        MedianOfRoundsBox.TextAlign = HorizontalAlignment.Center;
+        // 
+        // MedianOfRoundsLabel
+        // 
+        MedianOfRoundsLabel.AutoSize = true;
+        MedianOfRoundsLabel.Dock = DockStyle.Top;
+        MedianOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        MedianOfRoundsLabel.Location = new Point(0, 363);
+        MedianOfRoundsLabel.Name = "MedianOfRoundsLabel";
+        MedianOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
+        MedianOfRoundsLabel.Size = new Size(284, 62);
+        MedianOfRoundsLabel.TabIndex = 7;
+        MedianOfRoundsLabel.Text = "MedianOfNumOfRounds:";
         // 
         // StandardDeviationBox
         // 
@@ -1764,7 +1793,7 @@ partial class BearGameProject
         StandardDeviationBox.Name = "StandardDeviationBox";
         StandardDeviationBox.PlaceholderText = "standardDeviation";
         StandardDeviationBox.ReadOnly = true;
-        StandardDeviationBox.Size = new Size(382, 32);
+        StandardDeviationBox.Size = new Size(321, 32);
         StandardDeviationBox.TabIndex = 6;
         StandardDeviationBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1789,7 +1818,7 @@ partial class BearGameProject
         VarianceOfRoundsBox.Name = "VarianceOfRoundsBox";
         VarianceOfRoundsBox.PlaceholderText = "variance";
         VarianceOfRoundsBox.ReadOnly = true;
-        VarianceOfRoundsBox.Size = new Size(382, 32);
+        VarianceOfRoundsBox.Size = new Size(321, 32);
         VarianceOfRoundsBox.TabIndex = 4;
         VarianceOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1814,7 +1843,7 @@ partial class BearGameProject
         AvarageNumOfRoundsBox.Name = "AvarageNumOfRoundsBox";
         AvarageNumOfRoundsBox.PlaceholderText = "avarage";
         AvarageNumOfRoundsBox.ReadOnly = true;
-        AvarageNumOfRoundsBox.Size = new Size(382, 32);
+        AvarageNumOfRoundsBox.Size = new Size(321, 32);
         AvarageNumOfRoundsBox.TabIndex = 2;
         AvarageNumOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1870,8 +1899,8 @@ partial class BearGameProject
         KOdDiagramLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         KOdDiagramLabel.Location = new Point(0, 0);
         KOdDiagramLabel.Name = "KOdDiagramLabel";
-        KOdDiagramLabel.Padding = new Padding(100, 5, 100, 5);
-        KOdDiagramLabel.Size = new Size(709, 42);
+        KOdDiagramLabel.Padding = new Padding(100, 5, 100, 10);
+        KOdDiagramLabel.Size = new Size(709, 47);
         KOdDiagramLabel.TabIndex = 0;
         KOdDiagramLabel.Text = "NumberOfTimesPlayerHasBeenKnockedout";
         // 
@@ -1893,8 +1922,8 @@ partial class BearGameProject
         KOsDiagramLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         KOsDiagramLabel.Location = new Point(0, 0);
         KOsDiagramLabel.Name = "KOsDiagramLabel";
-        KOsDiagramLabel.Padding = new Padding(100, 50, 100, 5);
-        KOsDiagramLabel.Size = new Size(562, 87);
+        KOsDiagramLabel.Padding = new Padding(100, 50, 100, 10);
+        KOsDiagramLabel.Size = new Size(562, 92);
         KOsDiagramLabel.TabIndex = 0;
         KOsDiagramLabel.Text = "NumberOfKnockedoutPlayers:";
         // 
@@ -2090,4 +2119,6 @@ partial class BearGameProject
     private TextBox VarianceOfRoundsBox;
     private TextBox StandardDeviationBox;
     private Label StandardDeviationLabel;
+    private Label MedianOfRoundsLabel;
+    private TextBox MedianOfRoundsBox;
 }

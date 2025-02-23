@@ -389,7 +389,7 @@ public partial class BearGameProject : Form
         SaveStatisticsButton.Visible = visibility;
         LoadStatisticsButton.Enabled = visibility;
         LoadStatisticsButton.Visible = visibility;
-        GeneralStatistics.Visible = visibility;
+        GeneralStatistics.Enabled = visibility;
 
         StartGameButton.UseWaitCursor = !visibility;
         ProgressPanel.Visible = !visibility;
@@ -399,6 +399,11 @@ public partial class BearGameProject : Form
     {
         try
         {
+            AvarageNumOfRoundsBox.Text = string.Empty;
+            VarianceOfRoundsBox.Text = string.Empty;
+            StandardDeviationBox.Text = string.Empty;
+            MedianOfRoundsBox.Text += string.Empty;
+
             GameStatistics gameStatistics = new GameStatistics((int)NumberOfMatchesSelector.Value, (int)NumberOfPlayersSelector.Value);
             _dataCollection = new DataCollection(gameStatistics);
             Player[] players = GetPlayers((int)NumberOfPlayersSelector.Value);
@@ -416,16 +421,19 @@ public partial class BearGameProject : Form
             _koDiagram = GetNewBarDiagram(players.Length, playerLabels, playerColors, out List<ScottPlot.Bar> outBars);
             _koDiagram.Plot.Title("KOs per Player");
             KOsDiagram.Controls.Add(_koDiagram);
+            _koDiagram.BringToFront();
 
             KOdDiagram.Controls.Remove(_beenKOdDiagram);
             _beenKOdDiagram = GetNewBarDiagram(players.Length, playerLabels, playerColors, out List<ScottPlot.Bar> outBars2);
             _beenKOdDiagram.Plot.Title("KOd per Player");
             KOdDiagram.Controls.Add(_beenKOdDiagram);
+            _beenKOdDiagram.BringToFront();
 
             VictoryDiagramPanel.Controls.Remove(_winsDiagram);
             _winsDiagram = GetNewPieDiagram(players.Length, playerLabels, playerColors, out List<ScottPlot.PieSlice> outPie);
             _winsDiagram.Plot.Title("NumberOfVictories");
             VictoryDiagramPanel.Controls.Add( _winsDiagram);
+            _winsDiagram.BringToFront();
 
             Game game = new Game(
                 players, 
@@ -605,6 +613,7 @@ public partial class BearGameProject : Form
                 GeneralStatistics.Visible = true;
                 LoadDataToDiagrams();
                 CalculateGeneralStatistics();
+                GeneralStatistics.Enabled = true;
             }
         }
         catch (Exception ex)
@@ -731,6 +740,9 @@ public partial class BearGameProject : Form
             _koDiagram.Plot.Axes.AutoScale();
             _koDiagram.Plot.Axes.AutoScale();
             _winsDiagram.Plot.Axes.AutoScale();
+            _koDiagram.BringToFront();
+            _beenKOdDiagram.BringToFront();
+            _winsDiagram.BringToFront();
             _koDiagram.Refresh();
             _beenKOdDiagram.Refresh();
             _winsDiagram.Refresh();
@@ -749,7 +761,8 @@ public partial class BearGameProject : Form
             VarianceOfRoundsBox.Text += Math.Round(varianceOfRounds, 4).ToString();
             double standardDeviationOfRounds = MathNet.Numerics.Statistics.Statistics.StandardDeviation(numOfRounds);
             StandardDeviationBox.Text = Math.Round(standardDeviationOfRounds, 4).ToString();
-            
+            double medianOfRounds = MathNet.Numerics.Statistics.Statistics.Median(numOfRounds);
+            MedianOfRoundsBox.Text = Math.Round(medianOfRounds, 4).ToString();
         }
     }
 
