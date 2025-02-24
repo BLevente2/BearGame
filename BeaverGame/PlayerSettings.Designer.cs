@@ -1,4 +1,4 @@
-﻿namespace BearGame;
+﻿namespace BeaverGame;
 
 partial class PlayerSettings
 {

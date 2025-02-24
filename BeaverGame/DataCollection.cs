@@ -1,7 +1,7 @@
 ﻿using MathNet.Numerics.Statistics;
 using System.Text.Json;
 
-namespace BearGame;
+namespace BeaverGame;
 
 class DataCollection
 {

@@ -1,6 +1,6 @@
 using System.Runtime.Versioning;
 
-namespace BearGame;
+namespace BeaverGame;
 
 public static class Program
 {
@@ -11,7 +11,7 @@ public static class Program
         if (OperatingSystem.IsWindows())
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new BearGameProject());
+            Application.Run(new BeaverGameProject());
         }
         else
         {

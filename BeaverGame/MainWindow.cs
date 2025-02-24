@@ -1,8 +1,6 @@
-using ScottPlot.WinForms;
+namespace BeaverGame;
 
-namespace BearGame;
-
-public partial class BearGameProject : Form
+public partial class BeaverGameProject : Form
 {
 
     private ScottPlot.WinForms.FormsPlot _koDiagram;
@@ -12,7 +10,7 @@ public partial class BearGameProject : Form
 
     #region Constructor
 
-    public BearGameProject()
+    public BeaverGameProject()
     {
         InitializeComponent();
 
@@ -762,7 +760,8 @@ public partial class BearGameProject : Form
     {
         if (_dataCollection != null && _dataCollection.GameStatistics != null)
         {
-            double[] numOfRounds = _dataCollection.GetNumOfRounds();
+            List<double> numOfRounds = _dataCollection.GetNumOfRounds().ToList();
+            numOfRounds.Sort();
             double avgNumOfRounds = numOfRounds.Average();
             AvarageNumOfRoundsBox.Text = Math.Round(avgNumOfRounds, 4).ToString();
             double varianceOfRounds = MathNet.Numerics.Statistics.Statistics.Variance(numOfRounds);

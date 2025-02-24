@@ -1,6 +1,6 @@
 ﻿using MathNet.Numerics.Random;
 
-namespace BearGame;
+namespace BeaverGame;
 
 public class Game
 {

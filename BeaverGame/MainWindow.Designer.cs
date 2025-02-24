@@ -1,6 +1,6 @@
-﻿namespace BearGame;
+﻿namespace BeaverGame;
 
-partial class BearGameProject
+partial class BeaverGameProject
 {
     /// <summary>
     ///  Required designer variable.
@@ -137,6 +137,8 @@ partial class BearGameProject
         VictoryDiagramPanel = new Panel();
         VictoryLabel = new Label();
         GeneralStatistics = new Panel();
+        textBox1 = new TextBox();
+        LowerQuantilLabel = new Label();
         MaxOfRoundsBox = new TextBox();
         MaxOfRoundsLabel = new Label();
         MinOfRoundsBox = new TextBox();
@@ -186,19 +188,17 @@ partial class BearGameProject
         ViewControlPanel.Controls.Add(GameViewButton);
         ViewControlPanel.Dock = DockStyle.Top;
         ViewControlPanel.Location = new Point(0, 0);
-        ViewControlPanel.Margin = new Padding(4);
         ViewControlPanel.Name = "ViewControlPanel";
-        ViewControlPanel.Size = new Size(2167, 41);
+        ViewControlPanel.Size = new Size(1539, 33);
         ViewControlPanel.TabIndex = 0;
         // 
         // StatisticsViewButton
         // 
         StatisticsViewButton.Dock = DockStyle.Left;
         StatisticsViewButton.FlatStyle = FlatStyle.Flat;
-        StatisticsViewButton.Location = new Point(210, 0);
-        StatisticsViewButton.Margin = new Padding(4);
+        StatisticsViewButton.Location = new Point(168, 0);
         StatisticsViewButton.Name = "StatisticsViewButton";
-        StatisticsViewButton.Size = new Size(210, 39);
+        StatisticsViewButton.Size = new Size(168, 31);
         StatisticsViewButton.TabIndex = 2;
         StatisticsViewButton.Text = "StatisticsView";
         StatisticsViewButton.UseVisualStyleBackColor = true;
@@ -209,9 +209,8 @@ partial class BearGameProject
         GameViewButton.Dock = DockStyle.Left;
         GameViewButton.FlatStyle = FlatStyle.Flat;
         GameViewButton.Location = new Point(0, 0);
-        GameViewButton.Margin = new Padding(4);
         GameViewButton.Name = "GameViewButton";
-        GameViewButton.Size = new Size(210, 39);
+        GameViewButton.Size = new Size(168, 31);
         GameViewButton.TabIndex = 1;
         GameViewButton.Text = "GameView";
         GameViewButton.UseVisualStyleBackColor = true;
@@ -223,9 +222,8 @@ partial class BearGameProject
         GameView.Controls.Add(GameConfigPanel);
         GameView.Dock = DockStyle.Fill;
         GameView.Location = new Point(0, 0);
-        GameView.Margin = new Padding(4);
         GameView.Name = "GameView";
-        GameView.Size = new Size(2167, 1032);
+        GameView.Size = new Size(1539, 826);
         GameView.TabIndex = 1;
         // 
         // GameTablePanel
@@ -307,9 +305,8 @@ partial class BearGameProject
         GameTablePanel.Controls.Add(YC1);
         GameTablePanel.Dock = DockStyle.Fill;
         GameTablePanel.Location = new Point(0, 0);
-        GameTablePanel.Margin = new Padding(4);
         GameTablePanel.Name = "GameTablePanel";
-        GameTablePanel.Size = new Size(1819, 1032);
+        GameTablePanel.Size = new Size(1260, 826);
         GameTablePanel.TabIndex = 1;
         // 
         // GameDataPanel
@@ -321,9 +318,10 @@ partial class BearGameProject
         GameDataPanel.Controls.Add(MatchesPlayedCounter);
         GameDataPanel.Controls.Add(MatchCounterLabel);
         GameDataPanel.Dock = DockStyle.Right;
-        GameDataPanel.Location = new Point(1456, 0);
+        GameDataPanel.Location = new Point(969, 0);
+        GameDataPanel.Margin = new Padding(2);
         GameDataPanel.Name = "GameDataPanel";
-        GameDataPanel.Size = new Size(361, 940);
+        GameDataPanel.Size = new Size(289, 752);
         GameDataPanel.TabIndex = 75;
         // 
         // PlayerFinishedCounter
@@ -331,10 +329,11 @@ partial class BearGameProject
         PlayerFinishedCounter.AutoSize = true;
         PlayerFinishedCounter.Dock = DockStyle.Top;
         PlayerFinishedCounter.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        PlayerFinishedCounter.Location = new Point(0, 220);
+        PlayerFinishedCounter.Location = new Point(0, 188);
+        PlayerFinishedCounter.Margin = new Padding(2, 0, 2, 0);
         PlayerFinishedCounter.Name = "PlayerFinishedCounter";
-        PlayerFinishedCounter.Padding = new Padding(45, 0, 0, 0);
-        PlayerFinishedCounter.Size = new Size(72, 32);
+        PlayerFinishedCounter.Padding = new Padding(36, 0, 0, 0);
+        PlayerFinishedCounter.Size = new Size(59, 28);
         PlayerFinishedCounter.TabIndex = 5;
         PlayerFinishedCounter.Text = "0";
         // 
@@ -343,10 +342,11 @@ partial class BearGameProject
         PlayerFinishedCounterLabel.AutoSize = true;
         PlayerFinishedCounterLabel.Dock = DockStyle.Top;
         PlayerFinishedCounterLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        PlayerFinishedCounterLabel.Location = new Point(0, 168);
+        PlayerFinishedCounterLabel.Location = new Point(0, 144);
+        PlayerFinishedCounterLabel.Margin = new Padding(2, 0, 2, 0);
         PlayerFinishedCounterLabel.Name = "PlayerFinishedCounterLabel";
-        PlayerFinishedCounterLabel.Padding = new Padding(0, 20, 0, 0);
-        PlayerFinishedCounterLabel.Size = new Size(296, 52);
+        PlayerFinishedCounterLabel.Padding = new Padding(0, 16, 0, 0);
+        PlayerFinishedCounterLabel.Size = new Size(242, 44);
         PlayerFinishedCounterLabel.TabIndex = 4;
         PlayerFinishedCounterLabel.Text = "NumberOfPlayersFinished:";
         // 
@@ -355,10 +355,11 @@ partial class BearGameProject
         RoundsPlayedCounter.AutoSize = true;
         RoundsPlayedCounter.Dock = DockStyle.Top;
         RoundsPlayedCounter.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        RoundsPlayedCounter.Location = new Point(0, 136);
+        RoundsPlayedCounter.Location = new Point(0, 116);
+        RoundsPlayedCounter.Margin = new Padding(2, 0, 2, 0);
         RoundsPlayedCounter.Name = "RoundsPlayedCounter";
-        RoundsPlayedCounter.Padding = new Padding(45, 0, 0, 0);
-        RoundsPlayedCounter.Size = new Size(72, 32);
+        RoundsPlayedCounter.Padding = new Padding(36, 0, 0, 0);
+        RoundsPlayedCounter.Size = new Size(59, 28);
         RoundsPlayedCounter.TabIndex = 3;
         RoundsPlayedCounter.Text = "0";
         // 
@@ -367,10 +368,11 @@ partial class BearGameProject
         RoundCounterLabel.AutoSize = true;
         RoundCounterLabel.Dock = DockStyle.Top;
         RoundCounterLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        RoundCounterLabel.Location = new Point(0, 84);
+        RoundCounterLabel.Location = new Point(0, 72);
+        RoundCounterLabel.Margin = new Padding(2, 0, 2, 0);
         RoundCounterLabel.Name = "RoundCounterLabel";
-        RoundCounterLabel.Padding = new Padding(0, 20, 0, 0);
-        RoundCounterLabel.Size = new Size(282, 52);
+        RoundCounterLabel.Padding = new Padding(0, 16, 0, 0);
+        RoundCounterLabel.Size = new Size(232, 44);
         RoundCounterLabel.TabIndex = 2;
         RoundCounterLabel.Text = "NumberOfRoundsPlayed:";
         // 
@@ -379,10 +381,11 @@ partial class BearGameProject
         MatchesPlayedCounter.AutoSize = true;
         MatchesPlayedCounter.Dock = DockStyle.Top;
         MatchesPlayedCounter.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MatchesPlayedCounter.Location = new Point(0, 52);
+        MatchesPlayedCounter.Location = new Point(0, 44);
+        MatchesPlayedCounter.Margin = new Padding(2, 0, 2, 0);
         MatchesPlayedCounter.Name = "MatchesPlayedCounter";
-        MatchesPlayedCounter.Padding = new Padding(45, 0, 0, 0);
-        MatchesPlayedCounter.Size = new Size(72, 32);
+        MatchesPlayedCounter.Padding = new Padding(36, 0, 0, 0);
+        MatchesPlayedCounter.Size = new Size(59, 28);
         MatchesPlayedCounter.TabIndex = 1;
         MatchesPlayedCounter.Text = "0";
         // 
@@ -392,9 +395,10 @@ partial class BearGameProject
         MatchCounterLabel.Dock = DockStyle.Top;
         MatchCounterLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
         MatchCounterLabel.Location = new Point(0, 0);
+        MatchCounterLabel.Margin = new Padding(2, 0, 2, 0);
         MatchCounterLabel.Name = "MatchCounterLabel";
-        MatchCounterLabel.Padding = new Padding(0, 20, 0, 0);
-        MatchCounterLabel.Size = new Size(293, 52);
+        MatchCounterLabel.Padding = new Padding(0, 16, 0, 0);
+        MatchCounterLabel.Size = new Size(240, 44);
         MatchCounterLabel.TabIndex = 0;
         MatchCounterLabel.Text = "NumberOfMatchesPlayed:";
         // 
@@ -403,19 +407,21 @@ partial class BearGameProject
         ProgressPanel.Controls.Add(SimulationProgress);
         ProgressPanel.Controls.Add(ProgressLabel);
         ProgressPanel.Dock = DockStyle.Bottom;
-        ProgressPanel.Location = new Point(0, 940);
+        ProgressPanel.Location = new Point(0, 752);
+        ProgressPanel.Margin = new Padding(2);
         ProgressPanel.Name = "ProgressPanel";
-        ProgressPanel.Size = new Size(1817, 90);
+        ProgressPanel.Size = new Size(1258, 72);
         ProgressPanel.TabIndex = 74;
         ProgressPanel.Visible = false;
         // 
         // SimulationProgress
         // 
         SimulationProgress.Dock = DockStyle.Bottom;
-        SimulationProgress.Location = new Point(0, 35);
+        SimulationProgress.Location = new Point(0, 28);
+        SimulationProgress.Margin = new Padding(2);
         SimulationProgress.Maximum = 1000;
         SimulationProgress.Name = "SimulationProgress";
-        SimulationProgress.Size = new Size(1817, 55);
+        SimulationProgress.Size = new Size(1258, 44);
         SimulationProgress.Style = ProgressBarStyle.Continuous;
         SimulationProgress.TabIndex = 72;
         SimulationProgress.UseWaitCursor = true;
@@ -428,8 +434,9 @@ partial class BearGameProject
         ProgressLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         ProgressLabel.ForeColor = SystemColors.WindowText;
         ProgressLabel.Location = new Point(0, 0);
+        ProgressLabel.Margin = new Padding(2, 0, 2, 0);
         ProgressLabel.Name = "ProgressLabel";
-        ProgressLabel.Size = new Size(170, 32);
+        ProgressLabel.Size = new Size(139, 28);
         ProgressLabel.TabIndex = 73;
         ProgressLabel.Text = "Progress: 0 %";
         // 
@@ -438,11 +445,10 @@ partial class BearGameProject
         GF4.BackColor = SystemColors.Control;
         GF4.BorderStyle = BorderStyle.FixedSingle;
         GF4.ForeColor = Color.Green;
-        GF4.Location = new Point(499, 346);
-        GF4.Margin = new Padding(4);
+        GF4.Location = new Point(399, 277);
         GF4.Name = "GF4";
         GF4.ReadOnly = true;
-        GF4.Size = new Size(33, 31);
+        GF4.Size = new Size(27, 27);
         GF4.TabIndex = 71;
         GF4.Tag = "";
         GF4.Text = "F";
@@ -453,11 +459,10 @@ partial class BearGameProject
         GF3.BackColor = SystemColors.Control;
         GF3.BorderStyle = BorderStyle.FixedSingle;
         GF3.ForeColor = Color.Green;
-        GF3.Location = new Point(499, 401);
-        GF3.Margin = new Padding(4);
+        GF3.Location = new Point(399, 321);
         GF3.Name = "GF3";
         GF3.ReadOnly = true;
-        GF3.Size = new Size(33, 31);
+        GF3.Size = new Size(27, 27);
         GF3.TabIndex = 70;
         GF3.Tag = "";
         GF3.Text = "F";
@@ -468,11 +473,10 @@ partial class BearGameProject
         GF2.BackColor = SystemColors.Control;
         GF2.BorderStyle = BorderStyle.FixedSingle;
         GF2.ForeColor = Color.Green;
-        GF2.Location = new Point(499, 452);
-        GF2.Margin = new Padding(4);
+        GF2.Location = new Point(399, 362);
         GF2.Name = "GF2";
         GF2.ReadOnly = true;
-        GF2.Size = new Size(33, 31);
+        GF2.Size = new Size(27, 27);
         GF2.TabIndex = 69;
         GF2.Tag = "";
         GF2.Text = "F";
@@ -483,11 +487,10 @@ partial class BearGameProject
         GF1.BackColor = SystemColors.Control;
         GF1.BorderStyle = BorderStyle.FixedSingle;
         GF1.ForeColor = Color.Green;
-        GF1.Location = new Point(499, 506);
-        GF1.Margin = new Padding(4);
+        GF1.Location = new Point(399, 405);
         GF1.Name = "GF1";
         GF1.ReadOnly = true;
-        GF1.Size = new Size(33, 31);
+        GF1.Size = new Size(27, 27);
         GF1.TabIndex = 68;
         GF1.Tag = "";
         GF1.Text = "F";
@@ -498,11 +501,10 @@ partial class BearGameProject
         BF4.BackColor = SystemColors.Control;
         BF4.BorderStyle = BorderStyle.FixedSingle;
         BF4.ForeColor = Color.Blue;
-        BF4.Location = new Point(1035, 495);
-        BF4.Margin = new Padding(4);
+        BF4.Location = new Point(828, 396);
         BF4.Name = "BF4";
         BF4.ReadOnly = true;
-        BF4.Size = new Size(33, 31);
+        BF4.Size = new Size(27, 27);
         BF4.TabIndex = 67;
         BF4.Tag = "";
         BF4.Text = "F";
@@ -513,11 +515,10 @@ partial class BearGameProject
         BF3.BackColor = SystemColors.Control;
         BF3.BorderStyle = BorderStyle.FixedSingle;
         BF3.ForeColor = Color.Blue;
-        BF3.Location = new Point(1101, 495);
-        BF3.Margin = new Padding(4);
+        BF3.Location = new Point(881, 396);
         BF3.Name = "BF3";
         BF3.ReadOnly = true;
-        BF3.Size = new Size(33, 31);
+        BF3.Size = new Size(27, 27);
         BF3.TabIndex = 66;
         BF3.Tag = "";
         BF3.Text = "F";
@@ -528,11 +529,10 @@ partial class BearGameProject
         BF2.BackColor = SystemColors.Control;
         BF2.BorderStyle = BorderStyle.FixedSingle;
         BF2.ForeColor = Color.Blue;
-        BF2.Location = new Point(1186, 495);
-        BF2.Margin = new Padding(4);
+        BF2.Location = new Point(949, 396);
         BF2.Name = "BF2";
         BF2.ReadOnly = true;
-        BF2.Size = new Size(33, 31);
+        BF2.Size = new Size(27, 27);
         BF2.TabIndex = 65;
         BF2.Tag = "";
         BF2.Text = "F";
@@ -543,11 +543,10 @@ partial class BearGameProject
         BF1.BackColor = SystemColors.Control;
         BF1.BorderStyle = BorderStyle.FixedSingle;
         BF1.ForeColor = Color.Blue;
-        BF1.Location = new Point(1274, 495);
-        BF1.Margin = new Padding(4);
+        BF1.Location = new Point(1019, 396);
         BF1.Name = "BF1";
         BF1.ReadOnly = true;
-        BF1.Size = new Size(33, 31);
+        BF1.Size = new Size(27, 27);
         BF1.TabIndex = 64;
         BF1.Tag = "";
         BF1.Text = "F";
@@ -558,11 +557,10 @@ partial class BearGameProject
         RF4.BackColor = SystemColors.Control;
         RF4.BorderStyle = BorderStyle.FixedSingle;
         RF4.ForeColor = Color.Red;
-        RF4.Location = new Point(1186, 381);
-        RF4.Margin = new Padding(4);
+        RF4.Location = new Point(949, 305);
         RF4.Name = "RF4";
         RF4.ReadOnly = true;
-        RF4.Size = new Size(33, 31);
+        RF4.Size = new Size(27, 27);
         RF4.TabIndex = 63;
         RF4.Tag = "";
         RF4.Text = "F";
@@ -573,11 +571,10 @@ partial class BearGameProject
         RF3.BackColor = SystemColors.Control;
         RF3.BorderStyle = BorderStyle.FixedSingle;
         RF3.ForeColor = Color.Red;
-        RF3.Location = new Point(1186, 320);
-        RF3.Margin = new Padding(4);
+        RF3.Location = new Point(949, 256);
         RF3.Name = "RF3";
         RF3.ReadOnly = true;
-        RF3.Size = new Size(33, 31);
+        RF3.Size = new Size(27, 27);
         RF3.TabIndex = 62;
         RF3.Tag = "";
         RF3.Text = "F";
@@ -588,11 +585,10 @@ partial class BearGameProject
         RF2.BackColor = SystemColors.Control;
         RF2.BorderStyle = BorderStyle.FixedSingle;
         RF2.ForeColor = Color.Red;
-        RF2.Location = new Point(1186, 262);
-        RF2.Margin = new Padding(4);
+        RF2.Location = new Point(949, 210);
         RF2.Name = "RF2";
         RF2.ReadOnly = true;
-        RF2.Size = new Size(33, 31);
+        RF2.Size = new Size(27, 27);
         RF2.TabIndex = 61;
         RF2.Tag = "";
         RF2.Text = "F";
@@ -603,11 +599,10 @@ partial class BearGameProject
         RF1.BackColor = SystemColors.Control;
         RF1.BorderStyle = BorderStyle.FixedSingle;
         RF1.ForeColor = Color.Red;
-        RF1.Location = new Point(1186, 204);
-        RF1.Margin = new Padding(4);
+        RF1.Location = new Point(949, 163);
         RF1.Name = "RF1";
         RF1.ReadOnly = true;
-        RF1.Size = new Size(33, 31);
+        RF1.Size = new Size(27, 27);
         RF1.TabIndex = 60;
         RF1.Tag = "";
         RF1.Text = "F";
@@ -618,11 +613,10 @@ partial class BearGameProject
         YF4.BackColor = SystemColors.Control;
         YF4.BorderStyle = BorderStyle.FixedSingle;
         YF4.ForeColor = Color.Yellow;
-        YF4.Location = new Point(650, 245);
-        YF4.Margin = new Padding(4);
+        YF4.Location = new Point(520, 196);
         YF4.Name = "YF4";
         YF4.ReadOnly = true;
-        YF4.Size = new Size(33, 31);
+        YF4.Size = new Size(27, 27);
         YF4.TabIndex = 59;
         YF4.Tag = "";
         YF4.Text = "F";
@@ -633,11 +627,10 @@ partial class BearGameProject
         YF3.BackColor = SystemColors.Control;
         YF3.BorderStyle = BorderStyle.FixedSingle;
         YF3.ForeColor = Color.Yellow;
-        YF3.Location = new Point(571, 245);
-        YF3.Margin = new Padding(4);
+        YF3.Location = new Point(457, 196);
         YF3.Name = "YF3";
         YF3.ReadOnly = true;
-        YF3.Size = new Size(33, 31);
+        YF3.Size = new Size(27, 27);
         YF3.TabIndex = 58;
         YF3.Tag = "";
         YF3.Text = "F";
@@ -648,11 +641,10 @@ partial class BearGameProject
         YF2.BackColor = SystemColors.Control;
         YF2.BorderStyle = BorderStyle.FixedSingle;
         YF2.ForeColor = Color.Yellow;
-        YF2.Location = new Point(499, 245);
-        YF2.Margin = new Padding(4);
+        YF2.Location = new Point(399, 196);
         YF2.Name = "YF2";
         YF2.ReadOnly = true;
-        YF2.Size = new Size(33, 31);
+        YF2.Size = new Size(27, 27);
         YF2.TabIndex = 57;
         YF2.Tag = "";
         YF2.Text = "F";
@@ -663,11 +655,10 @@ partial class BearGameProject
         YF1.BackColor = SystemColors.Control;
         YF1.BorderStyle = BorderStyle.FixedSingle;
         YF1.ForeColor = Color.Yellow;
-        YF1.Location = new Point(412, 245);
-        YF1.Margin = new Padding(4);
+        YF1.Location = new Point(330, 196);
         YF1.Name = "YF1";
         YF1.ReadOnly = true;
-        YF1.Size = new Size(33, 31);
+        YF1.Size = new Size(27, 27);
         YF1.TabIndex = 56;
         YF1.Tag = "";
         YF1.Text = "F";
@@ -678,11 +669,10 @@ partial class BearGameProject
         S36.BackColor = SystemColors.Control;
         S36.BorderStyle = BorderStyle.FixedSingle;
         S36.ForeColor = SystemColors.WindowText;
-        S36.Location = new Point(160, 369);
-        S36.Margin = new Padding(4);
+        S36.Location = new Point(128, 295);
         S36.Name = "S36";
         S36.ReadOnly = true;
-        S36.Size = new Size(33, 31);
+        S36.Size = new Size(27, 27);
         S36.TabIndex = 55;
         S36.Tag = "";
         S36.TextAlign = HorizontalAlignment.Center;
@@ -692,11 +682,10 @@ partial class BearGameProject
         S37.BackColor = SystemColors.Control;
         S37.BorderStyle = BorderStyle.FixedSingle;
         S37.ForeColor = SystemColors.WindowText;
-        S37.Location = new Point(160, 311);
-        S37.Margin = new Padding(4);
+        S37.Location = new Point(128, 249);
         S37.Name = "S37";
         S37.ReadOnly = true;
-        S37.Size = new Size(33, 31);
+        S37.Size = new Size(27, 27);
         S37.TabIndex = 54;
         S37.Tag = "";
         S37.TextAlign = HorizontalAlignment.Center;
@@ -706,11 +695,10 @@ partial class BearGameProject
         S35.BackColor = SystemColors.Control;
         S35.BorderStyle = BorderStyle.FixedSingle;
         S35.ForeColor = SystemColors.WindowText;
-        S35.Location = new Point(160, 438);
-        S35.Margin = new Padding(4);
+        S35.Location = new Point(128, 350);
         S35.Name = "S35";
         S35.ReadOnly = true;
-        S35.Size = new Size(33, 31);
+        S35.Size = new Size(27, 27);
         S35.TabIndex = 53;
         S35.Tag = "";
         S35.TextAlign = HorizontalAlignment.Center;
@@ -720,11 +708,10 @@ partial class BearGameProject
         S38.BackColor = SystemColors.Control;
         S38.BorderStyle = BorderStyle.FixedSingle;
         S38.ForeColor = SystemColors.WindowText;
-        S38.Location = new Point(160, 245);
-        S38.Margin = new Padding(4);
+        S38.Location = new Point(128, 196);
         S38.Name = "S38";
         S38.ReadOnly = true;
-        S38.Size = new Size(33, 31);
+        S38.Size = new Size(27, 27);
         S38.TabIndex = 52;
         S38.Tag = "";
         S38.TextAlign = HorizontalAlignment.Center;
@@ -734,11 +721,10 @@ partial class BearGameProject
         S34.BackColor = SystemColors.Control;
         S34.BorderStyle = BorderStyle.FixedSingle;
         S34.ForeColor = SystemColors.WindowText;
-        S34.Location = new Point(160, 495);
-        S34.Margin = new Padding(4);
+        S34.Location = new Point(128, 396);
         S34.Name = "S34";
         S34.ReadOnly = true;
-        S34.Size = new Size(33, 31);
+        S34.Size = new Size(27, 27);
         S34.TabIndex = 51;
         S34.Tag = "";
         S34.TextAlign = HorizontalAlignment.Center;
@@ -748,11 +734,10 @@ partial class BearGameProject
         S39.BackColor = SystemColors.Control;
         S39.BorderStyle = BorderStyle.FixedSingle;
         S39.ForeColor = SystemColors.WindowText;
-        S39.Location = new Point(239, 208);
-        S39.Margin = new Padding(4);
+        S39.Location = new Point(191, 166);
         S39.Name = "S39";
         S39.ReadOnly = true;
-        S39.Size = new Size(33, 31);
+        S39.Size = new Size(27, 27);
         S39.TabIndex = 50;
         S39.Tag = "";
         S39.TextAlign = HorizontalAlignment.Center;
@@ -762,11 +747,10 @@ partial class BearGameProject
         S33.BackColor = SystemColors.Control;
         S33.BorderStyle = BorderStyle.FixedSingle;
         S33.ForeColor = SystemColors.WindowText;
-        S33.Location = new Point(239, 530);
-        S33.Margin = new Padding(4);
+        S33.Location = new Point(191, 424);
         S33.Name = "S33";
         S33.ReadOnly = true;
-        S33.Size = new Size(33, 31);
+        S33.Size = new Size(27, 27);
         S33.TabIndex = 49;
         S33.Tag = "";
         S33.TextAlign = HorizontalAlignment.Center;
@@ -776,11 +760,10 @@ partial class BearGameProject
         S40.BackColor = SystemColors.Control;
         S40.BorderStyle = BorderStyle.FixedSingle;
         S40.ForeColor = SystemColors.WindowText;
-        S40.Location = new Point(321, 208);
-        S40.Margin = new Padding(4);
+        S40.Location = new Point(257, 166);
         S40.Name = "S40";
         S40.ReadOnly = true;
-        S40.Size = new Size(33, 31);
+        S40.Size = new Size(27, 27);
         S40.TabIndex = 48;
         S40.Tag = "";
         S40.TextAlign = HorizontalAlignment.Center;
@@ -790,11 +773,10 @@ partial class BearGameProject
         S32.BackColor = SystemColors.Control;
         S32.BorderStyle = BorderStyle.FixedSingle;
         S32.ForeColor = SystemColors.WindowText;
-        S32.Location = new Point(321, 530);
-        S32.Margin = new Padding(4);
+        S32.Location = new Point(257, 424);
         S32.Name = "S32";
         S32.ReadOnly = true;
-        S32.Size = new Size(33, 31);
+        S32.Size = new Size(27, 27);
         S32.TabIndex = 47;
         S32.Tag = "";
         S32.TextAlign = HorizontalAlignment.Center;
@@ -804,11 +786,10 @@ partial class BearGameProject
         S16.BackColor = SystemColors.Control;
         S16.BorderStyle = BorderStyle.FixedSingle;
         S16.ForeColor = SystemColors.WindowText;
-        S16.Location = new Point(1509, 369);
-        S16.Margin = new Padding(4);
+        S16.Location = new Point(1207, 295);
         S16.Name = "S16";
         S16.ReadOnly = true;
-        S16.Size = new Size(33, 31);
+        S16.Size = new Size(27, 27);
         S16.TabIndex = 46;
         S16.Tag = "";
         S16.TextAlign = HorizontalAlignment.Center;
@@ -818,11 +799,10 @@ partial class BearGameProject
         S17.BackColor = SystemColors.Control;
         S17.BorderStyle = BorderStyle.FixedSingle;
         S17.ForeColor = SystemColors.WindowText;
-        S17.Location = new Point(1509, 438);
-        S17.Margin = new Padding(4);
+        S17.Location = new Point(1207, 350);
         S17.Name = "S17";
         S17.ReadOnly = true;
-        S17.Size = new Size(33, 31);
+        S17.Size = new Size(27, 27);
         S17.TabIndex = 45;
         S17.Tag = "";
         S17.TextAlign = HorizontalAlignment.Center;
@@ -832,11 +812,10 @@ partial class BearGameProject
         S15.BackColor = SystemColors.Control;
         S15.BorderStyle = BorderStyle.FixedSingle;
         S15.ForeColor = SystemColors.WindowText;
-        S15.Location = new Point(1509, 311);
-        S15.Margin = new Padding(4);
+        S15.Location = new Point(1207, 249);
         S15.Name = "S15";
         S15.ReadOnly = true;
-        S15.Size = new Size(33, 31);
+        S15.Size = new Size(27, 27);
         S15.TabIndex = 44;
         S15.Tag = "";
         S15.TextAlign = HorizontalAlignment.Center;
@@ -846,11 +825,10 @@ partial class BearGameProject
         S18.BackColor = SystemColors.Control;
         S18.BorderStyle = BorderStyle.FixedSingle;
         S18.ForeColor = SystemColors.WindowText;
-        S18.Location = new Point(1509, 495);
-        S18.Margin = new Padding(4);
+        S18.Location = new Point(1207, 396);
         S18.Name = "S18";
         S18.ReadOnly = true;
-        S18.Size = new Size(33, 31);
+        S18.Size = new Size(27, 27);
         S18.TabIndex = 43;
         S18.Tag = "";
         S18.TextAlign = HorizontalAlignment.Center;
@@ -860,11 +838,10 @@ partial class BearGameProject
         S14.BackColor = SystemColors.Control;
         S14.BorderStyle = BorderStyle.FixedSingle;
         S14.ForeColor = SystemColors.WindowText;
-        S14.Location = new Point(1509, 245);
-        S14.Margin = new Padding(4);
+        S14.Location = new Point(1207, 196);
         S14.Name = "S14";
         S14.ReadOnly = true;
-        S14.Size = new Size(33, 31);
+        S14.Size = new Size(27, 27);
         S14.TabIndex = 42;
         S14.Tag = "";
         S14.TextAlign = HorizontalAlignment.Center;
@@ -874,11 +851,10 @@ partial class BearGameProject
         S13.BackColor = SystemColors.Control;
         S13.BorderStyle = BorderStyle.FixedSingle;
         S13.ForeColor = SystemColors.WindowText;
-        S13.Location = new Point(1432, 208);
-        S13.Margin = new Padding(4);
+        S13.Location = new Point(1146, 166);
         S13.Name = "S13";
         S13.ReadOnly = true;
-        S13.Size = new Size(33, 31);
+        S13.Size = new Size(27, 27);
         S13.TabIndex = 41;
         S13.Tag = "";
         S13.TextAlign = HorizontalAlignment.Center;
@@ -888,11 +864,10 @@ partial class BearGameProject
         S19.BackColor = SystemColors.Control;
         S19.BorderStyle = BorderStyle.FixedSingle;
         S19.ForeColor = SystemColors.WindowText;
-        S19.Location = new Point(1432, 530);
-        S19.Margin = new Padding(4);
+        S19.Location = new Point(1146, 424);
         S19.Name = "S19";
         S19.ReadOnly = true;
-        S19.Size = new Size(33, 31);
+        S19.Size = new Size(27, 27);
         S19.TabIndex = 40;
         S19.Tag = "";
         S19.TextAlign = HorizontalAlignment.Center;
@@ -902,11 +877,10 @@ partial class BearGameProject
         S20.BackColor = SystemColors.Control;
         S20.BorderStyle = BorderStyle.FixedSingle;
         S20.ForeColor = SystemColors.WindowText;
-        S20.Location = new Point(1350, 530);
-        S20.Margin = new Padding(4);
+        S20.Location = new Point(1080, 424);
         S20.Name = "S20";
         S20.ReadOnly = true;
-        S20.Size = new Size(33, 31);
+        S20.Size = new Size(27, 27);
         S20.TabIndex = 39;
         S20.Tag = "";
         S20.TextAlign = HorizontalAlignment.Center;
@@ -916,11 +890,10 @@ partial class BearGameProject
         S12.BackColor = SystemColors.Control;
         S12.BorderStyle = BorderStyle.FixedSingle;
         S12.ForeColor = SystemColors.WindowText;
-        S12.Location = new Point(1350, 208);
-        S12.Margin = new Padding(4);
+        S12.Location = new Point(1080, 166);
         S12.Name = "S12";
         S12.ReadOnly = true;
-        S12.Size = new Size(33, 31);
+        S12.Size = new Size(27, 27);
         S12.TabIndex = 38;
         S12.Tag = "";
         S12.TextAlign = HorizontalAlignment.Center;
@@ -930,11 +903,10 @@ partial class BearGameProject
         S26.BackColor = SystemColors.Control;
         S26.BorderStyle = BorderStyle.FixedSingle;
         S26.ForeColor = SystemColors.WindowText;
-        S26.Location = new Point(851, 618);
-        S26.Margin = new Padding(4);
+        S26.Location = new Point(681, 494);
         S26.Name = "S26";
         S26.ReadOnly = true;
-        S26.Size = new Size(33, 31);
+        S26.Size = new Size(27, 27);
         S26.TabIndex = 37;
         S26.Tag = "";
         S26.TextAlign = HorizontalAlignment.Center;
@@ -944,11 +916,10 @@ partial class BearGameProject
         S25.BackColor = SystemColors.Control;
         S25.BorderStyle = BorderStyle.FixedSingle;
         S25.ForeColor = SystemColors.WindowText;
-        S25.Location = new Point(932, 618);
-        S25.Margin = new Padding(4);
+        S25.Location = new Point(746, 494);
         S25.Name = "S25";
         S25.ReadOnly = true;
-        S25.Size = new Size(33, 31);
+        S25.Size = new Size(27, 27);
         S25.TabIndex = 36;
         S25.Tag = "";
         S25.TextAlign = HorizontalAlignment.Center;
@@ -958,11 +929,10 @@ partial class BearGameProject
         S27.BackColor = SystemColors.Control;
         S27.BorderStyle = BorderStyle.FixedSingle;
         S27.ForeColor = SystemColors.WindowText;
-        S27.Location = new Point(748, 618);
-        S27.Margin = new Padding(4);
+        S27.Location = new Point(598, 494);
         S27.Name = "S27";
         S27.ReadOnly = true;
-        S27.Size = new Size(33, 31);
+        S27.Size = new Size(27, 27);
         S27.TabIndex = 35;
         S27.Tag = "";
         S27.TextAlign = HorizontalAlignment.Center;
@@ -972,11 +942,10 @@ partial class BearGameProject
         S24.BackColor = SystemColors.Control;
         S24.BorderStyle = BorderStyle.FixedSingle;
         S24.ForeColor = SystemColors.WindowText;
-        S24.Location = new Point(1035, 618);
-        S24.Margin = new Padding(4);
+        S24.Location = new Point(828, 494);
         S24.Name = "S24";
         S24.ReadOnly = true;
-        S24.Size = new Size(33, 31);
+        S24.Size = new Size(27, 27);
         S24.TabIndex = 34;
         S24.Tag = "";
         S24.TextAlign = HorizontalAlignment.Center;
@@ -986,11 +955,10 @@ partial class BearGameProject
         S28.BackColor = SystemColors.Control;
         S28.BorderStyle = BorderStyle.FixedSingle;
         S28.ForeColor = SystemColors.WindowText;
-        S28.Location = new Point(650, 618);
-        S28.Margin = new Padding(4);
+        S28.Location = new Point(520, 494);
         S28.Name = "S28";
         S28.ReadOnly = true;
-        S28.Size = new Size(33, 31);
+        S28.Size = new Size(27, 27);
         S28.TabIndex = 33;
         S28.Tag = "";
         S28.TextAlign = HorizontalAlignment.Center;
@@ -1000,11 +968,10 @@ partial class BearGameProject
         S29.BackColor = SystemColors.Control;
         S29.BorderStyle = BorderStyle.FixedSingle;
         S29.ForeColor = SystemColors.WindowText;
-        S29.Location = new Point(571, 596);
-        S29.Margin = new Padding(4);
+        S29.Location = new Point(457, 477);
         S29.Name = "S29";
         S29.ReadOnly = true;
-        S29.Size = new Size(33, 31);
+        S29.Size = new Size(27, 27);
         S29.TabIndex = 32;
         S29.Tag = "";
         S29.TextAlign = HorizontalAlignment.Center;
@@ -1014,11 +981,10 @@ partial class BearGameProject
         S23.BackColor = SystemColors.Control;
         S23.BorderStyle = BorderStyle.FixedSingle;
         S23.ForeColor = SystemColors.WindowText;
-        S23.Location = new Point(1101, 596);
-        S23.Margin = new Padding(4);
+        S23.Location = new Point(881, 477);
         S23.Name = "S23";
         S23.ReadOnly = true;
-        S23.Size = new Size(33, 31);
+        S23.Size = new Size(27, 27);
         S23.TabIndex = 31;
         S23.Tag = "";
         S23.TextAlign = HorizontalAlignment.Center;
@@ -1028,11 +994,10 @@ partial class BearGameProject
         S22.BackColor = SystemColors.Control;
         S22.BorderStyle = BorderStyle.FixedSingle;
         S22.ForeColor = SystemColors.WindowText;
-        S22.Location = new Point(1186, 579);
-        S22.Margin = new Padding(4);
+        S22.Location = new Point(949, 463);
         S22.Name = "S22";
         S22.ReadOnly = true;
-        S22.Size = new Size(33, 31);
+        S22.Size = new Size(27, 27);
         S22.TabIndex = 30;
         S22.Tag = "";
         S22.TextAlign = HorizontalAlignment.Center;
@@ -1042,11 +1007,10 @@ partial class BearGameProject
         S30.BackColor = SystemColors.Control;
         S30.BorderStyle = BorderStyle.FixedSingle;
         S30.ForeColor = SystemColors.WindowText;
-        S30.Location = new Point(499, 579);
-        S30.Margin = new Padding(4);
+        S30.Location = new Point(399, 463);
         S30.Name = "S30";
         S30.ReadOnly = true;
-        S30.Size = new Size(33, 31);
+        S30.Size = new Size(27, 27);
         S30.TabIndex = 29;
         S30.Tag = "";
         S30.TextAlign = HorizontalAlignment.Center;
@@ -1056,11 +1020,10 @@ partial class BearGameProject
         S21.BackColor = SystemColors.Control;
         S21.BorderStyle = BorderStyle.FixedSingle;
         S21.ForeColor = Color.Blue;
-        S21.Location = new Point(1274, 566);
-        S21.Margin = new Padding(4);
+        S21.Location = new Point(1019, 453);
         S21.Name = "S21";
         S21.ReadOnly = true;
-        S21.Size = new Size(33, 31);
+        S21.Size = new Size(27, 27);
         S21.TabIndex = 28;
         S21.Tag = "";
         S21.Text = "S";
@@ -1071,11 +1034,10 @@ partial class BearGameProject
         S31.BackColor = SystemColors.Control;
         S31.BorderStyle = BorderStyle.FixedSingle;
         S31.ForeColor = Color.Green;
-        S31.Location = new Point(412, 566);
-        S31.Margin = new Padding(4);
+        S31.Location = new Point(330, 453);
         S31.Name = "S31";
         S31.ReadOnly = true;
-        S31.Size = new Size(33, 31);
+        S31.Size = new Size(27, 27);
         S31.TabIndex = 27;
         S31.Tag = "";
         S31.Text = "S";
@@ -1086,11 +1048,10 @@ partial class BearGameProject
         S6.BackColor = SystemColors.Control;
         S6.BorderStyle = BorderStyle.FixedSingle;
         S6.ForeColor = SystemColors.WindowText;
-        S6.Location = new Point(851, 102);
-        S6.Margin = new Padding(4);
+        S6.Location = new Point(681, 82);
         S6.Name = "S6";
         S6.ReadOnly = true;
-        S6.Size = new Size(33, 31);
+        S6.Size = new Size(27, 27);
         S6.TabIndex = 26;
         S6.Tag = "";
         S6.TextAlign = HorizontalAlignment.Center;
@@ -1100,11 +1061,10 @@ partial class BearGameProject
         S7.BackColor = SystemColors.Control;
         S7.BorderStyle = BorderStyle.FixedSingle;
         S7.ForeColor = SystemColors.WindowText;
-        S7.Location = new Point(932, 102);
-        S7.Margin = new Padding(4);
+        S7.Location = new Point(746, 82);
         S7.Name = "S7";
         S7.ReadOnly = true;
-        S7.Size = new Size(33, 31);
+        S7.Size = new Size(27, 27);
         S7.TabIndex = 25;
         S7.Tag = "";
         S7.TextAlign = HorizontalAlignment.Center;
@@ -1114,11 +1074,10 @@ partial class BearGameProject
         S5.BackColor = SystemColors.Control;
         S5.BorderStyle = BorderStyle.FixedSingle;
         S5.ForeColor = SystemColors.WindowText;
-        S5.Location = new Point(748, 102);
-        S5.Margin = new Padding(4);
+        S5.Location = new Point(598, 82);
         S5.Name = "S5";
         S5.ReadOnly = true;
-        S5.Size = new Size(33, 31);
+        S5.Size = new Size(27, 27);
         S5.TabIndex = 24;
         S5.Tag = "";
         S5.TextAlign = HorizontalAlignment.Center;
@@ -1128,11 +1087,10 @@ partial class BearGameProject
         S8.BackColor = SystemColors.Control;
         S8.BorderStyle = BorderStyle.FixedSingle;
         S8.ForeColor = SystemColors.WindowText;
-        S8.Location = new Point(1035, 102);
-        S8.Margin = new Padding(4);
+        S8.Location = new Point(828, 82);
         S8.Name = "S8";
         S8.ReadOnly = true;
-        S8.Size = new Size(33, 31);
+        S8.Size = new Size(27, 27);
         S8.TabIndex = 23;
         S8.Tag = "";
         S8.TextAlign = HorizontalAlignment.Center;
@@ -1142,11 +1100,10 @@ partial class BearGameProject
         S4.BackColor = SystemColors.Control;
         S4.BorderStyle = BorderStyle.FixedSingle;
         S4.ForeColor = SystemColors.WindowText;
-        S4.Location = new Point(650, 102);
-        S4.Margin = new Padding(4);
+        S4.Location = new Point(520, 82);
         S4.Name = "S4";
         S4.ReadOnly = true;
-        S4.Size = new Size(33, 31);
+        S4.Size = new Size(27, 27);
         S4.TabIndex = 22;
         S4.Tag = "";
         S4.TextAlign = HorizontalAlignment.Center;
@@ -1156,11 +1113,10 @@ partial class BearGameProject
         S3.BackColor = SystemColors.Control;
         S3.BorderStyle = BorderStyle.FixedSingle;
         S3.ForeColor = SystemColors.WindowText;
-        S3.Location = new Point(571, 118);
-        S3.Margin = new Padding(4);
+        S3.Location = new Point(457, 94);
         S3.Name = "S3";
         S3.ReadOnly = true;
-        S3.Size = new Size(33, 31);
+        S3.Size = new Size(27, 27);
         S3.TabIndex = 21;
         S3.Tag = "";
         S3.TextAlign = HorizontalAlignment.Center;
@@ -1170,11 +1126,10 @@ partial class BearGameProject
         S9.BackColor = SystemColors.Control;
         S9.BorderStyle = BorderStyle.FixedSingle;
         S9.ForeColor = SystemColors.WindowText;
-        S9.Location = new Point(1101, 118);
-        S9.Margin = new Padding(4);
+        S9.Location = new Point(881, 94);
         S9.Name = "S9";
         S9.ReadOnly = true;
-        S9.Size = new Size(33, 31);
+        S9.Size = new Size(27, 27);
         S9.TabIndex = 20;
         S9.Tag = "";
         S9.TextAlign = HorizontalAlignment.Center;
@@ -1184,11 +1139,10 @@ partial class BearGameProject
         S10.BackColor = SystemColors.Control;
         S10.BorderStyle = BorderStyle.FixedSingle;
         S10.ForeColor = SystemColors.WindowText;
-        S10.Location = new Point(1186, 139);
-        S10.Margin = new Padding(4);
+        S10.Location = new Point(949, 111);
         S10.Name = "S10";
         S10.ReadOnly = true;
-        S10.Size = new Size(33, 31);
+        S10.Size = new Size(27, 27);
         S10.TabIndex = 19;
         S10.Tag = "";
         S10.TextAlign = HorizontalAlignment.Center;
@@ -1198,11 +1152,10 @@ partial class BearGameProject
         S2.BackColor = SystemColors.Control;
         S2.BorderStyle = BorderStyle.FixedSingle;
         S2.ForeColor = SystemColors.WindowText;
-        S2.Location = new Point(499, 139);
-        S2.Margin = new Padding(4);
+        S2.Location = new Point(399, 111);
         S2.Name = "S2";
         S2.ReadOnly = true;
-        S2.Size = new Size(33, 31);
+        S2.Size = new Size(27, 27);
         S2.TabIndex = 18;
         S2.Tag = "";
         S2.TextAlign = HorizontalAlignment.Center;
@@ -1212,11 +1165,10 @@ partial class BearGameProject
         S11.BackColor = SystemColors.Control;
         S11.BorderStyle = BorderStyle.FixedSingle;
         S11.ForeColor = Color.Red;
-        S11.Location = new Point(1274, 164);
-        S11.Margin = new Padding(4);
+        S11.Location = new Point(1019, 131);
         S11.Name = "S11";
         S11.ReadOnly = true;
-        S11.Size = new Size(33, 31);
+        S11.Size = new Size(27, 27);
         S11.TabIndex = 17;
         S11.Tag = "";
         S11.Text = "S";
@@ -1227,11 +1179,10 @@ partial class BearGameProject
         S1.BackColor = SystemColors.Control;
         S1.BorderStyle = BorderStyle.FixedSingle;
         S1.ForeColor = Color.Yellow;
-        S1.Location = new Point(412, 164);
-        S1.Margin = new Padding(4);
+        S1.Location = new Point(330, 131);
         S1.Name = "S1";
         S1.ReadOnly = true;
-        S1.Size = new Size(33, 31);
+        S1.Size = new Size(27, 27);
         S1.TabIndex = 16;
         S1.Tag = "";
         S1.Text = "S";
@@ -1242,11 +1193,10 @@ partial class BearGameProject
         BC3.BackColor = Color.Blue;
         BC3.BorderStyle = BorderStyle.FixedSingle;
         BC3.ForeColor = SystemColors.WindowText;
-        BC3.Location = new Point(1481, 682);
-        BC3.Margin = new Padding(4);
+        BC3.Location = new Point(1185, 546);
         BC3.Name = "BC3";
         BC3.ReadOnly = true;
-        BC3.Size = new Size(33, 31);
+        BC3.Size = new Size(27, 27);
         BC3.TabIndex = 15;
         BC3.Tag = "";
         BC3.Text = "C";
@@ -1257,11 +1207,10 @@ partial class BearGameProject
         BC4.BackColor = Color.Blue;
         BC4.BorderStyle = BorderStyle.FixedSingle;
         BC4.ForeColor = SystemColors.WindowText;
-        BC4.Location = new Point(1416, 682);
-        BC4.Margin = new Padding(4);
+        BC4.Location = new Point(1133, 546);
         BC4.Name = "BC4";
         BC4.ReadOnly = true;
-        BC4.Size = new Size(33, 31);
+        BC4.Size = new Size(27, 27);
         BC4.TabIndex = 14;
         BC4.Tag = "";
         BC4.Text = "C";
@@ -1272,11 +1221,10 @@ partial class BearGameProject
         BC2.BackColor = Color.Blue;
         BC2.BorderStyle = BorderStyle.FixedSingle;
         BC2.ForeColor = SystemColors.WindowText;
-        BC2.Location = new Point(1481, 624);
-        BC2.Margin = new Padding(4);
+        BC2.Location = new Point(1185, 499);
         BC2.Name = "BC2";
         BC2.ReadOnly = true;
-        BC2.Size = new Size(33, 31);
+        BC2.Size = new Size(27, 27);
         BC2.TabIndex = 13;
         BC2.Tag = "";
         BC2.Text = "C";
@@ -1288,11 +1236,10 @@ partial class BearGameProject
         BC1.BackColor = Color.Blue;
         BC1.BorderStyle = BorderStyle.FixedSingle;
         BC1.ForeColor = SystemColors.WindowText;
-        BC1.Location = new Point(1416, 624);
-        BC1.Margin = new Padding(4);
+        BC1.Location = new Point(1133, 499);
         BC1.Name = "BC1";
         BC1.ReadOnly = true;
-        BC1.Size = new Size(33, 31);
+        BC1.Size = new Size(27, 27);
         BC1.TabIndex = 12;
         BC1.Tag = "";
         BC1.Text = "C";
@@ -1303,11 +1250,10 @@ partial class BearGameProject
         GC3.BackColor = Color.Green;
         GC3.BorderStyle = BorderStyle.FixedSingle;
         GC3.ForeColor = SystemColors.WindowText;
-        GC3.Location = new Point(272, 682);
-        GC3.Margin = new Padding(4);
+        GC3.Location = new Point(218, 546);
         GC3.Name = "GC3";
         GC3.ReadOnly = true;
-        GC3.Size = new Size(33, 31);
+        GC3.Size = new Size(27, 27);
         GC3.TabIndex = 11;
         GC3.Tag = "";
         GC3.Text = "C";
@@ -1318,11 +1264,10 @@ partial class BearGameProject
         GC4.BackColor = Color.Green;
         GC4.BorderStyle = BorderStyle.FixedSingle;
         GC4.ForeColor = SystemColors.WindowText;
-        GC4.Location = new Point(208, 682);
-        GC4.Margin = new Padding(4);
+        GC4.Location = new Point(166, 546);
         GC4.Name = "GC4";
         GC4.ReadOnly = true;
-        GC4.Size = new Size(33, 31);
+        GC4.Size = new Size(27, 27);
         GC4.TabIndex = 10;
         GC4.Tag = "";
         GC4.Text = "C";
@@ -1333,11 +1278,10 @@ partial class BearGameProject
         GC2.BackColor = Color.Green;
         GC2.BorderStyle = BorderStyle.FixedSingle;
         GC2.ForeColor = SystemColors.WindowText;
-        GC2.Location = new Point(272, 624);
-        GC2.Margin = new Padding(4);
+        GC2.Location = new Point(218, 499);
         GC2.Name = "GC2";
         GC2.ReadOnly = true;
-        GC2.Size = new Size(33, 31);
+        GC2.Size = new Size(27, 27);
         GC2.TabIndex = 9;
         GC2.Tag = "";
         GC2.Text = "C";
@@ -1348,11 +1292,10 @@ partial class BearGameProject
         GC1.BackColor = Color.Green;
         GC1.BorderStyle = BorderStyle.FixedSingle;
         GC1.ForeColor = SystemColors.WindowText;
-        GC1.Location = new Point(208, 624);
-        GC1.Margin = new Padding(4);
+        GC1.Location = new Point(166, 499);
         GC1.Name = "GC1";
         GC1.ReadOnly = true;
-        GC1.Size = new Size(33, 31);
+        GC1.Size = new Size(27, 27);
         GC1.TabIndex = 8;
         GC1.Tag = "";
         GC1.Text = "C";
@@ -1363,11 +1306,10 @@ partial class BearGameProject
         RC3.BackColor = Color.Red;
         RC3.BorderStyle = BorderStyle.FixedSingle;
         RC3.ForeColor = SystemColors.WindowText;
-        RC3.Location = new Point(1481, 118);
-        RC3.Margin = new Padding(4);
+        RC3.Location = new Point(1185, 94);
         RC3.Name = "RC3";
         RC3.ReadOnly = true;
-        RC3.Size = new Size(33, 31);
+        RC3.Size = new Size(27, 27);
         RC3.TabIndex = 7;
         RC3.Tag = "";
         RC3.Text = "C";
@@ -1378,11 +1320,10 @@ partial class BearGameProject
         RC4.BackColor = Color.Red;
         RC4.BorderStyle = BorderStyle.FixedSingle;
         RC4.ForeColor = SystemColors.WindowText;
-        RC4.Location = new Point(1416, 118);
-        RC4.Margin = new Padding(4);
+        RC4.Location = new Point(1133, 94);
         RC4.Name = "RC4";
         RC4.ReadOnly = true;
-        RC4.Size = new Size(33, 31);
+        RC4.Size = new Size(27, 27);
         RC4.TabIndex = 6;
         RC4.Tag = "";
         RC4.Text = "C";
@@ -1393,11 +1334,10 @@ partial class BearGameProject
         RC2.BackColor = Color.Red;
         RC2.BorderStyle = BorderStyle.FixedSingle;
         RC2.ForeColor = SystemColors.WindowText;
-        RC2.Location = new Point(1481, 59);
-        RC2.Margin = new Padding(4);
+        RC2.Location = new Point(1185, 47);
         RC2.Name = "RC2";
         RC2.ReadOnly = true;
-        RC2.Size = new Size(33, 31);
+        RC2.Size = new Size(27, 27);
         RC2.TabIndex = 5;
         RC2.Tag = "";
         RC2.Text = "C";
@@ -1408,11 +1348,10 @@ partial class BearGameProject
         RC1.BackColor = Color.Red;
         RC1.BorderStyle = BorderStyle.FixedSingle;
         RC1.ForeColor = SystemColors.WindowText;
-        RC1.Location = new Point(1416, 59);
-        RC1.Margin = new Padding(4);
+        RC1.Location = new Point(1133, 47);
         RC1.Name = "RC1";
         RC1.ReadOnly = true;
-        RC1.Size = new Size(33, 31);
+        RC1.Size = new Size(27, 27);
         RC1.TabIndex = 4;
         RC1.Tag = "";
         RC1.Text = "C";
@@ -1423,11 +1362,10 @@ partial class BearGameProject
         YC4.BackColor = Color.Yellow;
         YC4.BorderStyle = BorderStyle.FixedSingle;
         YC4.ForeColor = SystemColors.WindowText;
-        YC4.Location = new Point(272, 118);
-        YC4.Margin = new Padding(4);
+        YC4.Location = new Point(218, 94);
         YC4.Name = "YC4";
         YC4.ReadOnly = true;
-        YC4.Size = new Size(33, 31);
+        YC4.Size = new Size(27, 27);
         YC4.TabIndex = 3;
         YC4.Tag = "";
         YC4.Text = "C";
@@ -1438,11 +1376,10 @@ partial class BearGameProject
         YC3.BackColor = Color.Yellow;
         YC3.BorderStyle = BorderStyle.FixedSingle;
         YC3.ForeColor = SystemColors.WindowText;
-        YC3.Location = new Point(208, 118);
-        YC3.Margin = new Padding(4);
+        YC3.Location = new Point(166, 94);
         YC3.Name = "YC3";
         YC3.ReadOnly = true;
-        YC3.Size = new Size(33, 31);
+        YC3.Size = new Size(27, 27);
         YC3.TabIndex = 2;
         YC3.Tag = "";
         YC3.Text = "C";
@@ -1453,11 +1390,10 @@ partial class BearGameProject
         YC2.BackColor = Color.Yellow;
         YC2.BorderStyle = BorderStyle.FixedSingle;
         YC2.ForeColor = SystemColors.WindowText;
-        YC2.Location = new Point(272, 59);
-        YC2.Margin = new Padding(4);
+        YC2.Location = new Point(218, 47);
         YC2.Name = "YC2";
         YC2.ReadOnly = true;
-        YC2.Size = new Size(33, 31);
+        YC2.Size = new Size(27, 27);
         YC2.TabIndex = 1;
         YC2.Tag = "";
         YC2.Text = "C";
@@ -1468,11 +1404,10 @@ partial class BearGameProject
         YC1.BackColor = Color.Yellow;
         YC1.BorderStyle = BorderStyle.FixedSingle;
         YC1.ForeColor = SystemColors.WindowText;
-        YC1.Location = new Point(208, 59);
-        YC1.Margin = new Padding(4);
+        YC1.Location = new Point(166, 47);
         YC1.Name = "YC1";
         YC1.ReadOnly = true;
-        YC1.Size = new Size(33, 31);
+        YC1.Size = new Size(27, 27);
         YC1.TabIndex = 0;
         YC1.Tag = "";
         YC1.Text = "C";
@@ -1496,20 +1431,20 @@ partial class BearGameProject
         GameConfigPanel.Controls.Add(StartGameButton);
         GameConfigPanel.Controls.Add(GameConfigLabel);
         GameConfigPanel.Dock = DockStyle.Right;
-        GameConfigPanel.Location = new Point(1819, 0);
-        GameConfigPanel.Margin = new Padding(4);
+        GameConfigPanel.Location = new Point(1260, 0);
         GameConfigPanel.Name = "GameConfigPanel";
-        GameConfigPanel.Size = new Size(348, 1032);
+        GameConfigPanel.Size = new Size(279, 826);
         GameConfigPanel.TabIndex = 0;
         // 
         // GameSpeedBar
         // 
         GameSpeedBar.Dock = DockStyle.Top;
-        GameSpeedBar.Location = new Point(0, 677);
+        GameSpeedBar.Location = new Point(0, 562);
+        GameSpeedBar.Margin = new Padding(2);
         GameSpeedBar.Maximum = 50;
         GameSpeedBar.Minimum = 1;
         GameSpeedBar.Name = "GameSpeedBar";
-        GameSpeedBar.Size = new Size(346, 69);
+        GameSpeedBar.Size = new Size(277, 56);
         GameSpeedBar.TabIndex = 13;
         GameSpeedBar.TickFrequency = 2;
         GameSpeedBar.Value = 10;
@@ -1522,10 +1457,11 @@ partial class BearGameProject
         UseSlowModeBox.Dock = DockStyle.Top;
         UseSlowModeBox.FlatStyle = FlatStyle.Flat;
         UseSlowModeBox.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        UseSlowModeBox.Location = new Point(0, 632);
+        UseSlowModeBox.Location = new Point(0, 524);
+        UseSlowModeBox.Margin = new Padding(2);
         UseSlowModeBox.Name = "UseSlowModeBox";
-        UseSlowModeBox.Padding = new Padding(50, 0, 0, 5);
-        UseSlowModeBox.Size = new Size(346, 45);
+        UseSlowModeBox.Padding = new Padding(40, 0, 0, 4);
+        UseSlowModeBox.Size = new Size(277, 38);
         UseSlowModeBox.TabIndex = 12;
         UseSlowModeBox.Text = "UseSlowMode";
         UseSlowModeBox.UseVisualStyleBackColor = true;
@@ -1536,11 +1472,11 @@ partial class BearGameProject
         GameSpeedLabel.AutoSize = true;
         GameSpeedLabel.Dock = DockStyle.Top;
         GameSpeedLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        GameSpeedLabel.Location = new Point(0, 556);
+        GameSpeedLabel.Location = new Point(0, 461);
         GameSpeedLabel.Margin = new Padding(2, 0, 2, 0);
         GameSpeedLabel.Name = "GameSpeedLabel";
-        GameSpeedLabel.Padding = new Padding(25, 38, 0, 6);
-        GameSpeedLabel.Size = new Size(173, 76);
+        GameSpeedLabel.Padding = new Padding(20, 30, 0, 5);
+        GameSpeedLabel.Size = new Size(142, 63);
         GameSpeedLabel.TabIndex = 11;
         GameSpeedLabel.Text = "GameSpeed:";
         // 
@@ -1550,9 +1486,10 @@ partial class BearGameProject
         SettingPlayer4.FlatStyle = FlatStyle.Flat;
         SettingPlayer4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         SettingPlayer4.ForeColor = Color.Green;
-        SettingPlayer4.Location = new Point(0, 504);
+        SettingPlayer4.Location = new Point(0, 419);
+        SettingPlayer4.Margin = new Padding(2);
         SettingPlayer4.Name = "SettingPlayer4";
-        SettingPlayer4.Size = new Size(346, 52);
+        SettingPlayer4.Size = new Size(277, 42);
         SettingPlayer4.TabIndex = 10;
         SettingPlayer4.Text = "SetStrategyForPlayer1";
         SettingPlayer4.UseVisualStyleBackColor = true;
@@ -1564,9 +1501,10 @@ partial class BearGameProject
         SettingPlayer3.FlatStyle = FlatStyle.Flat;
         SettingPlayer3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         SettingPlayer3.ForeColor = Color.Blue;
-        SettingPlayer3.Location = new Point(0, 452);
+        SettingPlayer3.Location = new Point(0, 377);
+        SettingPlayer3.Margin = new Padding(2);
         SettingPlayer3.Name = "SettingPlayer3";
-        SettingPlayer3.Size = new Size(346, 52);
+        SettingPlayer3.Size = new Size(277, 42);
         SettingPlayer3.TabIndex = 9;
         SettingPlayer3.Text = "SetStrategyForPlayer1";
         SettingPlayer3.UseVisualStyleBackColor = true;
@@ -1578,9 +1516,10 @@ partial class BearGameProject
         SettingPlayer2.FlatStyle = FlatStyle.Flat;
         SettingPlayer2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         SettingPlayer2.ForeColor = Color.Red;
-        SettingPlayer2.Location = new Point(0, 400);
+        SettingPlayer2.Location = new Point(0, 335);
+        SettingPlayer2.Margin = new Padding(2);
         SettingPlayer2.Name = "SettingPlayer2";
-        SettingPlayer2.Size = new Size(346, 52);
+        SettingPlayer2.Size = new Size(277, 42);
         SettingPlayer2.TabIndex = 8;
         SettingPlayer2.Text = "SetStrategyForPlayer1";
         SettingPlayer2.UseVisualStyleBackColor = true;
@@ -1592,9 +1531,10 @@ partial class BearGameProject
         SettingPlayer1.FlatStyle = FlatStyle.Flat;
         SettingPlayer1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         SettingPlayer1.ForeColor = Color.Yellow;
-        SettingPlayer1.Location = new Point(0, 348);
+        SettingPlayer1.Location = new Point(0, 293);
+        SettingPlayer1.Margin = new Padding(2);
         SettingPlayer1.Name = "SettingPlayer1";
-        SettingPlayer1.Size = new Size(346, 52);
+        SettingPlayer1.Size = new Size(277, 42);
         SettingPlayer1.TabIndex = 7;
         SettingPlayer1.Text = "SetStrategyForPlayer1";
         SettingPlayer1.UseVisualStyleBackColor = true;
@@ -1605,11 +1545,11 @@ partial class BearGameProject
         GameStrategyLabel.AutoSize = true;
         GameStrategyLabel.Dock = DockStyle.Top;
         GameStrategyLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        GameStrategyLabel.Location = new Point(0, 268);
+        GameStrategyLabel.Location = new Point(0, 227);
         GameStrategyLabel.Margin = new Padding(2, 0, 2, 0);
         GameStrategyLabel.Name = "GameStrategyLabel";
-        GameStrategyLabel.Padding = new Padding(25, 38, 0, 10);
-        GameStrategyLabel.Size = new Size(193, 80);
+        GameStrategyLabel.Padding = new Padding(20, 30, 0, 8);
+        GameStrategyLabel.Size = new Size(160, 66);
         GameStrategyLabel.TabIndex = 6;
         GameStrategyLabel.Text = "GameStrategy:";
         // 
@@ -1618,12 +1558,12 @@ partial class BearGameProject
         NumberOfMatchesSelector.BorderStyle = BorderStyle.FixedSingle;
         NumberOfMatchesSelector.Dock = DockStyle.Top;
         NumberOfMatchesSelector.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        NumberOfMatchesSelector.Location = new Point(0, 229);
+        NumberOfMatchesSelector.Location = new Point(0, 193);
         NumberOfMatchesSelector.Margin = new Padding(2);
         NumberOfMatchesSelector.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
         NumberOfMatchesSelector.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
         NumberOfMatchesSelector.Name = "NumberOfMatchesSelector";
-        NumberOfMatchesSelector.Size = new Size(346, 39);
+        NumberOfMatchesSelector.Size = new Size(277, 34);
         NumberOfMatchesSelector.TabIndex = 5;
         NumberOfMatchesSelector.TextAlign = HorizontalAlignment.Center;
         NumberOfMatchesSelector.ThousandsSeparator = true;
@@ -1634,11 +1574,11 @@ partial class BearGameProject
         NumberOfMatchesLabel.AutoSize = true;
         NumberOfMatchesLabel.Dock = DockStyle.Top;
         NumberOfMatchesLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        NumberOfMatchesLabel.Location = new Point(0, 153);
+        NumberOfMatchesLabel.Location = new Point(0, 130);
         NumberOfMatchesLabel.Margin = new Padding(2, 0, 2, 0);
         NumberOfMatchesLabel.Name = "NumberOfMatchesLabel";
-        NumberOfMatchesLabel.Padding = new Padding(25, 38, 0, 6);
-        NumberOfMatchesLabel.Size = new Size(248, 76);
+        NumberOfMatchesLabel.Padding = new Padding(20, 30, 0, 5);
+        NumberOfMatchesLabel.Size = new Size(202, 63);
         NumberOfMatchesLabel.TabIndex = 4;
         NumberOfMatchesLabel.Text = "NumberOfMatches:";
         // 
@@ -1647,12 +1587,12 @@ partial class BearGameProject
         NumberOfPlayersSelector.BorderStyle = BorderStyle.FixedSingle;
         NumberOfPlayersSelector.Dock = DockStyle.Top;
         NumberOfPlayersSelector.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        NumberOfPlayersSelector.Location = new Point(0, 114);
+        NumberOfPlayersSelector.Location = new Point(0, 96);
         NumberOfPlayersSelector.Margin = new Padding(2);
         NumberOfPlayersSelector.Maximum = new decimal(new int[] { 4, 0, 0, 0 });
         NumberOfPlayersSelector.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
         NumberOfPlayersSelector.Name = "NumberOfPlayersSelector";
-        NumberOfPlayersSelector.Size = new Size(346, 39);
+        NumberOfPlayersSelector.Size = new Size(277, 34);
         NumberOfPlayersSelector.TabIndex = 3;
         NumberOfPlayersSelector.TextAlign = HorizontalAlignment.Center;
         NumberOfPlayersSelector.Value = new decimal(new int[] { 4, 0, 0, 0 });
@@ -1663,11 +1603,11 @@ partial class BearGameProject
         NumberOfPlayersLabel.AutoSize = true;
         NumberOfPlayersLabel.Dock = DockStyle.Top;
         NumberOfPlayersLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        NumberOfPlayersLabel.Location = new Point(0, 76);
+        NumberOfPlayersLabel.Location = new Point(0, 63);
         NumberOfPlayersLabel.Margin = new Padding(2, 0, 2, 0);
         NumberOfPlayersLabel.Name = "NumberOfPlayersLabel";
-        NumberOfPlayersLabel.Padding = new Padding(25, 0, 0, 6);
-        NumberOfPlayersLabel.Size = new Size(232, 38);
+        NumberOfPlayersLabel.Padding = new Padding(20, 0, 0, 5);
+        NumberOfPlayersLabel.Size = new Size(190, 33);
         NumberOfPlayersLabel.TabIndex = 2;
         NumberOfPlayersLabel.Text = "NumberOfPlayers:";
         // 
@@ -1676,10 +1616,10 @@ partial class BearGameProject
         StartGameButton.Dock = DockStyle.Bottom;
         StartGameButton.FlatStyle = FlatStyle.Flat;
         StartGameButton.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        StartGameButton.Location = new Point(0, 950);
+        StartGameButton.Location = new Point(0, 760);
         StartGameButton.Margin = new Padding(2);
         StartGameButton.Name = "StartGameButton";
-        StartGameButton.Size = new Size(346, 80);
+        StartGameButton.Size = new Size(277, 64);
         StartGameButton.TabIndex = 1;
         StartGameButton.Text = "StartGame";
         StartGameButton.UseVisualStyleBackColor = true;
@@ -1691,10 +1631,9 @@ partial class BearGameProject
         GameConfigLabel.Dock = DockStyle.Top;
         GameConfigLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         GameConfigLabel.Location = new Point(0, 0);
-        GameConfigLabel.Margin = new Padding(4, 0, 4, 0);
         GameConfigLabel.Name = "GameConfigLabel";
-        GameConfigLabel.Padding = new Padding(91, 0, 91, 44);
-        GameConfigLabel.Size = new Size(337, 76);
+        GameConfigLabel.Padding = new Padding(73, 0, 73, 35);
+        GameConfigLabel.Size = new Size(274, 63);
         GameConfigLabel.TabIndex = 0;
         GameConfigLabel.Text = "GameConfig";
         GameConfigLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -1711,9 +1650,8 @@ partial class BearGameProject
         StatisticsView.Dock = DockStyle.Fill;
         StatisticsView.Enabled = false;
         StatisticsView.Location = new Point(0, 0);
-        StatisticsView.Margin = new Padding(4);
         StatisticsView.Name = "StatisticsView";
-        StatisticsView.Size = new Size(2167, 1032);
+        StatisticsView.Size = new Size(1539, 826);
         StatisticsView.TabIndex = 2;
         StatisticsView.Visible = false;
         // 
@@ -1722,9 +1660,10 @@ partial class BearGameProject
         LeftStat2.Controls.Add(DotPlotterPanel);
         LeftStat2.Controls.Add(VictoryDiagramPanel);
         LeftStat2.Dock = DockStyle.Left;
-        LeftStat2.Location = new Point(781, 0);
+        LeftStat2.Location = new Point(625, 0);
+        LeftStat2.Margin = new Padding(2);
         LeftStat2.Name = "LeftStat2";
-        LeftStat2.Size = new Size(582, 920);
+        LeftStat2.Size = new Size(466, 736);
         LeftStat2.TabIndex = 5;
         // 
         // DotPlotterPanel
@@ -1732,9 +1671,10 @@ partial class BearGameProject
         DotPlotterPanel.BorderStyle = BorderStyle.FixedSingle;
         DotPlotterPanel.Controls.Add(DotPlotterLabel);
         DotPlotterPanel.Dock = DockStyle.Top;
-        DotPlotterPanel.Location = new Point(0, 483);
+        DotPlotterPanel.Location = new Point(0, 387);
+        DotPlotterPanel.Margin = new Padding(2);
         DotPlotterPanel.Name = "DotPlotterPanel";
-        DotPlotterPanel.Size = new Size(582, 431);
+        DotPlotterPanel.Size = new Size(466, 345);
         DotPlotterPanel.TabIndex = 1;
         // 
         // DotPlotterLabel
@@ -1743,9 +1683,10 @@ partial class BearGameProject
         DotPlotterLabel.Dock = DockStyle.Top;
         DotPlotterLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         DotPlotterLabel.Location = new Point(0, 0);
+        DotPlotterLabel.Margin = new Padding(2, 0, 2, 0);
         DotPlotterLabel.Name = "DotPlotterLabel";
-        DotPlotterLabel.Padding = new Padding(20, 5, 0, 10);
-        DotPlotterLabel.Size = new Size(530, 47);
+        DotPlotterLabel.Padding = new Padding(16, 4, 0, 8);
+        DotPlotterLabel.Size = new Size(443, 40);
         DotPlotterLabel.TabIndex = 0;
         DotPlotterLabel.Text = "RelationBetweenNumOfMatches&NumOfKOs";
         // 
@@ -1755,8 +1696,9 @@ partial class BearGameProject
         VictoryDiagramPanel.Controls.Add(VictoryLabel);
         VictoryDiagramPanel.Dock = DockStyle.Top;
         VictoryDiagramPanel.Location = new Point(0, 0);
+        VictoryDiagramPanel.Margin = new Padding(2);
         VictoryDiagramPanel.Name = "VictoryDiagramPanel";
-        VictoryDiagramPanel.Size = new Size(582, 483);
+        VictoryDiagramPanel.Size = new Size(466, 387);
         VictoryDiagramPanel.TabIndex = 0;
         // 
         // VictoryLabel
@@ -1766,15 +1708,18 @@ partial class BearGameProject
         VictoryLabel.Dock = DockStyle.Top;
         VictoryLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         VictoryLabel.Location = new Point(0, 0);
+        VictoryLabel.Margin = new Padding(2, 0, 2, 0);
         VictoryLabel.Name = "VictoryLabel";
-        VictoryLabel.Padding = new Padding(20, 45, 0, 10);
-        VictoryLabel.Size = new Size(320, 87);
+        VictoryLabel.Padding = new Padding(16, 36, 0, 8);
+        VictoryLabel.Size = new Size(266, 72);
         VictoryLabel.TabIndex = 0;
         VictoryLabel.Text = "VictoriesBetweenPlayers:";
         // 
         // GeneralStatistics
         // 
         GeneralStatistics.BorderStyle = BorderStyle.FixedSingle;
+        GeneralStatistics.Controls.Add(textBox1);
+        GeneralStatistics.Controls.Add(LowerQuantilLabel);
         GeneralStatistics.Controls.Add(MaxOfRoundsBox);
         GeneralStatistics.Controls.Add(MaxOfRoundsLabel);
         GeneralStatistics.Controls.Add(MinOfRoundsBox);
@@ -1792,21 +1737,50 @@ partial class BearGameProject
         GeneralStatistics.Controls.Add(GeneralStatisticsLabel);
         GeneralStatistics.Dock = DockStyle.Right;
         GeneralStatistics.Enabled = false;
-        GeneralStatistics.Location = new Point(1842, 0);
+        GeneralStatistics.Location = new Point(1217, 0);
+        GeneralStatistics.Margin = new Padding(2);
         GeneralStatistics.Name = "GeneralStatistics";
-        GeneralStatistics.Size = new Size(323, 920);
+        GeneralStatistics.Size = new Size(320, 736);
         GeneralStatistics.TabIndex = 4;
+        // 
+        // textBox1
+        // 
+        textBox1.BorderStyle = BorderStyle.None;
+        textBox1.Dock = DockStyle.Top;
+        textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        textBox1.Location = new Point(0, 671);
+        textBox1.Margin = new Padding(2);
+        textBox1.Name = "textBox1";
+        textBox1.PlaceholderText = "max";
+        textBox1.ReadOnly = true;
+        textBox1.Size = new Size(318, 27);
+        textBox1.TabIndex = 16;
+        textBox1.TextAlign = HorizontalAlignment.Center;
+        // 
+        // LowerQuantilLabel
+        // 
+        LowerQuantilLabel.AutoSize = true;
+        LowerQuantilLabel.Dock = DockStyle.Top;
+        LowerQuantilLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        LowerQuantilLabel.Location = new Point(0, 619);
+        LowerQuantilLabel.Margin = new Padding(2, 0, 2, 0);
+        LowerQuantilLabel.Name = "LowerQuantilLabel";
+        LowerQuantilLabel.Padding = new Padding(0, 20, 0, 4);
+        LowerQuantilLabel.Size = new Size(203, 52);
+        LowerQuantilLabel.TabIndex = 15;
+        LowerQuantilLabel.Text = "MaxOfNumOfRounds:";
         // 
         // MaxOfRoundsBox
         // 
         MaxOfRoundsBox.BorderStyle = BorderStyle.None;
         MaxOfRoundsBox.Dock = DockStyle.Top;
         MaxOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MaxOfRoundsBox.Location = new Point(0, 707);
+        MaxOfRoundsBox.Location = new Point(0, 592);
+        MaxOfRoundsBox.Margin = new Padding(2);
         MaxOfRoundsBox.Name = "MaxOfRoundsBox";
         MaxOfRoundsBox.PlaceholderText = "max";
         MaxOfRoundsBox.ReadOnly = true;
-        MaxOfRoundsBox.Size = new Size(321, 32);
+        MaxOfRoundsBox.Size = new Size(318, 27);
         MaxOfRoundsBox.TabIndex = 14;
         MaxOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1815,10 +1789,11 @@ partial class BearGameProject
         MaxOfRoundsLabel.AutoSize = true;
         MaxOfRoundsLabel.Dock = DockStyle.Top;
         MaxOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MaxOfRoundsLabel.Location = new Point(0, 645);
+        MaxOfRoundsLabel.Location = new Point(0, 540);
+        MaxOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         MaxOfRoundsLabel.Name = "MaxOfRoundsLabel";
-        MaxOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
-        MaxOfRoundsLabel.Size = new Size(248, 62);
+        MaxOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
+        MaxOfRoundsLabel.Size = new Size(203, 52);
         MaxOfRoundsLabel.TabIndex = 13;
         MaxOfRoundsLabel.Text = "MaxOfNumOfRounds:";
         // 
@@ -1827,11 +1802,12 @@ partial class BearGameProject
         MinOfRoundsBox.BorderStyle = BorderStyle.None;
         MinOfRoundsBox.Dock = DockStyle.Top;
         MinOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MinOfRoundsBox.Location = new Point(0, 613);
+        MinOfRoundsBox.Location = new Point(0, 513);
+        MinOfRoundsBox.Margin = new Padding(2);
         MinOfRoundsBox.Name = "MinOfRoundsBox";
         MinOfRoundsBox.PlaceholderText = "min";
         MinOfRoundsBox.ReadOnly = true;
-        MinOfRoundsBox.Size = new Size(321, 32);
+        MinOfRoundsBox.Size = new Size(318, 27);
         MinOfRoundsBox.TabIndex = 12;
         MinOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1840,10 +1816,11 @@ partial class BearGameProject
         MinOfRoundsLabel.AutoSize = true;
         MinOfRoundsLabel.Dock = DockStyle.Top;
         MinOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MinOfRoundsLabel.Location = new Point(0, 551);
+        MinOfRoundsLabel.Location = new Point(0, 461);
+        MinOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         MinOfRoundsLabel.Name = "MinOfRoundsLabel";
-        MinOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
-        MinOfRoundsLabel.Size = new Size(245, 62);
+        MinOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
+        MinOfRoundsLabel.Size = new Size(200, 52);
         MinOfRoundsLabel.TabIndex = 11;
         MinOfRoundsLabel.Text = "MinOfNumOfRounds:";
         // 
@@ -1852,11 +1829,12 @@ partial class BearGameProject
         RangeOfRoundsBox.BorderStyle = BorderStyle.None;
         RangeOfRoundsBox.Dock = DockStyle.Top;
         RangeOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        RangeOfRoundsBox.Location = new Point(0, 519);
+        RangeOfRoundsBox.Location = new Point(0, 434);
+        RangeOfRoundsBox.Margin = new Padding(2);
         RangeOfRoundsBox.Name = "RangeOfRoundsBox";
         RangeOfRoundsBox.PlaceholderText = "rage";
         RangeOfRoundsBox.ReadOnly = true;
-        RangeOfRoundsBox.Size = new Size(321, 32);
+        RangeOfRoundsBox.Size = new Size(318, 27);
         RangeOfRoundsBox.TabIndex = 10;
         RangeOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1865,10 +1843,11 @@ partial class BearGameProject
         RangeOfRoundsLabel.AutoSize = true;
         RangeOfRoundsLabel.Dock = DockStyle.Top;
         RangeOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        RangeOfRoundsLabel.Location = new Point(0, 457);
+        RangeOfRoundsLabel.Location = new Point(0, 382);
+        RangeOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         RangeOfRoundsLabel.Name = "RangeOfRoundsLabel";
-        RangeOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
-        RangeOfRoundsLabel.Size = new Size(270, 62);
+        RangeOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
+        RangeOfRoundsLabel.Size = new Size(221, 52);
         RangeOfRoundsLabel.TabIndex = 9;
         RangeOfRoundsLabel.Text = "RangeOfNumOfRounds:";
         // 
@@ -1877,11 +1856,12 @@ partial class BearGameProject
         MedianOfRoundsBox.BorderStyle = BorderStyle.None;
         MedianOfRoundsBox.Dock = DockStyle.Top;
         MedianOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MedianOfRoundsBox.Location = new Point(0, 425);
+        MedianOfRoundsBox.Location = new Point(0, 355);
+        MedianOfRoundsBox.Margin = new Padding(2);
         MedianOfRoundsBox.Name = "MedianOfRoundsBox";
         MedianOfRoundsBox.PlaceholderText = "median";
         MedianOfRoundsBox.ReadOnly = true;
-        MedianOfRoundsBox.Size = new Size(321, 32);
+        MedianOfRoundsBox.Size = new Size(318, 27);
         MedianOfRoundsBox.TabIndex = 8;
         MedianOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1890,10 +1870,11 @@ partial class BearGameProject
         MedianOfRoundsLabel.AutoSize = true;
         MedianOfRoundsLabel.Dock = DockStyle.Top;
         MedianOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MedianOfRoundsLabel.Location = new Point(0, 363);
+        MedianOfRoundsLabel.Location = new Point(0, 303);
+        MedianOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         MedianOfRoundsLabel.Name = "MedianOfRoundsLabel";
-        MedianOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
-        MedianOfRoundsLabel.Size = new Size(284, 62);
+        MedianOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
+        MedianOfRoundsLabel.Size = new Size(232, 52);
         MedianOfRoundsLabel.TabIndex = 7;
         MedianOfRoundsLabel.Text = "MedianOfNumOfRounds:";
         // 
@@ -1902,11 +1883,12 @@ partial class BearGameProject
         StandardDeviationBox.BorderStyle = BorderStyle.None;
         StandardDeviationBox.Dock = DockStyle.Top;
         StandardDeviationBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        StandardDeviationBox.Location = new Point(0, 331);
+        StandardDeviationBox.Location = new Point(0, 276);
+        StandardDeviationBox.Margin = new Padding(2);
         StandardDeviationBox.Name = "StandardDeviationBox";
         StandardDeviationBox.PlaceholderText = "standardDeviation";
         StandardDeviationBox.ReadOnly = true;
-        StandardDeviationBox.Size = new Size(321, 32);
+        StandardDeviationBox.Size = new Size(318, 27);
         StandardDeviationBox.TabIndex = 6;
         StandardDeviationBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1915,10 +1897,11 @@ partial class BearGameProject
         StandardDeviationLabel.AutoSize = true;
         StandardDeviationLabel.Dock = DockStyle.Top;
         StandardDeviationLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        StandardDeviationLabel.Location = new Point(0, 269);
+        StandardDeviationLabel.Location = new Point(0, 224);
+        StandardDeviationLabel.Margin = new Padding(2, 0, 2, 0);
         StandardDeviationLabel.Name = "StandardDeviationLabel";
-        StandardDeviationLabel.Padding = new Padding(0, 25, 0, 5);
-        StandardDeviationLabel.Size = new Size(320, 62);
+        StandardDeviationLabel.Padding = new Padding(0, 20, 0, 4);
+        StandardDeviationLabel.Size = new Size(265, 52);
         StandardDeviationLabel.TabIndex = 5;
         StandardDeviationLabel.Text = "StandardDeviationOfRounds:";
         // 
@@ -1927,11 +1910,12 @@ partial class BearGameProject
         VarianceOfRoundsBox.BorderStyle = BorderStyle.None;
         VarianceOfRoundsBox.Dock = DockStyle.Top;
         VarianceOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        VarianceOfRoundsBox.Location = new Point(0, 237);
+        VarianceOfRoundsBox.Location = new Point(0, 197);
+        VarianceOfRoundsBox.Margin = new Padding(2);
         VarianceOfRoundsBox.Name = "VarianceOfRoundsBox";
         VarianceOfRoundsBox.PlaceholderText = "variance";
         VarianceOfRoundsBox.ReadOnly = true;
-        VarianceOfRoundsBox.Size = new Size(321, 32);
+        VarianceOfRoundsBox.Size = new Size(318, 27);
         VarianceOfRoundsBox.TabIndex = 4;
         VarianceOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1940,10 +1924,11 @@ partial class BearGameProject
         VarianceOfRoundsLabel.AutoSize = true;
         VarianceOfRoundsLabel.Dock = DockStyle.Top;
         VarianceOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        VarianceOfRoundsLabel.Location = new Point(0, 175);
+        VarianceOfRoundsLabel.Location = new Point(0, 145);
+        VarianceOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         VarianceOfRoundsLabel.Name = "VarianceOfRoundsLabel";
-        VarianceOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
-        VarianceOfRoundsLabel.Size = new Size(292, 62);
+        VarianceOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
+        VarianceOfRoundsLabel.Size = new Size(239, 52);
         VarianceOfRoundsLabel.TabIndex = 3;
         VarianceOfRoundsLabel.Text = "VarianceOfNumOfRounds:";
         // 
@@ -1952,11 +1937,12 @@ partial class BearGameProject
         AvarageNumOfRoundsBox.BorderStyle = BorderStyle.None;
         AvarageNumOfRoundsBox.Dock = DockStyle.Top;
         AvarageNumOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        AvarageNumOfRoundsBox.Location = new Point(0, 143);
+        AvarageNumOfRoundsBox.Location = new Point(0, 118);
+        AvarageNumOfRoundsBox.Margin = new Padding(2);
         AvarageNumOfRoundsBox.Name = "AvarageNumOfRoundsBox";
         AvarageNumOfRoundsBox.PlaceholderText = "avarage";
         AvarageNumOfRoundsBox.ReadOnly = true;
-        AvarageNumOfRoundsBox.Size = new Size(321, 32);
+        AvarageNumOfRoundsBox.Size = new Size(318, 27);
         AvarageNumOfRoundsBox.TabIndex = 2;
         AvarageNumOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1965,10 +1951,11 @@ partial class BearGameProject
         AvarageNumOfRoundsLabel.AutoSize = true;
         AvarageNumOfRoundsLabel.Dock = DockStyle.Top;
         AvarageNumOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        AvarageNumOfRoundsLabel.Location = new Point(0, 81);
+        AvarageNumOfRoundsLabel.Location = new Point(0, 66);
+        AvarageNumOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         AvarageNumOfRoundsLabel.Name = "AvarageNumOfRoundsLabel";
-        AvarageNumOfRoundsLabel.Padding = new Padding(0, 25, 0, 5);
-        AvarageNumOfRoundsLabel.Size = new Size(263, 62);
+        AvarageNumOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
+        AvarageNumOfRoundsLabel.Size = new Size(217, 52);
         AvarageNumOfRoundsLabel.TabIndex = 1;
         AvarageNumOfRoundsLabel.Text = "AvarageNumOfRounds:";
         // 
@@ -1978,9 +1965,10 @@ partial class BearGameProject
         GeneralStatisticsLabel.Dock = DockStyle.Top;
         GeneralStatisticsLabel.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 238);
         GeneralStatisticsLabel.Location = new Point(0, 0);
+        GeneralStatisticsLabel.Margin = new Padding(2, 0, 2, 0);
         GeneralStatisticsLabel.Name = "GeneralStatisticsLabel";
-        GeneralStatisticsLabel.Padding = new Padding(25, 45, 0, 0);
-        GeneralStatisticsLabel.Size = new Size(239, 81);
+        GeneralStatisticsLabel.Padding = new Padding(20, 36, 0, 0);
+        GeneralStatisticsLabel.Size = new Size(206, 66);
         GeneralStatisticsLabel.TabIndex = 0;
         GeneralStatisticsLabel.Text = "GeneralStatistics";
         // 
@@ -1990,8 +1978,9 @@ partial class BearGameProject
         LeftStatPanel.Controls.Add(KOsDiagram);
         LeftStatPanel.Dock = DockStyle.Left;
         LeftStatPanel.Location = new Point(0, 0);
+        LeftStatPanel.Margin = new Padding(2);
         LeftStatPanel.Name = "LeftStatPanel";
-        LeftStatPanel.Size = new Size(781, 920);
+        LeftStatPanel.Size = new Size(625, 736);
         LeftStatPanel.TabIndex = 3;
         // 
         // KOdDiagram
@@ -1999,9 +1988,10 @@ partial class BearGameProject
         KOdDiagram.BorderStyle = BorderStyle.FixedSingle;
         KOdDiagram.Controls.Add(KOdDiagramLabel);
         KOdDiagram.Dock = DockStyle.Top;
-        KOdDiagram.Location = new Point(0, 483);
+        KOdDiagram.Location = new Point(0, 387);
+        KOdDiagram.Margin = new Padding(2);
         KOdDiagram.Name = "KOdDiagram";
-        KOdDiagram.Size = new Size(781, 431);
+        KOdDiagram.Size = new Size(625, 345);
         KOdDiagram.TabIndex = 1;
         // 
         // KOdDiagramLabel
@@ -2011,9 +2001,10 @@ partial class BearGameProject
         KOdDiagramLabel.Dock = DockStyle.Top;
         KOdDiagramLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         KOdDiagramLabel.Location = new Point(0, 0);
+        KOdDiagramLabel.Margin = new Padding(2, 0, 2, 0);
         KOdDiagramLabel.Name = "KOdDiagramLabel";
-        KOdDiagramLabel.Padding = new Padding(100, 5, 100, 10);
-        KOdDiagramLabel.Size = new Size(709, 47);
+        KOdDiagramLabel.Padding = new Padding(80, 4, 80, 8);
+        KOdDiagramLabel.Size = new Size(582, 40);
         KOdDiagramLabel.TabIndex = 0;
         KOdDiagramLabel.Text = "NumberOfTimesPlayerHasBeenKnockedout";
         // 
@@ -2023,8 +2014,9 @@ partial class BearGameProject
         KOsDiagram.Controls.Add(KOsDiagramLabel);
         KOsDiagram.Dock = DockStyle.Top;
         KOsDiagram.Location = new Point(0, 0);
+        KOsDiagram.Margin = new Padding(2);
         KOsDiagram.Name = "KOsDiagram";
-        KOsDiagram.Size = new Size(781, 483);
+        KOsDiagram.Size = new Size(625, 387);
         KOsDiagram.TabIndex = 0;
         // 
         // KOsDiagramLabel
@@ -2034,9 +2026,10 @@ partial class BearGameProject
         KOsDiagramLabel.Dock = DockStyle.Top;
         KOsDiagramLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
         KOsDiagramLabel.Location = new Point(0, 0);
+        KOsDiagramLabel.Margin = new Padding(2, 0, 2, 0);
         KOsDiagramLabel.Name = "KOsDiagramLabel";
-        KOsDiagramLabel.Padding = new Padding(100, 50, 100, 10);
-        KOsDiagramLabel.Size = new Size(562, 92);
+        KOsDiagramLabel.Padding = new Padding(80, 40, 80, 8);
+        KOsDiagramLabel.Size = new Size(458, 76);
         KOsDiagramLabel.TabIndex = 0;
         KOsDiagramLabel.Text = "NumberOfKnockedoutPlayers:";
         // 
@@ -2045,9 +2038,10 @@ partial class BearGameProject
         LoadStatisticsButton.Dock = DockStyle.Bottom;
         LoadStatisticsButton.FlatStyle = FlatStyle.Flat;
         LoadStatisticsButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        LoadStatisticsButton.Location = new Point(0, 920);
+        LoadStatisticsButton.Location = new Point(0, 736);
+        LoadStatisticsButton.Margin = new Padding(2);
         LoadStatisticsButton.Name = "LoadStatisticsButton";
-        LoadStatisticsButton.Size = new Size(2165, 55);
+        LoadStatisticsButton.Size = new Size(1537, 44);
         LoadStatisticsButton.TabIndex = 1;
         LoadStatisticsButton.Text = "LoadStatistics";
         LoadStatisticsButton.UseVisualStyleBackColor = true;
@@ -2059,28 +2053,28 @@ partial class BearGameProject
         SaveStatisticsButton.Enabled = false;
         SaveStatisticsButton.FlatStyle = FlatStyle.Flat;
         SaveStatisticsButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        SaveStatisticsButton.Location = new Point(0, 975);
+        SaveStatisticsButton.Location = new Point(0, 780);
+        SaveStatisticsButton.Margin = new Padding(2);
         SaveStatisticsButton.Name = "SaveStatisticsButton";
-        SaveStatisticsButton.Size = new Size(2165, 55);
+        SaveStatisticsButton.Size = new Size(1537, 44);
         SaveStatisticsButton.TabIndex = 0;
         SaveStatisticsButton.Text = "SaveStatistics";
         SaveStatisticsButton.UseVisualStyleBackColor = true;
         SaveStatisticsButton.Visible = false;
         SaveStatisticsButton.Click += SaveStatisticsButton_Click;
         // 
-        // BearGameProject
+        // BeaverGameProject
         // 
-        AutoScaleDimensions = new SizeF(10F, 25F);
+        AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(2167, 1032);
+        ClientSize = new Size(1539, 826);
         Controls.Add(ViewControlPanel);
         Controls.Add(StatisticsView);
         Controls.Add(GameView);
         DoubleBuffered = true;
         FormBorderStyle = FormBorderStyle.FixedToolWindow;
-        Margin = new Padding(4);
-        Name = "BearGameProject";
-        Text = "BearGameProject";
+        Name = "BeaverGameProject";
+        Text = "BeaverGameProject";
         WindowState = FormWindowState.Maximized;
         ViewControlPanel.ResumeLayout(false);
         GameView.ResumeLayout(false);
@@ -2244,4 +2238,6 @@ partial class BearGameProject
     private Label MaxOfRoundsLabel;
     private Panel DotPlotterPanel;
     private Label DotPlotterLabel;
+    private TextBox textBox1;
+    private Label LowerQuantilLabel;
 }
