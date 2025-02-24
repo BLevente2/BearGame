@@ -132,6 +132,8 @@ partial class BearGameProject
         GameConfigLabel = new Label();
         StatisticsView = new Panel();
         LeftStat2 = new Panel();
+        DotPlotterPanel = new Panel();
+        DotPlotterLabel = new Label();
         VictoryDiagramPanel = new Panel();
         VictoryLabel = new Label();
         GeneralStatistics = new Panel();
@@ -168,6 +170,7 @@ partial class BearGameProject
         ((System.ComponentModel.ISupportInitialize)NumberOfPlayersSelector).BeginInit();
         StatisticsView.SuspendLayout();
         LeftStat2.SuspendLayout();
+        DotPlotterPanel.SuspendLayout();
         VictoryDiagramPanel.SuspendLayout();
         GeneralStatistics.SuspendLayout();
         LeftStatPanel.SuspendLayout();
@@ -1716,12 +1719,35 @@ partial class BearGameProject
         // 
         // LeftStat2
         // 
+        LeftStat2.Controls.Add(DotPlotterPanel);
         LeftStat2.Controls.Add(VictoryDiagramPanel);
         LeftStat2.Dock = DockStyle.Left;
         LeftStat2.Location = new Point(781, 0);
         LeftStat2.Name = "LeftStat2";
         LeftStat2.Size = new Size(582, 920);
         LeftStat2.TabIndex = 5;
+        // 
+        // DotPlotterPanel
+        // 
+        DotPlotterPanel.BorderStyle = BorderStyle.FixedSingle;
+        DotPlotterPanel.Controls.Add(DotPlotterLabel);
+        DotPlotterPanel.Dock = DockStyle.Top;
+        DotPlotterPanel.Location = new Point(0, 483);
+        DotPlotterPanel.Name = "DotPlotterPanel";
+        DotPlotterPanel.Size = new Size(582, 431);
+        DotPlotterPanel.TabIndex = 1;
+        // 
+        // DotPlotterLabel
+        // 
+        DotPlotterLabel.AutoSize = true;
+        DotPlotterLabel.Dock = DockStyle.Top;
+        DotPlotterLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
+        DotPlotterLabel.Location = new Point(0, 0);
+        DotPlotterLabel.Name = "DotPlotterLabel";
+        DotPlotterLabel.Padding = new Padding(20, 5, 0, 10);
+        DotPlotterLabel.Size = new Size(530, 47);
+        DotPlotterLabel.TabIndex = 0;
+        DotPlotterLabel.Text = "RelationBetweenNumOfMatches&NumOfKOs";
         // 
         // VictoryDiagramPanel
         // 
@@ -2071,6 +2097,8 @@ partial class BearGameProject
         ((System.ComponentModel.ISupportInitialize)NumberOfPlayersSelector).EndInit();
         StatisticsView.ResumeLayout(false);
         LeftStat2.ResumeLayout(false);
+        DotPlotterPanel.ResumeLayout(false);
+        DotPlotterPanel.PerformLayout();
         VictoryDiagramPanel.ResumeLayout(false);
         VictoryDiagramPanel.PerformLayout();
         GeneralStatistics.ResumeLayout(false);
@@ -2214,4 +2242,6 @@ partial class BearGameProject
     private Label MinOfRoundsLabel;
     private TextBox MaxOfRoundsBox;
     private Label MaxOfRoundsLabel;
+    private Panel DotPlotterPanel;
+    private Label DotPlotterLabel;
 }

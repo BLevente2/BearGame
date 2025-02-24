@@ -1,5 +1,4 @@
-using MathNet.Numerics.Statistics;
-using System.Windows.Forms;
+using ScottPlot.WinForms;
 
 namespace BearGame;
 
@@ -9,6 +8,7 @@ public partial class BearGameProject : Form
     private ScottPlot.WinForms.FormsPlot _koDiagram;
     private ScottPlot.WinForms.FormsPlot _beenKOdDiagram;
     private ScottPlot.WinForms.FormsPlot _winsDiagram;
+    private ScottPlot.WinForms.FormsPlot _dotPlotter;
 
     #region Constructor
 
@@ -58,6 +58,11 @@ public partial class BearGameProject : Form
         KOdDiagram.Controls.Add(_beenKOdDiagram);
         _winsDiagram = GetNewPieDiagram();
         VictoryDiagramPanel.Controls.Add(_winsDiagram);
+        _dotPlotter = new ScottPlot.WinForms.FormsPlot();
+        DotPlotterPanel.Controls.Add(_dotPlotter);
+        _dotPlotter.Dock = DockStyle.Fill;
+        _dotPlotter.Plot.DataBackground.Color = ScottPlot.Color.FromARGB(SystemColors.Control.ToArgb());
+        _dotPlotter.BringToFront();
 
 
         _dataCollection = null;
@@ -772,6 +777,26 @@ public partial class BearGameProject : Form
             MaxOfRoundsBox.Text = Math.Round(maxOfRounds, 4).ToString();
             double rangeOfRounds = maxOfRounds - minOfRounds;
             RangeOfRoundsBox.Text = Math.Round(rangeOfRounds, 4).ToString();
+
+            double[] values1 = _dataCollection.GetNumOfRounds();
+            double[] values2 = _dataCollection.GetNumOfKOs(values1);
+
+            _dotPlotter.Plot.Clear();
+            var scatter = _dotPlotter.Plot.Add.Scatter(values1, values2);
+            
+            if (scatter != null)
+            {
+                scatter.Color = ScottPlot.Colors.Transparent;
+                scatter.MarkerShape = ScottPlot.MarkerShape.FilledCircle;
+                scatter.MarkerSize = 8;
+                scatter.MarkerColor = ScottPlot.Color.FromARGB(SystemColors.WindowText.ToArgb());
+            }
+
+            _dotPlotter.Plot.ShowGrid();
+            _dotPlotter.Plot.Grid.MajorLineColor = ScottPlot.Color.FromARGB(SystemColors.Highlight.ToArgb());
+            _dotPlotter.Plot.Grid.MinorLineColor = ScottPlot.Colors.Gray;
+            _dotPlotter.Plot.Axes.Color(ScottPlot.Colors.Red);         _dotPlotter.Plot.Axes.AutoScale();
+            _dotPlotter.Refresh();
         }
     }
 

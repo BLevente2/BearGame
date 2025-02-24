@@ -102,5 +102,22 @@ class DataCollection
         return numOfRounds;
     }
 
+    public double[] GetNumOfKOs(double[] numOfRounds)
+    {
+        double[] numOfKOs = new double[numOfRounds.Length];
+
+        for (int i = 0; i < numOfRounds.Length; i++)
+        {
+            if (numOfRounds[i] == GameStatistics.MatchStatistics[i].TotalNumberOfRounds)
+            {
+                numOfKOs[i] = GameStatistics.MatchStatistics[i].NumberOfTimesKnockedOutAPlayer.Sum();
+            }
+            else
+            {
+                return numOfKOs;
+            }
+        }
+        return numOfKOs;
+    }
 
 }
