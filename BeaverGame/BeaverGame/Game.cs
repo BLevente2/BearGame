@@ -159,6 +159,7 @@ public class Game
                 else if (_playersFinished.Count == 1)
                 {
                     _victoriesDiagram[currentPlayer.PlayerIndex].Value++;
+                    _victoriesDiagram[currentPlayer.PlayerIndex].Label = _victoriesDiagram[currentPlayer.PlayerIndex].Value.ToString();
                     _victoriesPlot.Plot.Axes.AutoScale();
                     _victoriesPlot.Refresh();
                 }

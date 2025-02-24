@@ -137,8 +137,8 @@ partial class BeaverGameProject
         VictoryDiagramPanel = new Panel();
         VictoryLabel = new Label();
         GeneralStatistics = new Panel();
-        textBox1 = new TextBox();
-        LowerQuantilLabel = new Label();
+        CovarianceOfDataBox = new TextBox();
+        CovarianceOfValuesLabel = new Label();
         MaxOfRoundsBox = new TextBox();
         MaxOfRoundsLabel = new Label();
         MinOfRoundsBox = new TextBox();
@@ -223,7 +223,7 @@ partial class BeaverGameProject
         GameView.Dock = DockStyle.Fill;
         GameView.Location = new Point(0, 0);
         GameView.Name = "GameView";
-        GameView.Size = new Size(1539, 826);
+        GameView.Size = new Size(1539, 878);
         GameView.TabIndex = 1;
         // 
         // GameTablePanel
@@ -306,7 +306,7 @@ partial class BeaverGameProject
         GameTablePanel.Dock = DockStyle.Fill;
         GameTablePanel.Location = new Point(0, 0);
         GameTablePanel.Name = "GameTablePanel";
-        GameTablePanel.Size = new Size(1260, 826);
+        GameTablePanel.Size = new Size(1260, 878);
         GameTablePanel.TabIndex = 1;
         // 
         // GameDataPanel
@@ -321,7 +321,7 @@ partial class BeaverGameProject
         GameDataPanel.Location = new Point(969, 0);
         GameDataPanel.Margin = new Padding(2);
         GameDataPanel.Name = "GameDataPanel";
-        GameDataPanel.Size = new Size(289, 752);
+        GameDataPanel.Size = new Size(289, 804);
         GameDataPanel.TabIndex = 75;
         // 
         // PlayerFinishedCounter
@@ -407,7 +407,7 @@ partial class BeaverGameProject
         ProgressPanel.Controls.Add(SimulationProgress);
         ProgressPanel.Controls.Add(ProgressLabel);
         ProgressPanel.Dock = DockStyle.Bottom;
-        ProgressPanel.Location = new Point(0, 752);
+        ProgressPanel.Location = new Point(0, 804);
         ProgressPanel.Margin = new Padding(2);
         ProgressPanel.Name = "ProgressPanel";
         ProgressPanel.Size = new Size(1258, 72);
@@ -1433,7 +1433,7 @@ partial class BeaverGameProject
         GameConfigPanel.Dock = DockStyle.Right;
         GameConfigPanel.Location = new Point(1260, 0);
         GameConfigPanel.Name = "GameConfigPanel";
-        GameConfigPanel.Size = new Size(279, 826);
+        GameConfigPanel.Size = new Size(279, 878);
         GameConfigPanel.TabIndex = 0;
         // 
         // GameSpeedBar
@@ -1491,7 +1491,7 @@ partial class BeaverGameProject
         SettingPlayer4.Name = "SettingPlayer4";
         SettingPlayer4.Size = new Size(277, 42);
         SettingPlayer4.TabIndex = 10;
-        SettingPlayer4.Text = "SetStrategyForPlayer1";
+        SettingPlayer4.Text = "SetStrategyForPlayer4";
         SettingPlayer4.UseVisualStyleBackColor = true;
         SettingPlayer4.Click += SettingPlayer4_Click;
         // 
@@ -1506,7 +1506,7 @@ partial class BeaverGameProject
         SettingPlayer3.Name = "SettingPlayer3";
         SettingPlayer3.Size = new Size(277, 42);
         SettingPlayer3.TabIndex = 9;
-        SettingPlayer3.Text = "SetStrategyForPlayer1";
+        SettingPlayer3.Text = "SetStrategyForPlayer3";
         SettingPlayer3.UseVisualStyleBackColor = true;
         SettingPlayer3.Click += SettingPlayer3_Click;
         // 
@@ -1521,7 +1521,7 @@ partial class BeaverGameProject
         SettingPlayer2.Name = "SettingPlayer2";
         SettingPlayer2.Size = new Size(277, 42);
         SettingPlayer2.TabIndex = 8;
-        SettingPlayer2.Text = "SetStrategyForPlayer1";
+        SettingPlayer2.Text = "SetStrategyForPlayer2";
         SettingPlayer2.UseVisualStyleBackColor = true;
         SettingPlayer2.Click += SettingPlayer2_Click;
         // 
@@ -1616,7 +1616,7 @@ partial class BeaverGameProject
         StartGameButton.Dock = DockStyle.Bottom;
         StartGameButton.FlatStyle = FlatStyle.Flat;
         StartGameButton.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        StartGameButton.Location = new Point(0, 760);
+        StartGameButton.Location = new Point(0, 812);
         StartGameButton.Margin = new Padding(2);
         StartGameButton.Name = "StartGameButton";
         StartGameButton.Size = new Size(277, 64);
@@ -1649,9 +1649,9 @@ partial class BeaverGameProject
         StatisticsView.Controls.Add(SaveStatisticsButton);
         StatisticsView.Dock = DockStyle.Fill;
         StatisticsView.Enabled = false;
-        StatisticsView.Location = new Point(0, 0);
+        StatisticsView.Location = new Point(0, 33);
         StatisticsView.Name = "StatisticsView";
-        StatisticsView.Size = new Size(1539, 826);
+        StatisticsView.Size = new Size(1539, 845);
         StatisticsView.TabIndex = 2;
         StatisticsView.Visible = false;
         // 
@@ -1660,10 +1660,10 @@ partial class BeaverGameProject
         LeftStat2.Controls.Add(DotPlotterPanel);
         LeftStat2.Controls.Add(VictoryDiagramPanel);
         LeftStat2.Dock = DockStyle.Left;
-        LeftStat2.Location = new Point(625, 0);
+        LeftStat2.Location = new Point(593, 0);
         LeftStat2.Margin = new Padding(2);
         LeftStat2.Name = "LeftStat2";
-        LeftStat2.Size = new Size(466, 736);
+        LeftStat2.Size = new Size(567, 755);
         LeftStat2.TabIndex = 5;
         // 
         // DotPlotterPanel
@@ -1671,10 +1671,10 @@ partial class BeaverGameProject
         DotPlotterPanel.BorderStyle = BorderStyle.FixedSingle;
         DotPlotterPanel.Controls.Add(DotPlotterLabel);
         DotPlotterPanel.Dock = DockStyle.Top;
-        DotPlotterPanel.Location = new Point(0, 387);
+        DotPlotterPanel.Location = new Point(0, 419);
         DotPlotterPanel.Margin = new Padding(2);
         DotPlotterPanel.Name = "DotPlotterPanel";
-        DotPlotterPanel.Size = new Size(466, 345);
+        DotPlotterPanel.Size = new Size(567, 365);
         DotPlotterPanel.TabIndex = 1;
         // 
         // DotPlotterLabel
@@ -1685,10 +1685,10 @@ partial class BeaverGameProject
         DotPlotterLabel.Location = new Point(0, 0);
         DotPlotterLabel.Margin = new Padding(2, 0, 2, 0);
         DotPlotterLabel.Name = "DotPlotterLabel";
-        DotPlotterLabel.Padding = new Padding(16, 4, 0, 8);
-        DotPlotterLabel.Size = new Size(443, 40);
+        DotPlotterLabel.Padding = new Padding(80, 5, 0, 8);
+        DotPlotterLabel.Size = new Size(497, 41);
         DotPlotterLabel.TabIndex = 0;
-        DotPlotterLabel.Text = "RelationBetweenNumOfMatches&NumOfKOs";
+        DotPlotterLabel.Text = "RelationBetweenNumOfRounds&NumOfKOs";
         // 
         // VictoryDiagramPanel
         // 
@@ -1698,7 +1698,7 @@ partial class BeaverGameProject
         VictoryDiagramPanel.Location = new Point(0, 0);
         VictoryDiagramPanel.Margin = new Padding(2);
         VictoryDiagramPanel.Name = "VictoryDiagramPanel";
-        VictoryDiagramPanel.Size = new Size(466, 387);
+        VictoryDiagramPanel.Size = new Size(567, 419);
         VictoryDiagramPanel.TabIndex = 0;
         // 
         // VictoryLabel
@@ -1710,16 +1710,16 @@ partial class BeaverGameProject
         VictoryLabel.Location = new Point(0, 0);
         VictoryLabel.Margin = new Padding(2, 0, 2, 0);
         VictoryLabel.Name = "VictoryLabel";
-        VictoryLabel.Padding = new Padding(16, 36, 0, 8);
-        VictoryLabel.Size = new Size(266, 72);
+        VictoryLabel.Padding = new Padding(80, 5, 0, 8);
+        VictoryLabel.Size = new Size(330, 41);
         VictoryLabel.TabIndex = 0;
         VictoryLabel.Text = "VictoriesBetweenPlayers:";
         // 
         // GeneralStatistics
         // 
         GeneralStatistics.BorderStyle = BorderStyle.FixedSingle;
-        GeneralStatistics.Controls.Add(textBox1);
-        GeneralStatistics.Controls.Add(LowerQuantilLabel);
+        GeneralStatistics.Controls.Add(CovarianceOfDataBox);
+        GeneralStatistics.Controls.Add(CovarianceOfValuesLabel);
         GeneralStatistics.Controls.Add(MaxOfRoundsBox);
         GeneralStatistics.Controls.Add(MaxOfRoundsLabel);
         GeneralStatistics.Controls.Add(MinOfRoundsBox);
@@ -1737,50 +1737,50 @@ partial class BeaverGameProject
         GeneralStatistics.Controls.Add(GeneralStatisticsLabel);
         GeneralStatistics.Dock = DockStyle.Right;
         GeneralStatistics.Enabled = false;
-        GeneralStatistics.Location = new Point(1217, 0);
+        GeneralStatistics.Location = new Point(1178, 0);
         GeneralStatistics.Margin = new Padding(2);
         GeneralStatistics.Name = "GeneralStatistics";
-        GeneralStatistics.Size = new Size(320, 736);
+        GeneralStatistics.Size = new Size(359, 755);
         GeneralStatistics.TabIndex = 4;
         // 
-        // textBox1
+        // CovarianceOfDataBox
         // 
-        textBox1.BorderStyle = BorderStyle.None;
-        textBox1.Dock = DockStyle.Top;
-        textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        textBox1.Location = new Point(0, 671);
-        textBox1.Margin = new Padding(2);
-        textBox1.Name = "textBox1";
-        textBox1.PlaceholderText = "max";
-        textBox1.ReadOnly = true;
-        textBox1.Size = new Size(318, 27);
-        textBox1.TabIndex = 16;
-        textBox1.TextAlign = HorizontalAlignment.Center;
+        CovarianceOfDataBox.BorderStyle = BorderStyle.None;
+        CovarianceOfDataBox.Dock = DockStyle.Top;
+        CovarianceOfDataBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        CovarianceOfDataBox.Location = new Point(0, 711);
+        CovarianceOfDataBox.Margin = new Padding(2);
+        CovarianceOfDataBox.Name = "CovarianceOfDataBox";
+        CovarianceOfDataBox.PlaceholderText = "covariance";
+        CovarianceOfDataBox.ReadOnly = true;
+        CovarianceOfDataBox.Size = new Size(357, 27);
+        CovarianceOfDataBox.TabIndex = 16;
+        CovarianceOfDataBox.TextAlign = HorizontalAlignment.Center;
         // 
-        // LowerQuantilLabel
+        // CovarianceOfValuesLabel
         // 
-        LowerQuantilLabel.AutoSize = true;
-        LowerQuantilLabel.Dock = DockStyle.Top;
-        LowerQuantilLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        LowerQuantilLabel.Location = new Point(0, 619);
-        LowerQuantilLabel.Margin = new Padding(2, 0, 2, 0);
-        LowerQuantilLabel.Name = "LowerQuantilLabel";
-        LowerQuantilLabel.Padding = new Padding(0, 20, 0, 4);
-        LowerQuantilLabel.Size = new Size(203, 52);
-        LowerQuantilLabel.TabIndex = 15;
-        LowerQuantilLabel.Text = "MaxOfNumOfRounds:";
+        CovarianceOfValuesLabel.AutoSize = true;
+        CovarianceOfValuesLabel.Dock = DockStyle.Top;
+        CovarianceOfValuesLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        CovarianceOfValuesLabel.Location = new Point(0, 654);
+        CovarianceOfValuesLabel.Margin = new Padding(2, 0, 2, 0);
+        CovarianceOfValuesLabel.Name = "CovarianceOfValuesLabel";
+        CovarianceOfValuesLabel.Padding = new Padding(20, 25, 0, 4);
+        CovarianceOfValuesLabel.Size = new Size(316, 57);
+        CovarianceOfValuesLabel.TabIndex = 15;
+        CovarianceOfValuesLabel.Text = "CovarianceOfNumOfRounds&KOs:";
         // 
         // MaxOfRoundsBox
         // 
         MaxOfRoundsBox.BorderStyle = BorderStyle.None;
         MaxOfRoundsBox.Dock = DockStyle.Top;
         MaxOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MaxOfRoundsBox.Location = new Point(0, 592);
+        MaxOfRoundsBox.Location = new Point(0, 627);
         MaxOfRoundsBox.Margin = new Padding(2);
         MaxOfRoundsBox.Name = "MaxOfRoundsBox";
         MaxOfRoundsBox.PlaceholderText = "max";
         MaxOfRoundsBox.ReadOnly = true;
-        MaxOfRoundsBox.Size = new Size(318, 27);
+        MaxOfRoundsBox.Size = new Size(357, 27);
         MaxOfRoundsBox.TabIndex = 14;
         MaxOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1789,11 +1789,11 @@ partial class BeaverGameProject
         MaxOfRoundsLabel.AutoSize = true;
         MaxOfRoundsLabel.Dock = DockStyle.Top;
         MaxOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MaxOfRoundsLabel.Location = new Point(0, 540);
+        MaxOfRoundsLabel.Location = new Point(0, 570);
         MaxOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         MaxOfRoundsLabel.Name = "MaxOfRoundsLabel";
-        MaxOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
-        MaxOfRoundsLabel.Size = new Size(203, 52);
+        MaxOfRoundsLabel.Padding = new Padding(20, 25, 0, 4);
+        MaxOfRoundsLabel.Size = new Size(223, 57);
         MaxOfRoundsLabel.TabIndex = 13;
         MaxOfRoundsLabel.Text = "MaxOfNumOfRounds:";
         // 
@@ -1802,12 +1802,12 @@ partial class BeaverGameProject
         MinOfRoundsBox.BorderStyle = BorderStyle.None;
         MinOfRoundsBox.Dock = DockStyle.Top;
         MinOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MinOfRoundsBox.Location = new Point(0, 513);
+        MinOfRoundsBox.Location = new Point(0, 543);
         MinOfRoundsBox.Margin = new Padding(2);
         MinOfRoundsBox.Name = "MinOfRoundsBox";
         MinOfRoundsBox.PlaceholderText = "min";
         MinOfRoundsBox.ReadOnly = true;
-        MinOfRoundsBox.Size = new Size(318, 27);
+        MinOfRoundsBox.Size = new Size(357, 27);
         MinOfRoundsBox.TabIndex = 12;
         MinOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1816,11 +1816,11 @@ partial class BeaverGameProject
         MinOfRoundsLabel.AutoSize = true;
         MinOfRoundsLabel.Dock = DockStyle.Top;
         MinOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MinOfRoundsLabel.Location = new Point(0, 461);
+        MinOfRoundsLabel.Location = new Point(0, 486);
         MinOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         MinOfRoundsLabel.Name = "MinOfRoundsLabel";
-        MinOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
-        MinOfRoundsLabel.Size = new Size(200, 52);
+        MinOfRoundsLabel.Padding = new Padding(20, 25, 0, 4);
+        MinOfRoundsLabel.Size = new Size(220, 57);
         MinOfRoundsLabel.TabIndex = 11;
         MinOfRoundsLabel.Text = "MinOfNumOfRounds:";
         // 
@@ -1829,12 +1829,12 @@ partial class BeaverGameProject
         RangeOfRoundsBox.BorderStyle = BorderStyle.None;
         RangeOfRoundsBox.Dock = DockStyle.Top;
         RangeOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        RangeOfRoundsBox.Location = new Point(0, 434);
+        RangeOfRoundsBox.Location = new Point(0, 459);
         RangeOfRoundsBox.Margin = new Padding(2);
         RangeOfRoundsBox.Name = "RangeOfRoundsBox";
         RangeOfRoundsBox.PlaceholderText = "rage";
         RangeOfRoundsBox.ReadOnly = true;
-        RangeOfRoundsBox.Size = new Size(318, 27);
+        RangeOfRoundsBox.Size = new Size(357, 27);
         RangeOfRoundsBox.TabIndex = 10;
         RangeOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1843,11 +1843,11 @@ partial class BeaverGameProject
         RangeOfRoundsLabel.AutoSize = true;
         RangeOfRoundsLabel.Dock = DockStyle.Top;
         RangeOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        RangeOfRoundsLabel.Location = new Point(0, 382);
+        RangeOfRoundsLabel.Location = new Point(0, 402);
         RangeOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         RangeOfRoundsLabel.Name = "RangeOfRoundsLabel";
-        RangeOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
-        RangeOfRoundsLabel.Size = new Size(221, 52);
+        RangeOfRoundsLabel.Padding = new Padding(20, 25, 0, 4);
+        RangeOfRoundsLabel.Size = new Size(241, 57);
         RangeOfRoundsLabel.TabIndex = 9;
         RangeOfRoundsLabel.Text = "RangeOfNumOfRounds:";
         // 
@@ -1856,12 +1856,12 @@ partial class BeaverGameProject
         MedianOfRoundsBox.BorderStyle = BorderStyle.None;
         MedianOfRoundsBox.Dock = DockStyle.Top;
         MedianOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MedianOfRoundsBox.Location = new Point(0, 355);
+        MedianOfRoundsBox.Location = new Point(0, 375);
         MedianOfRoundsBox.Margin = new Padding(2);
         MedianOfRoundsBox.Name = "MedianOfRoundsBox";
         MedianOfRoundsBox.PlaceholderText = "median";
         MedianOfRoundsBox.ReadOnly = true;
-        MedianOfRoundsBox.Size = new Size(318, 27);
+        MedianOfRoundsBox.Size = new Size(357, 27);
         MedianOfRoundsBox.TabIndex = 8;
         MedianOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1870,11 +1870,11 @@ partial class BeaverGameProject
         MedianOfRoundsLabel.AutoSize = true;
         MedianOfRoundsLabel.Dock = DockStyle.Top;
         MedianOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        MedianOfRoundsLabel.Location = new Point(0, 303);
+        MedianOfRoundsLabel.Location = new Point(0, 318);
         MedianOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         MedianOfRoundsLabel.Name = "MedianOfRoundsLabel";
-        MedianOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
-        MedianOfRoundsLabel.Size = new Size(232, 52);
+        MedianOfRoundsLabel.Padding = new Padding(20, 25, 0, 4);
+        MedianOfRoundsLabel.Size = new Size(252, 57);
         MedianOfRoundsLabel.TabIndex = 7;
         MedianOfRoundsLabel.Text = "MedianOfNumOfRounds:";
         // 
@@ -1883,12 +1883,12 @@ partial class BeaverGameProject
         StandardDeviationBox.BorderStyle = BorderStyle.None;
         StandardDeviationBox.Dock = DockStyle.Top;
         StandardDeviationBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        StandardDeviationBox.Location = new Point(0, 276);
+        StandardDeviationBox.Location = new Point(0, 291);
         StandardDeviationBox.Margin = new Padding(2);
         StandardDeviationBox.Name = "StandardDeviationBox";
         StandardDeviationBox.PlaceholderText = "standardDeviation";
         StandardDeviationBox.ReadOnly = true;
-        StandardDeviationBox.Size = new Size(318, 27);
+        StandardDeviationBox.Size = new Size(357, 27);
         StandardDeviationBox.TabIndex = 6;
         StandardDeviationBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1897,11 +1897,11 @@ partial class BeaverGameProject
         StandardDeviationLabel.AutoSize = true;
         StandardDeviationLabel.Dock = DockStyle.Top;
         StandardDeviationLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        StandardDeviationLabel.Location = new Point(0, 224);
+        StandardDeviationLabel.Location = new Point(0, 234);
         StandardDeviationLabel.Margin = new Padding(2, 0, 2, 0);
         StandardDeviationLabel.Name = "StandardDeviationLabel";
-        StandardDeviationLabel.Padding = new Padding(0, 20, 0, 4);
-        StandardDeviationLabel.Size = new Size(265, 52);
+        StandardDeviationLabel.Padding = new Padding(20, 25, 0, 4);
+        StandardDeviationLabel.Size = new Size(285, 57);
         StandardDeviationLabel.TabIndex = 5;
         StandardDeviationLabel.Text = "StandardDeviationOfRounds:";
         // 
@@ -1910,12 +1910,12 @@ partial class BeaverGameProject
         VarianceOfRoundsBox.BorderStyle = BorderStyle.None;
         VarianceOfRoundsBox.Dock = DockStyle.Top;
         VarianceOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        VarianceOfRoundsBox.Location = new Point(0, 197);
+        VarianceOfRoundsBox.Location = new Point(0, 207);
         VarianceOfRoundsBox.Margin = new Padding(2);
         VarianceOfRoundsBox.Name = "VarianceOfRoundsBox";
         VarianceOfRoundsBox.PlaceholderText = "variance";
         VarianceOfRoundsBox.ReadOnly = true;
-        VarianceOfRoundsBox.Size = new Size(318, 27);
+        VarianceOfRoundsBox.Size = new Size(357, 27);
         VarianceOfRoundsBox.TabIndex = 4;
         VarianceOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1924,11 +1924,11 @@ partial class BeaverGameProject
         VarianceOfRoundsLabel.AutoSize = true;
         VarianceOfRoundsLabel.Dock = DockStyle.Top;
         VarianceOfRoundsLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        VarianceOfRoundsLabel.Location = new Point(0, 145);
+        VarianceOfRoundsLabel.Location = new Point(0, 150);
         VarianceOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         VarianceOfRoundsLabel.Name = "VarianceOfRoundsLabel";
-        VarianceOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
-        VarianceOfRoundsLabel.Size = new Size(239, 52);
+        VarianceOfRoundsLabel.Padding = new Padding(20, 25, 0, 4);
+        VarianceOfRoundsLabel.Size = new Size(259, 57);
         VarianceOfRoundsLabel.TabIndex = 3;
         VarianceOfRoundsLabel.Text = "VarianceOfNumOfRounds:";
         // 
@@ -1937,12 +1937,12 @@ partial class BeaverGameProject
         AvarageNumOfRoundsBox.BorderStyle = BorderStyle.None;
         AvarageNumOfRoundsBox.Dock = DockStyle.Top;
         AvarageNumOfRoundsBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        AvarageNumOfRoundsBox.Location = new Point(0, 118);
+        AvarageNumOfRoundsBox.Location = new Point(0, 123);
         AvarageNumOfRoundsBox.Margin = new Padding(2);
         AvarageNumOfRoundsBox.Name = "AvarageNumOfRoundsBox";
         AvarageNumOfRoundsBox.PlaceholderText = "avarage";
         AvarageNumOfRoundsBox.ReadOnly = true;
-        AvarageNumOfRoundsBox.Size = new Size(318, 27);
+        AvarageNumOfRoundsBox.Size = new Size(357, 27);
         AvarageNumOfRoundsBox.TabIndex = 2;
         AvarageNumOfRoundsBox.TextAlign = HorizontalAlignment.Center;
         // 
@@ -1954,8 +1954,8 @@ partial class BeaverGameProject
         AvarageNumOfRoundsLabel.Location = new Point(0, 66);
         AvarageNumOfRoundsLabel.Margin = new Padding(2, 0, 2, 0);
         AvarageNumOfRoundsLabel.Name = "AvarageNumOfRoundsLabel";
-        AvarageNumOfRoundsLabel.Padding = new Padding(0, 20, 0, 4);
-        AvarageNumOfRoundsLabel.Size = new Size(217, 52);
+        AvarageNumOfRoundsLabel.Padding = new Padding(20, 25, 0, 4);
+        AvarageNumOfRoundsLabel.Size = new Size(237, 57);
         AvarageNumOfRoundsLabel.TabIndex = 1;
         AvarageNumOfRoundsLabel.Text = "AvarageNumOfRounds:";
         // 
@@ -1980,7 +1980,7 @@ partial class BeaverGameProject
         LeftStatPanel.Location = new Point(0, 0);
         LeftStatPanel.Margin = new Padding(2);
         LeftStatPanel.Name = "LeftStatPanel";
-        LeftStatPanel.Size = new Size(625, 736);
+        LeftStatPanel.Size = new Size(593, 755);
         LeftStatPanel.TabIndex = 3;
         // 
         // KOdDiagram
@@ -1988,10 +1988,10 @@ partial class BeaverGameProject
         KOdDiagram.BorderStyle = BorderStyle.FixedSingle;
         KOdDiagram.Controls.Add(KOdDiagramLabel);
         KOdDiagram.Dock = DockStyle.Top;
-        KOdDiagram.Location = new Point(0, 387);
+        KOdDiagram.Location = new Point(0, 419);
         KOdDiagram.Margin = new Padding(2);
         KOdDiagram.Name = "KOdDiagram";
-        KOdDiagram.Size = new Size(625, 345);
+        KOdDiagram.Size = new Size(593, 365);
         KOdDiagram.TabIndex = 1;
         // 
         // KOdDiagramLabel
@@ -2003,8 +2003,8 @@ partial class BeaverGameProject
         KOdDiagramLabel.Location = new Point(0, 0);
         KOdDiagramLabel.Margin = new Padding(2, 0, 2, 0);
         KOdDiagramLabel.Name = "KOdDiagramLabel";
-        KOdDiagramLabel.Padding = new Padding(80, 4, 80, 8);
-        KOdDiagramLabel.Size = new Size(582, 40);
+        KOdDiagramLabel.Padding = new Padding(80, 5, 80, 8);
+        KOdDiagramLabel.Size = new Size(582, 41);
         KOdDiagramLabel.TabIndex = 0;
         KOdDiagramLabel.Text = "NumberOfTimesPlayerHasBeenKnockedout";
         // 
@@ -2016,7 +2016,7 @@ partial class BeaverGameProject
         KOsDiagram.Location = new Point(0, 0);
         KOsDiagram.Margin = new Padding(2);
         KOsDiagram.Name = "KOsDiagram";
-        KOsDiagram.Size = new Size(625, 387);
+        KOsDiagram.Size = new Size(593, 419);
         KOsDiagram.TabIndex = 0;
         // 
         // KOsDiagramLabel
@@ -2028,8 +2028,8 @@ partial class BeaverGameProject
         KOsDiagramLabel.Location = new Point(0, 0);
         KOsDiagramLabel.Margin = new Padding(2, 0, 2, 0);
         KOsDiagramLabel.Name = "KOsDiagramLabel";
-        KOsDiagramLabel.Padding = new Padding(80, 40, 80, 8);
-        KOsDiagramLabel.Size = new Size(458, 76);
+        KOsDiagramLabel.Padding = new Padding(80, 5, 80, 8);
+        KOsDiagramLabel.Size = new Size(458, 41);
         KOsDiagramLabel.TabIndex = 0;
         KOsDiagramLabel.Text = "NumberOfKnockedoutPlayers:";
         // 
@@ -2038,7 +2038,7 @@ partial class BeaverGameProject
         LoadStatisticsButton.Dock = DockStyle.Bottom;
         LoadStatisticsButton.FlatStyle = FlatStyle.Flat;
         LoadStatisticsButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        LoadStatisticsButton.Location = new Point(0, 736);
+        LoadStatisticsButton.Location = new Point(0, 755);
         LoadStatisticsButton.Margin = new Padding(2);
         LoadStatisticsButton.Name = "LoadStatisticsButton";
         LoadStatisticsButton.Size = new Size(1537, 44);
@@ -2053,7 +2053,7 @@ partial class BeaverGameProject
         SaveStatisticsButton.Enabled = false;
         SaveStatisticsButton.FlatStyle = FlatStyle.Flat;
         SaveStatisticsButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        SaveStatisticsButton.Location = new Point(0, 780);
+        SaveStatisticsButton.Location = new Point(0, 799);
         SaveStatisticsButton.Margin = new Padding(2);
         SaveStatisticsButton.Name = "SaveStatisticsButton";
         SaveStatisticsButton.Size = new Size(1537, 44);
@@ -2067,9 +2067,9 @@ partial class BeaverGameProject
         // 
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1539, 826);
-        Controls.Add(ViewControlPanel);
+        ClientSize = new Size(1539, 878);
         Controls.Add(StatisticsView);
+        Controls.Add(ViewControlPanel);
         Controls.Add(GameView);
         DoubleBuffered = true;
         FormBorderStyle = FormBorderStyle.FixedToolWindow;
@@ -2238,6 +2238,6 @@ partial class BeaverGameProject
     private Label MaxOfRoundsLabel;
     private Panel DotPlotterPanel;
     private Label DotPlotterLabel;
-    private TextBox textBox1;
-    private Label LowerQuantilLabel;
+    private TextBox CovarianceOfDataBox;
+    private Label CovarianceOfValuesLabel;
 }

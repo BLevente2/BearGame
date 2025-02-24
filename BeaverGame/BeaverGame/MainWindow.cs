@@ -409,6 +409,7 @@ public partial class BeaverGameProject : Form
             RangeOfRoundsBox.Text = string.Empty;
             MinOfRoundsBox.Text = string.Empty;
             MaxOfRoundsBox.Text = string.Empty;
+            CovarianceOfDataBox.Text = string.Empty;
 
             GameStatistics gameStatistics = new GameStatistics((int)NumberOfMatchesSelector.Value, (int)NumberOfPlayersSelector.Value);
             _dataCollection = new DataCollection(gameStatistics);
@@ -440,6 +441,8 @@ public partial class BeaverGameProject : Form
             _winsDiagram.Plot.Title("NumberOfVictories");
             VictoryDiagramPanel.Controls.Add( _winsDiagram);
             _winsDiagram.BringToFront();
+
+            _dotPlotter.Plot.Clear();
 
             Game game = new Game(
                 players, 
@@ -779,6 +782,9 @@ public partial class BeaverGameProject : Form
 
             double[] values1 = _dataCollection.GetNumOfRounds();
             double[] values2 = _dataCollection.GetNumOfKOs(values1);
+
+            double covariance = MathNet.Numerics.Statistics.Statistics.Covariance(values1, values2);
+            CovarianceOfDataBox.Text = Math.Round(covariance, 4).ToString();
 
             _dotPlotter.Plot.Clear();
             var scatter = _dotPlotter.Plot.Add.Scatter(values1, values2);

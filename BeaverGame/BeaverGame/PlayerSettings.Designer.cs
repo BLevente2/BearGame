@@ -43,9 +43,10 @@ partial class PlayerSettings
         SettingOkButton.DialogResult = DialogResult.OK;
         SettingOkButton.FlatStyle = FlatStyle.Flat;
         SettingOkButton.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        SettingOkButton.Location = new Point(666, 381);
+        SettingOkButton.Location = new Point(533, 305);
+        SettingOkButton.Margin = new Padding(2);
         SettingOkButton.Name = "SettingOkButton";
-        SettingOkButton.Size = new Size(107, 57);
+        SettingOkButton.Size = new Size(86, 46);
         SettingOkButton.TabIndex = 0;
         SettingOkButton.Text = "Ok";
         SettingOkButton.UseVisualStyleBackColor = true;
@@ -56,9 +57,10 @@ partial class PlayerSettings
         SettingCancelButton.DialogResult = DialogResult.Cancel;
         SettingCancelButton.FlatStyle = FlatStyle.Flat;
         SettingCancelButton.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point, 238);
-        SettingCancelButton.Location = new Point(21, 383);
+        SettingCancelButton.Location = new Point(17, 306);
+        SettingCancelButton.Margin = new Padding(2);
         SettingCancelButton.Name = "SettingCancelButton";
-        SettingCancelButton.Size = new Size(107, 57);
+        SettingCancelButton.Size = new Size(86, 46);
         SettingCancelButton.TabIndex = 1;
         SettingCancelButton.Text = "Cancel";
         SettingCancelButton.UseVisualStyleBackColor = true;
@@ -72,9 +74,10 @@ partial class PlayerSettings
         GoWithRandomBox.FlatStyle = FlatStyle.Flat;
         GoWithRandomBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 238);
         GoWithRandomBox.ForeColor = SystemColors.WindowText;
-        GoWithRandomBox.Location = new Point(27, 35);
+        GoWithRandomBox.Location = new Point(22, 28);
+        GoWithRandomBox.Margin = new Padding(2);
         GoWithRandomBox.Name = "GoWithRandomBox";
-        GoWithRandomBox.Size = new Size(409, 34);
+        GoWithRandomBox.Size = new Size(357, 29);
         GoWithRandomBox.TabIndex = 2;
         GoWithRandomBox.Text = "If possible, go with a random character";
         GoWithRandomBox.UseVisualStyleBackColor = true;
@@ -86,9 +89,10 @@ partial class PlayerSettings
         GoWithClosestBox.FlatStyle = FlatStyle.Flat;
         GoWithClosestBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 238);
         GoWithClosestBox.ForeColor = SystemColors.WindowText;
-        GoWithClosestBox.Location = new Point(27, 75);
+        GoWithClosestBox.Location = new Point(22, 60);
+        GoWithClosestBox.Margin = new Padding(2);
         GoWithClosestBox.Name = "GoWithClosestBox";
-        GoWithClosestBox.Size = new Size(615, 34);
+        GoWithClosestBox.Size = new Size(537, 29);
         GoWithClosestBox.TabIndex = 3;
         GoWithClosestBox.Text = "If possible, go with the closest character to the starting point";
         GoWithClosestBox.UseVisualStyleBackColor = true;
@@ -100,9 +104,10 @@ partial class PlayerSettings
         GoWithTheFurthestBox.FlatStyle = FlatStyle.Flat;
         GoWithTheFurthestBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 238);
         GoWithTheFurthestBox.ForeColor = SystemColors.WindowText;
-        GoWithTheFurthestBox.Location = new Point(27, 115);
+        GoWithTheFurthestBox.Location = new Point(22, 92);
+        GoWithTheFurthestBox.Margin = new Padding(2);
         GoWithTheFurthestBox.Name = "GoWithTheFurthestBox";
-        GoWithTheFurthestBox.Size = new Size(651, 34);
+        GoWithTheFurthestBox.Size = new Size(568, 29);
         GoWithTheFurthestBox.TabIndex = 4;
         GoWithTheFurthestBox.Text = "If possible, go with the furthest cahracter from the starting point";
         GoWithTheFurthestBox.UseVisualStyleBackColor = true;
@@ -116,9 +121,10 @@ partial class PlayerSettings
         GoForKOsBox.FlatStyle = FlatStyle.Flat;
         GoForKOsBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 238);
         GoForKOsBox.ForeColor = SystemColors.WindowText;
-        GoForKOsBox.Location = new Point(27, 232);
+        GoForKOsBox.Location = new Point(22, 186);
+        GoForKOsBox.Margin = new Padding(2);
         GoForKOsBox.Name = "GoForKOsBox";
-        GoForKOsBox.Size = new Size(377, 34);
+        GoForKOsBox.Size = new Size(329, 29);
         GoForKOsBox.TabIndex = 5;
         GoForKOsBox.Text = "When possible, prioritize knockouts";
         GoForKOsBox.UseVisualStyleBackColor = true;
@@ -131,9 +137,10 @@ partial class PlayerSettings
         SetNewCharActiveBox.FlatStyle = FlatStyle.Flat;
         SetNewCharActiveBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 238);
         SetNewCharActiveBox.ForeColor = SystemColors.WindowText;
-        SetNewCharActiveBox.Location = new Point(27, 281);
+        SetNewCharActiveBox.Location = new Point(22, 225);
+        SetNewCharActiveBox.Margin = new Padding(2);
         SetNewCharActiveBox.Name = "SetNewCharActiveBox";
-        SetNewCharActiveBox.Size = new Size(668, 34);
+        SetNewCharActiveBox.Size = new Size(585, 29);
         SetNewCharActiveBox.TabIndex = 6;
         SetNewCharActiveBox.Text = "If possilbe, when rolling 6, prioritize setting a new character active";
         SetNewCharActiveBox.UseVisualStyleBackColor = true;
@@ -146,18 +153,19 @@ partial class PlayerSettings
         GoOutOfStartBox.FlatStyle = FlatStyle.Flat;
         GoOutOfStartBox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 238);
         GoOutOfStartBox.ForeColor = SystemColors.WindowText;
-        GoOutOfStartBox.Location = new Point(27, 325);
+        GoOutOfStartBox.Location = new Point(22, 260);
+        GoOutOfStartBox.Margin = new Padding(2);
         GoOutOfStartBox.Name = "GoOutOfStartBox";
-        GoOutOfStartBox.Size = new Size(506, 34);
+        GoOutOfStartBox.Size = new Size(441, 29);
         GoOutOfStartBox.TabIndex = 7;
         GoOutOfStartBox.Text = "If possible, prioritize moving out of starting point";
         GoOutOfStartBox.UseVisualStyleBackColor = true;
         // 
         // PlayerSettings
         // 
-        AutoScaleDimensions = new SizeF(10F, 25F);
+        AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(780, 448);
+        ClientSize = new Size(650, 382);
         ControlBox = false;
         Controls.Add(GoOutOfStartBox);
         Controls.Add(SetNewCharActiveBox);
@@ -168,6 +176,7 @@ partial class PlayerSettings
         Controls.Add(SettingCancelButton);
         Controls.Add(SettingOkButton);
         FormBorderStyle = FormBorderStyle.FixedSingle;
+        Margin = new Padding(2);
         Name = "PlayerSettings";
         ShowIcon = false;
         ShowInTaskbar = false;
